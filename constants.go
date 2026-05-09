@@ -139,23 +139,85 @@ func AllAwarenessStates() []string {
 
 // Framework constants for external framework mappings.
 const (
-	FrameworkNISTCSF     = "NIST_CSF"
-	FrameworkNIST80053   = "NIST_800_53"
-	FrameworkMITREATTACK = "MITRE_ATTACK"
-	FrameworkDORA        = "DORA"
-	FrameworkSRE         = "SRE"
-	FrameworkFEDRAMP     = "FEDRAMP"
+	// NIST Frameworks
+	FrameworkNISTCSF    = "NIST_CSF"     // NIST Cybersecurity Framework (1.1)
+	FrameworkNISTCSF2   = "NIST_CSF_2"   // NIST Cybersecurity Framework 2.0
+	FrameworkNIST80053  = "NIST_800_53"  // NIST SP 800-53 (Security and Privacy Controls)
+	FrameworkNISTRMF    = "NIST_RMF"     // NIST Risk Management Framework
+	FrameworkNISTAIRMF  = "NIST_AI_RMF"  // NIST AI Risk Management Framework
+	FrameworkNIST800171 = "NIST_800_171" // NIST SP 800-171 (CUI Protection)
+
+	// FedRAMP (uses NIST 800-53 controls)
+	FrameworkFEDRAMP     = "FEDRAMP"      // FedRAMP (general)
+	FrameworkFEDRAMPHigh = "FEDRAMP_HIGH" // FedRAMP High baseline
+	FrameworkFEDRAMPMod  = "FEDRAMP_MOD"  // FedRAMP Moderate baseline
+	FrameworkFEDRAMPLow  = "FEDRAMP_LOW"  // FedRAMP Low baseline
+
+	// Other Security Frameworks
+	FrameworkMITREATTACK = "MITRE_ATTACK" // MITRE ATT&CK
+	FrameworkCISControls = "CIS_CONTROLS" // CIS Critical Security Controls
+	FrameworkSOC2        = "SOC_2"        // SOC 2 Trust Services Criteria
+	FrameworkISO27001    = "ISO_27001"    // ISO/IEC 27001
+
+	// Engineering Frameworks
+	FrameworkDORA = "DORA" // DORA DevOps Metrics
+	FrameworkSRE  = "SRE"  // Google SRE Practices
+)
+
+// Framework baseline/impact levels for NIST 800-53 and FedRAMP.
+const (
+	BaselineHigh     = "high"
+	BaselineModerate = "moderate"
+	BaselineLow      = "low"
 )
 
 // AllFrameworks returns all valid framework values.
 func AllFrameworks() []string {
 	return []string{
 		FrameworkNISTCSF,
+		FrameworkNISTCSF2,
 		FrameworkNIST80053,
+		FrameworkNISTRMF,
+		FrameworkNISTAIRMF,
+		FrameworkNIST800171,
+		FrameworkFEDRAMP,
+		FrameworkFEDRAMPHigh,
+		FrameworkFEDRAMPMod,
+		FrameworkFEDRAMPLow,
 		FrameworkMITREATTACK,
+		FrameworkCISControls,
+		FrameworkSOC2,
+		FrameworkISO27001,
 		FrameworkDORA,
 		FrameworkSRE,
+	}
+}
+
+// NISTFrameworks returns NIST-specific frameworks.
+func NISTFrameworks() []string {
+	return []string{
+		FrameworkNISTCSF,
+		FrameworkNISTCSF2,
+		FrameworkNIST80053,
+		FrameworkNISTRMF,
+		FrameworkNISTAIRMF,
+		FrameworkNIST800171,
+	}
+}
+
+// ComplianceFrameworks returns compliance-focused frameworks.
+func ComplianceFrameworks() []string {
+	return []string{
+		FrameworkNISTCSF,
+		FrameworkNISTCSF2,
+		FrameworkNIST80053,
 		FrameworkFEDRAMP,
+		FrameworkFEDRAMPHigh,
+		FrameworkFEDRAMPMod,
+		FrameworkFEDRAMPLow,
+		FrameworkSOC2,
+		FrameworkISO27001,
+		FrameworkCISControls,
 	}
 }
 

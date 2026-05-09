@@ -99,22 +99,118 @@ type SLI struct {
 }
 
 // SLO represents a Service Level Objective.
+// SLOs can be quantitative (numeric targets) or qualitative (tracked states).
 type SLO struct {
+	// Identity
+	ID   string `json:"id,omitempty"`   // Unique identifier for the SLO
+	Name string `json:"name,omitempty"` // Human-readable name
+
+	// Type distinguishes quantitative vs qualitative SLOs.
+	// Quantitative SLOs have numeric targets (>=99.9%).
+	// Qualitative SLOs track binary states (tracked, implemented, defined).
+	Type string `json:"type,omitempty"` // "quantitative" (default), "qualitative"
+
+	// Quantitative fields
 	Target     string      `json:"target"`             // Display string (e.g., ">=99.9%")
-	Operator   string      `json:"operator,omitempty"` // Machine-readable: "gte", "lte", "eq", "gt", "lt"
+	Operator   string      `json:"operator,omitempty"` // Machine-readable: "gte", "lte", "eq", "gt", "lt", "exists"
 	Value      float64     `json:"value,omitempty"`    // Numeric target value
 	Window     string      `json:"window,omitempty"`   // "7d", "30d", "90d"
 	Thresholds *Thresholds `json:"thresholds,omitempty"`
+
+	// Qualitative fields
+	Status string `json:"status,omitempty"` // For qualitative: "tracked", "implemented", "defined", "documented", "not_tracked"
+
+	// Framework mappings - maps this SLO to compliance framework controls
+	FrameworkMappings []FrameworkMapping `json:"frameworkMappings,omitempty"`
 }
+
+// IsQualitative returns true if this is a qualitative SLO.
+func (s *SLO) IsQualitative() bool {
+	return s.Type == SLOTypeQualitative || s.Operator == SLOOperatorExists
+}
+
+// IsMet returns whether the SLO is met.
+// For qualitative SLOs, checks if status indicates compliance.
+// For quantitative SLOs, compares current value against target.
+func (s *SLO) IsMet(current float64) bool {
+	if s.IsQualitative() {
+		return s.IsQualitativeStatusMet()
+	}
+	return s.isQuantitativeMet(current)
+}
+
+// IsQualitativeStatusMet returns whether a qualitative SLO status indicates compliance.
+func (s *SLO) IsQualitativeStatusMet() bool {
+	switch s.Status {
+	case QualitativeStatusTracked, QualitativeStatusImplemented,
+		QualitativeStatusDefined, QualitativeStatusDocumented,
+		QualitativeStatusCompliant, QualitativeStatusEnabled:
+		return true
+	default:
+		return false
+	}
+}
+
+func (s *SLO) isQuantitativeMet(current float64) bool {
+	switch s.Operator {
+	case SLOOperatorGTE:
+		return current >= s.Value
+	case SLOOperatorLTE:
+		return current <= s.Value
+	case SLOOperatorEQ:
+		return current == s.Value
+	case SLOOperatorGT:
+		return current > s.Value
+	case SLOOperatorLT:
+		return current < s.Value
+	default:
+		return false
+	}
+}
+
+// SLO type constants.
+const (
+	SLOTypeQuantitative = "quantitative" // Default: numeric comparison
+	SLOTypeQualitative  = "qualitative"  // Binary state tracking
+)
 
 // SLO operator constants.
 const (
-	SLOOperatorGTE = "gte" // Greater than or equal
-	SLOOperatorLTE = "lte" // Less than or equal
-	SLOOperatorEQ  = "eq"  // Equal
-	SLOOperatorGT  = "gt"  // Greater than
-	SLOOperatorLT  = "lt"  // Less than
+	SLOOperatorGTE    = "gte"    // Greater than or equal
+	SLOOperatorLTE    = "lte"    // Less than or equal
+	SLOOperatorEQ     = "eq"     // Equal
+	SLOOperatorGT     = "gt"     // Greater than
+	SLOOperatorLT     = "lt"     // Less than
+	SLOOperatorExists = "exists" // Qualitative: metric exists/is tracked
 )
+
+// Qualitative status constants.
+const (
+	QualitativeStatusTracked     = "tracked"     // Metric is being tracked
+	QualitativeStatusImplemented = "implemented" // Control/feature is implemented
+	QualitativeStatusDefined     = "defined"     // Process/policy is defined
+	QualitativeStatusDocumented  = "documented"  // Documentation exists
+	QualitativeStatusCompliant   = "compliant"   // Meets compliance requirement
+	QualitativeStatusEnabled     = "enabled"     // Feature/capability is enabled
+	QualitativeStatusNotTracked  = "not_tracked" // Not yet being tracked
+	QualitativeStatusPartial     = "partial"     // Partially implemented
+	QualitativeStatusPlanned     = "planned"     // Planned but not started
+)
+
+// AllQualitativeStatuses returns all valid qualitative status values.
+func AllQualitativeStatuses() []string {
+	return []string{
+		QualitativeStatusTracked,
+		QualitativeStatusImplemented,
+		QualitativeStatusDefined,
+		QualitativeStatusDocumented,
+		QualitativeStatusCompliant,
+		QualitativeStatusEnabled,
+		QualitativeStatusNotTracked,
+		QualitativeStatusPartial,
+		QualitativeStatusPlanned,
+	}
+}
 
 // Thresholds defines threshold values for status calculation.
 type Thresholds struct {
@@ -141,10 +237,28 @@ type DMAICMapping struct {
 	Control string `json:"control,omitempty"`
 }
 
-// FrameworkMapping maps a metric to an external framework reference.
+// FrameworkMapping maps a metric or SLO to an external framework reference.
+// Supports compliance frameworks like NIST CSF, NIST 800-53, FedRAMP, etc.
 type FrameworkMapping struct {
-	Framework string `json:"framework"`
-	Reference string `json:"reference"`
+	Framework   string `json:"framework"`             // Framework identifier (e.g., "NIST_CSF_2", "NIST_800_53")
+	Reference   string `json:"reference"`             // Control or function ID (e.g., "PR.DS-1", "AC-2")
+	Name        string `json:"name,omitempty"`        // Human-readable control name
+	Description string `json:"description,omitempty"` // Control description
+	Baseline    string `json:"baseline,omitempty"`    // Required baseline level (e.g., "high", "moderate", "low" for FedRAMP)
+	Version     string `json:"version,omitempty"`     // Framework version (e.g., "2.0", "Rev 5")
+}
+
+// FrameworkRequirement specifies a framework control requirement with satisfaction criteria.
+type FrameworkRequirement struct {
+	Framework      string   `json:"framework"`                // Framework identifier
+	ControlID      string   `json:"controlId"`                // Control ID (e.g., "AC-2", "PR.DS-1")
+	ControlName    string   `json:"controlName,omitempty"`    // Human-readable name
+	Baseline       string   `json:"baseline,omitempty"`       // Required baseline (high/moderate/low)
+	MetricIDs      []string `json:"metricIds,omitempty"`      // Metrics that satisfy this control
+	SLOIDs         []string `json:"sloIds,omitempty"`         // SLOs that satisfy this control
+	Status         string   `json:"status,omitempty"`         // implemented, partial, planned, not_applicable
+	Evidence       string   `json:"evidence,omitempty"`       // Evidence or documentation reference
+	Implementation string   `json:"implementation,omitempty"` // Implementation description
 }
 
 // DataPoint represents a historical measurement.
