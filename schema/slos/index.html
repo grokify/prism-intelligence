@@ -393,7 +393,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../design/maturity/FEAT_MATURITY_CODEGEN/" class="md-tabs__link">
+        <a href="../../design/core/PRD/" class="md-tabs__link">
           
   
   
@@ -1095,6 +1095,52 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cli/maturity-report/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    prism maturity report
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cli/maturity-xlsx/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    prism maturity xlsx
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1345,6 +1391,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#sli-vs-slo-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      SLI vs SLO Architecture
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#sli-service-level-indicator" class="md-nav__link">
     <span class="md-ellipsis">
       SLI (Service Level Indicator)
@@ -1355,18 +1410,36 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#fields" class="md-nav__link">
+  <a href="#sli-fields-maturity-model" class="md-nav__link">
     <span class="md-ellipsis">
-      Fields
+      SLI Fields (Maturity Model)
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#example" class="md-nav__link">
+  <a href="#sli-example-maturity-model" class="md-nav__link">
     <span class="md-ellipsis">
-      Example
+      SLI Example (Maturity Model)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sli-fields-embedded-in-metric" class="md-nav__link">
+    <span class="md-ellipsis">
+      SLI Fields (Embedded in Metric)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-embedded-sli" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example (Embedded SLI)
     </span>
   </a>
   
@@ -1388,9 +1461,18 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#fields_1" class="md-nav__link">
+  <a href="#fields" class="md-nav__link">
     <span class="md-ellipsis">
       Fields
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#slo-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      SLO Types
     </span>
   </a>
   
@@ -1406,9 +1488,36 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#example-with-machine-evaluable-slo" class="md-nav__link">
+  <a href="#example-with-quantitative-slo" class="md-nav__link">
     <span class="md-ellipsis">
-      Example with Machine-Evaluable SLO
+      Example with Quantitative SLO
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-with-qualitative-slo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example with Qualitative SLO
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qualitative-status-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      Qualitative Status Values
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qualitative-slo-use-cases" class="md-nav__link">
+    <span class="md-ellipsis">
+      Qualitative SLO Use Cases
     </span>
   </a>
   
@@ -1462,11 +1571,98 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#qualitative-metric-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Qualitative Metric Example
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#xlsx-export" class="md-nav__link">
+    <span class="md-ellipsis">
+      XLSX Export
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#best-practices" class="md-nav__link">
     <span class="md-ellipsis">
       Best Practices
     </span>
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#maturity-model-slis-and-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      Maturity Model: SLIs and Criteria
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Maturity Model: SLIs and Criteria">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sli-definition" class="md-nav__link">
+    <span class="md-ellipsis">
+      SLI Definition
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#criterion-slo-referencing-sli" class="md-nav__link">
+    <span class="md-ellipsis">
+      Criterion (SLO) Referencing SLI
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-it-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      How It Works
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#criterion-fields" class="md-nav__link">
+    <span class="md-ellipsis">
+      Criterion Fields
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#backward-compatibility" class="md-nav__link">
+    <span class="md-ellipsis">
+      Backward Compatibility
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resolution-order" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resolution Order
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -2390,7 +2586,7 @@
   
   
   <span class="md-ellipsis">
-    Maturity
+    Core
     
   </span>
   
@@ -2400,6 +2596,82 @@
         
         <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_9_1_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_9_1">
+            <span class="md-nav__icon md-icon"></span>
+            Core
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../design/core/PRD/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    PRD
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_9_2" id="__nav_9_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Maturity
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_9_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9_2">
             <span class="md-nav__icon md-icon"></span>
             Maturity
           </label>
@@ -2781,6 +3053,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#sli-vs-slo-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      SLI vs SLO Architecture
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#sli-service-level-indicator" class="md-nav__link">
     <span class="md-ellipsis">
       SLI (Service Level Indicator)
@@ -2791,18 +3072,36 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#fields" class="md-nav__link">
+  <a href="#sli-fields-maturity-model" class="md-nav__link">
     <span class="md-ellipsis">
-      Fields
+      SLI Fields (Maturity Model)
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#example" class="md-nav__link">
+  <a href="#sli-example-maturity-model" class="md-nav__link">
     <span class="md-ellipsis">
-      Example
+      SLI Example (Maturity Model)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sli-fields-embedded-in-metric" class="md-nav__link">
+    <span class="md-ellipsis">
+      SLI Fields (Embedded in Metric)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-embedded-sli" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example (Embedded SLI)
     </span>
   </a>
   
@@ -2824,9 +3123,18 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#fields_1" class="md-nav__link">
+  <a href="#fields" class="md-nav__link">
     <span class="md-ellipsis">
       Fields
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#slo-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      SLO Types
     </span>
   </a>
   
@@ -2842,9 +3150,36 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#example-with-machine-evaluable-slo" class="md-nav__link">
+  <a href="#example-with-quantitative-slo" class="md-nav__link">
     <span class="md-ellipsis">
-      Example with Machine-Evaluable SLO
+      Example with Quantitative SLO
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-with-qualitative-slo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example with Qualitative SLO
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qualitative-status-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      Qualitative Status Values
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qualitative-slo-use-cases" class="md-nav__link">
+    <span class="md-ellipsis">
+      Qualitative SLO Use Cases
     </span>
   </a>
   
@@ -2898,11 +3233,98 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#qualitative-metric-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Qualitative Metric Example
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#xlsx-export" class="md-nav__link">
+    <span class="md-ellipsis">
+      XLSX Export
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#best-practices" class="md-nav__link">
     <span class="md-ellipsis">
       Best Practices
     </span>
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#maturity-model-slis-and-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      Maturity Model: SLIs and Criteria
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Maturity Model: SLIs and Criteria">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sli-definition" class="md-nav__link">
+    <span class="md-ellipsis">
+      SLI Definition
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#criterion-slo-referencing-sli" class="md-nav__link">
+    <span class="md-ellipsis">
+      Criterion (SLO) Referencing SLI
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-it-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      How It Works
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#criterion-fields" class="md-nav__link">
+    <span class="md-ellipsis">
+      Criterion Fields
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#backward-compatibility" class="md-nav__link">
+    <span class="md-ellipsis">
+      Backward Compatibility
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resolution-order" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resolution Order
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -2927,9 +3349,124 @@
 
 <h1 id="slis-slos">SLIs &amp; SLOs</h1>
 <p>PRISM supports Service Level Indicators (SLIs) and Service Level Objectives (SLOs) following SRE best practices.</p>
+<h2 id="sli-vs-slo-architecture">SLI vs SLO Architecture</h2>
+<p>PRISM distinguishes between SLIs (what is measured) and SLOs (target thresholds):</p>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Definition</th>
+<th>Example</th>
+<th>Framework Mappings</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>SLI</strong></td>
+<td>The metric being measured</td>
+<td>"MTTR" (Mean Time to Recovery)</td>
+<td>Defined here</td>
+</tr>
+<tr>
+<td><strong>SLO</strong></td>
+<td>Target threshold for a specific maturity level</td>
+<td>"MTTR ≤ 7 days for M4"</td>
+<td>Inherited from SLI</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key principle:</strong> Framework mappings are defined once at the SLI level, not repeated for each SLO. The metric "Security MTTR" maps to NIST/SOC2 controls regardless of the maturity level threshold.</p>
 <h2 id="sli-service-level-indicator">SLI (Service Level Indicator)</h2>
-<p>An SLI defines what is being measured.</p>
-<h3 id="fields">Fields</h3>
+<p>An SLI defines what is being measured, including any compliance framework mappings.</p>
+<h3 id="sli-fields-maturity-model">SLI Fields (Maturity Model)</h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>string</td>
+<td>Yes</td>
+<td>Unique identifier</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>Yes</td>
+<td>SLI name</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td>string</td>
+<td>No</td>
+<td>SLI description</td>
+</tr>
+<tr>
+<td><code>metricName</code></td>
+<td>string</td>
+<td>Yes</td>
+<td>The metric being measured</td>
+</tr>
+<tr>
+<td><code>unit</code></td>
+<td>string</td>
+<td>No</td>
+<td>Unit of measurement (%, hours, days)</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td>string</td>
+<td>No</td>
+<td><code>quantitative</code> (default) or <code>qualitative</code></td>
+</tr>
+<tr>
+<td><code>layer</code></td>
+<td>string</td>
+<td>No</td>
+<td>Value stream layer (code, infra, runtime, etc.)</td>
+</tr>
+<tr>
+<td><code>category</code></td>
+<td>string</td>
+<td>No</td>
+<td>Metric category (reliability, efficiency, security)</td>
+</tr>
+<tr>
+<td><code>frameworkMappings</code></td>
+<td>array</td>
+<td>No</td>
+<td>Compliance framework references</td>
+</tr>
+</tbody>
+</table>
+<h3 id="sli-example-maturity-model">SLI Example (Maturity Model)</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">{</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">&quot;slis&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="nt">&quot;security-mttr&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">      </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;security-mttr&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Security MTTR&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">      </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Mean time to remediate critical security findings&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">      </span><span class="nt">&quot;metricName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;security_mttr_days&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">      </span><span class="nt">&quot;unit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;days&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;quantitative&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">      </span><span class="nt">&quot;layer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;runtime&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">      </span><span class="nt">&quot;category&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;response&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">      </span><span class="nt">&quot;frameworkMappings&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">        </span><span class="p">{</span><span class="nt">&quot;framework&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;NIST_800_53&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;reference&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;IR-6&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Incident Reporting&quot;</span><span class="p">},</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="w">        </span><span class="p">{</span><span class="nt">&quot;framework&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SOC_2&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;reference&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;CC7.4&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Security Incident Response&quot;</span><span class="p">}</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="w">      </span><span class="p">]</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="p">}</span>
+</code></pre></div>
+<h3 id="sli-fields-embedded-in-metric">SLI Fields (Embedded in Metric)</h3>
+<p>For standalone metrics (not maturity model), SLIs can be embedded:</p>
 <table>
 <thead>
 <tr>
@@ -2960,18 +3497,18 @@
 </tr>
 </tbody>
 </table>
-<h3 id="example">Example</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">{</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">&quot;sli&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Availability&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Percentage of successful requests&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="nt">&quot;formula&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;successful_requests / total_requests * 100&quot;</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">  </span><span class="p">}</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="p">}</span>
+<h3 id="example-embedded-sli">Example (Embedded SLI)</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">{</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">&quot;sli&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Availability&quot;</span><span class="p">,</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Percentage of successful requests&quot;</span><span class="p">,</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="nt">&quot;formula&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;successful_requests / total_requests * 100&quot;</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="p">}</span>
 </code></pre></div>
 <h2 id="slo-service-level-objective">SLO (Service Level Objective)</h2>
 <p>An SLO defines the target for an SLI.</p>
-<h3 id="fields_1">Fields</h3>
+<h3 id="fields">Fields</h3>
 <table>
 <thead>
 <tr>
@@ -2983,10 +3520,16 @@
 </thead>
 <tbody>
 <tr>
+<td><code>type</code></td>
+<td>string</td>
+<td>No</td>
+<td>SLO type: <code>quantitative</code> (default) or <code>qualitative</code></td>
+</tr>
+<tr>
 <td><code>target</code></td>
 <td>string</td>
 <td>Yes</td>
-<td>Human-readable target</td>
+<td>Human-readable target (e.g., "&gt;=99.9%" or "Tracked")</td>
 </tr>
 <tr>
 <td><code>operator</code></td>
@@ -2998,19 +3541,48 @@
 <td><code>value</code></td>
 <td>number</td>
 <td>No</td>
-<td>Numeric target value</td>
+<td>Numeric target value (quantitative only)</td>
 </tr>
 <tr>
 <td><code>window</code></td>
 <td>string</td>
 <td>No</td>
-<td>Measurement window</td>
+<td>Measurement window (quantitative only)</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td>string</td>
+<td>No</td>
+<td>Current qualitative status (qualitative only)</td>
 </tr>
 <tr>
 <td><code>thresholds</code></td>
 <td>object</td>
 <td>No</td>
-<td>Additional thresholds</td>
+<td>Additional thresholds (quantitative only)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="slo-types">SLO Types</h3>
+<p>PRISM supports two types of SLOs:</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+<th>Example Use Case</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>quantitative</code></td>
+<td>Numeric comparison (default)</td>
+<td>Availability ≥99.99%, Latency ≤200ms</td>
+</tr>
+<tr>
+<td><code>qualitative</code></td>
+<td>Binary state tracking</td>
+<td>"Metric is tracked", "Process is defined"</td>
 </tr>
 </tbody>
 </table>
@@ -3020,7 +3592,8 @@
 <thead>
 <tr>
 <th>Operator</th>
-<th>Constant</th>
+<th>Symbol</th>
+<th>Type</th>
 <th>Description</th>
 <th>Example</th>
 </tr>
@@ -3029,45 +3602,134 @@
 <tr>
 <td><code>gte</code></td>
 <td><code>&gt;=</code></td>
+<td>Quantitative</td>
 <td>Greater than or equal</td>
 <td>Availability ≥99.99%</td>
 </tr>
 <tr>
 <td><code>lte</code></td>
 <td><code>&lt;=</code></td>
+<td>Quantitative</td>
 <td>Less than or equal</td>
 <td>Latency ≤200ms</td>
 </tr>
 <tr>
 <td><code>gt</code></td>
 <td><code>&gt;</code></td>
+<td>Quantitative</td>
 <td>Greater than</td>
 <td>Score &gt;80</td>
 </tr>
 <tr>
 <td><code>lt</code></td>
 <td><code>&lt;</code></td>
+<td>Quantitative</td>
 <td>Less than</td>
 <td>Error rate &lt;0.1%</td>
 </tr>
 <tr>
 <td><code>eq</code></td>
 <td><code>=</code></td>
+<td>Quantitative</td>
 <td>Equal to</td>
 <td>Target exactly 100</td>
 </tr>
+<tr>
+<td><code>exists</code></td>
+<td>Tracked</td>
+<td>Qualitative</td>
+<td>Metric exists/is tracked</td>
+<td>Metric is being tracked</td>
+</tr>
 </tbody>
 </table>
-<h3 id="example-with-machine-evaluable-slo">Example with Machine-Evaluable SLO</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">{</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">&quot;slo&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="nt">&quot;target&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&gt;=99.99%&quot;</span><span class="p">,</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="nt">&quot;operator&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;gte&quot;</span><span class="p">,</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">99.99</span><span class="p">,</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="nt">&quot;window&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;30d&quot;</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">  </span><span class="p">}</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="p">}</span>
+<h3 id="example-with-quantitative-slo">Example with Quantitative SLO</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="p">{</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">&quot;slo&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;quantitative&quot;</span><span class="p">,</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="nt">&quot;target&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&gt;=99.99%&quot;</span><span class="p">,</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="nt">&quot;operator&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;gte&quot;</span><span class="p">,</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">99.99</span><span class="p">,</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">    </span><span class="nt">&quot;window&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;30d&quot;</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="p">}</span>
 </code></pre></div>
+<h3 id="example-with-qualitative-slo">Example with Qualitative SLO</h3>
+<p>Qualitative SLOs track binary states rather than numeric values:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">{</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">&quot;slo&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;qualitative&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="nt">&quot;target&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Tracked&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="nt">&quot;operator&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;exists&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;tracked&quot;</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="p">}</span>
+</code></pre></div>
+<h3 id="qualitative-status-values">Qualitative Status Values</h3>
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Indicates Met</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>tracked</code></td>
+<td>Yes</td>
+<td>Metric is being tracked</td>
+</tr>
+<tr>
+<td><code>implemented</code></td>
+<td>Yes</td>
+<td>Control/feature is implemented</td>
+</tr>
+<tr>
+<td><code>defined</code></td>
+<td>Yes</td>
+<td>Process/policy is defined</td>
+</tr>
+<tr>
+<td><code>documented</code></td>
+<td>Yes</td>
+<td>Documentation exists</td>
+</tr>
+<tr>
+<td><code>compliant</code></td>
+<td>Yes</td>
+<td>Meets compliance requirement</td>
+</tr>
+<tr>
+<td><code>enabled</code></td>
+<td>Yes</td>
+<td>Feature/capability is enabled</td>
+</tr>
+<tr>
+<td><code>not_tracked</code></td>
+<td>No</td>
+<td>Not yet being tracked</td>
+</tr>
+<tr>
+<td><code>partial</code></td>
+<td>No</td>
+<td>Partially implemented</td>
+</tr>
+<tr>
+<td><code>planned</code></td>
+<td>No</td>
+<td>Planned but not started</td>
+</tr>
+</tbody>
+</table>
+<h3 id="qualitative-slo-use-cases">Qualitative SLO Use Cases</h3>
+<p>Qualitative SLOs are useful for:</p>
+<ul>
+<li><strong>Process maturity</strong> - "Incident runbooks are documented"</li>
+<li><strong>Compliance tracking</strong> - "SOC 2 controls are implemented"</li>
+<li><strong>Capability existence</strong> - "Alerting is enabled for critical services"</li>
+<li><strong>Observability</strong> - "Distributed tracing is tracked"</li>
+</ul>
 <h3 id="measurement-windows">Measurement Windows</h3>
 <p>Common window values:</p>
 <table>
@@ -3102,20 +3764,20 @@
 </table>
 <h2 id="programmatic-slo-checking">Programmatic SLO Checking</h2>
 <p>PRISM provides a <code>MeetsSLO()</code> method for programmatic checking:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nx">metric</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">prism</span><span class="p">.</span><span class="nx">Metric</span><span class="p">{</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="nx">Current</span><span class="p">:</span><span class="w"> </span><span class="mf">99.95</span><span class="p">,</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="nx">SLO</span><span class="p">:</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">prism</span><span class="p">.</span><span class="nx">SLO</span><span class="p">{</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">        </span><span class="nx">Target</span><span class="p">:</span><span class="w">   </span><span class="s">&quot;&gt;=99.99%&quot;</span><span class="p">,</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">        </span><span class="nx">Operator</span><span class="p">:</span><span class="w"> </span><span class="nx">prism</span><span class="p">.</span><span class="nx">SLOOperatorGTE</span><span class="p">,</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">        </span><span class="nx">Value</span><span class="p">:</span><span class="w">    </span><span class="mf">99.99</span><span class="p">,</span>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">    </span><span class="p">},</span>
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="p">}</span>
-<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>
-<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="k">if</span><span class="w"> </span><span class="nx">metric</span><span class="p">.</span><span class="nx">MeetsSLO</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;SLO met!&quot;</span><span class="p">)</span>
-<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;SLO not met&quot;</span><span class="p">)</span>
-<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="p">}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nx">metric</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">prism</span><span class="p">.</span><span class="nx">Metric</span><span class="p">{</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="nx">Current</span><span class="p">:</span><span class="w"> </span><span class="mf">99.95</span><span class="p">,</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="nx">SLO</span><span class="p">:</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">prism</span><span class="p">.</span><span class="nx">SLO</span><span class="p">{</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">        </span><span class="nx">Target</span><span class="p">:</span><span class="w">   </span><span class="s">&quot;&gt;=99.99%&quot;</span><span class="p">,</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">        </span><span class="nx">Operator</span><span class="p">:</span><span class="w"> </span><span class="nx">prism</span><span class="p">.</span><span class="nx">SLOOperatorGTE</span><span class="p">,</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">        </span><span class="nx">Value</span><span class="p">:</span><span class="w">    </span><span class="mf">99.99</span><span class="p">,</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">    </span><span class="p">},</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="p">}</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="k">if</span><span class="w"> </span><span class="nx">metric</span><span class="p">.</span><span class="nx">MeetsSLO</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;SLO met!&quot;</span><span class="p">)</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;SLO not met&quot;</span><span class="p">)</span>
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="p">}</span>
 </code></pre></div>
 <h3 id="operator-behavior">Operator Behavior</h3>
 <table>
@@ -3161,41 +3823,95 @@
 </tbody>
 </table>
 <h2 id="complete-metric-example">Complete Metric Example</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">{</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ops-availability&quot;</span><span class="p">,</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Service Availability&quot;</span><span class="p">,</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Percentage of time the service is available&quot;</span><span class="p">,</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">  </span><span class="nt">&quot;domain&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;operations&quot;</span><span class="p">,</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">  </span><span class="nt">&quot;stage&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;runtime&quot;</span><span class="p">,</span>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">  </span><span class="nt">&quot;category&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;reliability&quot;</span><span class="p">,</span>
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">  </span><span class="nt">&quot;metricType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;rate&quot;</span><span class="p">,</span>
-<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">  </span><span class="nt">&quot;trendDirection&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;higher_better&quot;</span><span class="p">,</span>
-<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">  </span><span class="nt">&quot;unit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;%&quot;</span><span class="p">,</span>
-<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">  </span><span class="nt">&quot;baseline&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">99.0</span><span class="p">,</span>
-<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">  </span><span class="nt">&quot;current&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">99.95</span><span class="p">,</span>
-<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">  </span><span class="nt">&quot;target&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">99.99</span><span class="p">,</span>
-<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">  </span><span class="nt">&quot;sli&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Availability&quot;</span><span class="p">,</span>
-<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="w">    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Successful requests / total requests&quot;</span><span class="p">,</span>
-<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="w">    </span><span class="nt">&quot;formula&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1 - (error_count / total_requests)&quot;</span>
-<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="w">  </span><span class="p">},</span>
-<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="w">  </span><span class="nt">&quot;slo&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="w">    </span><span class="nt">&quot;target&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&gt;=99.99%&quot;</span><span class="p">,</span>
-<a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a><span class="w">    </span><span class="nt">&quot;operator&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;gte&quot;</span><span class="p">,</span>
-<a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a><span class="w">    </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">99.99</span><span class="p">,</span>
-<a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a><span class="w">    </span><span class="nt">&quot;window&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;30d&quot;</span>
-<a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a><span class="w">  </span><span class="p">},</span>
-<a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a><span class="w">  </span><span class="nt">&quot;thresholds&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a><span class="w">    </span><span class="nt">&quot;green&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">99.95</span><span class="p">,</span>
-<a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a><span class="w">    </span><span class="nt">&quot;yellow&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">99.9</span><span class="p">,</span>
-<a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a><span class="w">    </span><span class="nt">&quot;red&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">99.0</span>
-<a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a><span class="w">  </span><span class="p">},</span>
-<a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a><span class="w">  </span><span class="nt">&quot;frameworkMappings&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<a id="__codelineno-3-31" name="__codelineno-3-31" href="#__codelineno-3-31"></a><span class="w">    </span><span class="p">{</span><span class="nt">&quot;framework&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SRE&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;reference&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;availability-slo&quot;</span><span class="p">},</span>
-<a id="__codelineno-3-32" name="__codelineno-3-32" href="#__codelineno-3-32"></a><span class="w">    </span><span class="p">{</span><span class="nt">&quot;framework&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;DORA&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;reference&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;availability&quot;</span><span class="p">}</span>
-<a id="__codelineno-3-33" name="__codelineno-3-33" href="#__codelineno-3-33"></a><span class="w">  </span><span class="p">]</span>
-<a id="__codelineno-3-34" name="__codelineno-3-34" href="#__codelineno-3-34"></a><span class="p">}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="p">{</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ops-availability&quot;</span><span class="p">,</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Service Availability&quot;</span><span class="p">,</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">  </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Percentage of time the service is available&quot;</span><span class="p">,</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">  </span><span class="nt">&quot;domain&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;operations&quot;</span><span class="p">,</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">  </span><span class="nt">&quot;stage&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;runtime&quot;</span><span class="p">,</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">  </span><span class="nt">&quot;category&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;reliability&quot;</span><span class="p">,</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">  </span><span class="nt">&quot;metricType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;rate&quot;</span><span class="p">,</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">  </span><span class="nt">&quot;trendDirection&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;higher_better&quot;</span><span class="p">,</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="w">  </span><span class="nt">&quot;unit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;%&quot;</span><span class="p">,</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="w">  </span><span class="nt">&quot;baseline&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">99.0</span><span class="p">,</span>
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="w">  </span><span class="nt">&quot;current&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">99.95</span><span class="p">,</span>
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="w">  </span><span class="nt">&quot;target&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">99.99</span><span class="p">,</span>
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="w">  </span><span class="nt">&quot;sli&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Availability&quot;</span><span class="p">,</span>
+<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="w">    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Successful requests / total requests&quot;</span><span class="p">,</span>
+<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a><span class="w">    </span><span class="nt">&quot;formula&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1 - (error_count / total_requests)&quot;</span>
+<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a><span class="w">  </span><span class="p">},</span>
+<a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a><span class="w">  </span><span class="nt">&quot;slo&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a><span class="w">    </span><span class="nt">&quot;target&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&gt;=99.99%&quot;</span><span class="p">,</span>
+<a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a><span class="w">    </span><span class="nt">&quot;operator&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;gte&quot;</span><span class="p">,</span>
+<a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a><span class="w">    </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">99.99</span><span class="p">,</span>
+<a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a><span class="w">    </span><span class="nt">&quot;window&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;30d&quot;</span>
+<a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a><span class="w">  </span><span class="p">},</span>
+<a id="__codelineno-5-25" name="__codelineno-5-25" href="#__codelineno-5-25"></a><span class="w">  </span><span class="nt">&quot;thresholds&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-5-26" name="__codelineno-5-26" href="#__codelineno-5-26"></a><span class="w">    </span><span class="nt">&quot;green&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">99.95</span><span class="p">,</span>
+<a id="__codelineno-5-27" name="__codelineno-5-27" href="#__codelineno-5-27"></a><span class="w">    </span><span class="nt">&quot;yellow&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">99.9</span><span class="p">,</span>
+<a id="__codelineno-5-28" name="__codelineno-5-28" href="#__codelineno-5-28"></a><span class="w">    </span><span class="nt">&quot;red&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">99.0</span>
+<a id="__codelineno-5-29" name="__codelineno-5-29" href="#__codelineno-5-29"></a><span class="w">  </span><span class="p">},</span>
+<a id="__codelineno-5-30" name="__codelineno-5-30" href="#__codelineno-5-30"></a><span class="w">  </span><span class="nt">&quot;frameworkMappings&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-5-31" name="__codelineno-5-31" href="#__codelineno-5-31"></a><span class="w">    </span><span class="p">{</span><span class="nt">&quot;framework&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SRE&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;reference&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;availability-slo&quot;</span><span class="p">},</span>
+<a id="__codelineno-5-32" name="__codelineno-5-32" href="#__codelineno-5-32"></a><span class="w">    </span><span class="p">{</span><span class="nt">&quot;framework&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;DORA&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;reference&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;availability&quot;</span><span class="p">}</span>
+<a id="__codelineno-5-33" name="__codelineno-5-33" href="#__codelineno-5-33"></a><span class="w">  </span><span class="p">]</span>
+<a id="__codelineno-5-34" name="__codelineno-5-34" href="#__codelineno-5-34"></a><span class="p">}</span>
 </code></pre></div>
+<h2 id="qualitative-metric-example">Qualitative Metric Example</h2>
+<p>For metrics that track existence or state rather than numeric values:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="p">{</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;sec-incident-runbooks&quot;</span><span class="p">,</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Incident Runbooks&quot;</span><span class="p">,</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">  </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Documented runbooks for incident response&quot;</span><span class="p">,</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">  </span><span class="nt">&quot;domain&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;security&quot;</span><span class="p">,</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">  </span><span class="nt">&quot;stage&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;response&quot;</span><span class="p">,</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">  </span><span class="nt">&quot;category&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;response&quot;</span><span class="p">,</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">  </span><span class="nt">&quot;metricType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;boolean&quot;</span><span class="p">,</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="w">  </span><span class="nt">&quot;slo&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;qualitative&quot;</span><span class="p">,</span>
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="w">    </span><span class="nt">&quot;target&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Documented&quot;</span><span class="p">,</span>
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="w">    </span><span class="nt">&quot;operator&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;exists&quot;</span><span class="p">,</span>
+<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="w">    </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;documented&quot;</span>
+<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="p">}</span>
+</code></pre></div>
+<h2 id="xlsx-export">XLSX Export</h2>
+<p>When exporting to XLSX, qualitative metrics display differently:</p>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Type</th>
+<th>Target</th>
+<th>Current</th>
+<th>Met</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Service Availability</td>
+<td>Quantitative</td>
+<td>&gt;=99.99%</td>
+<td>99.95</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Incident Runbooks</td>
+<td>Qualitative</td>
+<td>Tracked</td>
+<td>Documented</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Alerting Coverage</td>
+<td>Qualitative</td>
+<td>Tracked</td>
+<td>Partial</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
 <h2 id="best-practices">Best Practices</h2>
 <ol>
 <li><strong>Set Realistic Targets</strong> - SLOs should be achievable but challenging</li>
@@ -3204,6 +3920,173 @@
 <li><strong>Use Machine-Evaluable Operators</strong> - Enable automated SLO checking</li>
 <li><strong>Define Measurement Windows</strong> - Clarify the evaluation period</li>
 <li><strong>Map to Frameworks</strong> - Reference industry standards (SRE, DORA)</li>
+<li><strong>Use Qualitative for Binary States</strong> - Track existence/compliance with qualitative SLOs</li>
+<li><strong>Combine Both Types</strong> - Mix quantitative metrics with qualitative process controls</li>
+<li><strong>Define SLIs Separately</strong> - In maturity models, define SLIs with framework mappings once, then reference them from criteria</li>
+</ol>
+<h2 id="maturity-model-slis-and-criteria">Maturity Model: SLIs and Criteria</h2>
+<p>In PRISM maturity models, criteria (SLOs) can reference shared SLIs:</p>
+<h3 id="sli-definition">SLI Definition</h3>
+<p>Define SLIs at the top level with framework mappings:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="p">{</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span><span class="nt">&quot;slis&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">    </span><span class="nt">&quot;security-mttr&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">      </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;security-mttr&quot;</span><span class="p">,</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Security MTTR&quot;</span><span class="p">,</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">      </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Mean time to remediate critical security findings&quot;</span><span class="p">,</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">      </span><span class="nt">&quot;metricName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;security_mttr_days&quot;</span><span class="p">,</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="w">      </span><span class="nt">&quot;unit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;days&quot;</span><span class="p">,</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;quantitative&quot;</span><span class="p">,</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="w">      </span><span class="nt">&quot;frameworkMappings&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="w">        </span><span class="p">{</span><span class="nt">&quot;framework&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;NIST_800_53&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;reference&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;IR-6&quot;</span><span class="p">},</span>
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="w">        </span><span class="p">{</span><span class="nt">&quot;framework&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SOC_2&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;reference&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;CC7.4&quot;</span><span class="p">}</span>
+<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="w">      </span><span class="p">]</span>
+<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a><span class="p">}</span>
+</code></pre></div>
+<h3 id="criterion-slo-referencing-sli">Criterion (SLO) Referencing SLI</h3>
+<p>Criteria at each maturity level reference the SLI via <code>sliId</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="p">{</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span><span class="nt">&quot;domains&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">    </span><span class="nt">&quot;security&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">      </span><span class="nt">&quot;levels&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">        </span><span class="p">{</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">          </span><span class="nt">&quot;level&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="w">          </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Managed&quot;</span><span class="p">,</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="w">          </span><span class="nt">&quot;criteria&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="w">            </span><span class="p">{</span>
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="w">              </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;sec-m4-mttr&quot;</span><span class="p">,</span>
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="w">              </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Fast Security MTTR&quot;</span><span class="p">,</span>
+<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a><span class="w">              </span><span class="nt">&quot;sliId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;security-mttr&quot;</span><span class="p">,</span>
+<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a><span class="w">              </span><span class="nt">&quot;operator&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;lte&quot;</span><span class="p">,</span>
+<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a><span class="w">              </span><span class="nt">&quot;target&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span>
+<a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a><span class="w">            </span><span class="p">}</span>
+<a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a><span class="w">          </span><span class="p">]</span>
+<a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a><span class="w">        </span><span class="p">},</span>
+<a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a><span class="w">        </span><span class="p">{</span>
+<a id="__codelineno-8-19" name="__codelineno-8-19" href="#__codelineno-8-19"></a><span class="w">          </span><span class="nt">&quot;level&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span>
+<a id="__codelineno-8-20" name="__codelineno-8-20" href="#__codelineno-8-20"></a><span class="w">          </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Optimizing&quot;</span><span class="p">,</span>
+<a id="__codelineno-8-21" name="__codelineno-8-21" href="#__codelineno-8-21"></a><span class="w">          </span><span class="nt">&quot;criteria&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-8-22" name="__codelineno-8-22" href="#__codelineno-8-22"></a><span class="w">            </span><span class="p">{</span>
+<a id="__codelineno-8-23" name="__codelineno-8-23" href="#__codelineno-8-23"></a><span class="w">              </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;sec-m5-mttr&quot;</span><span class="p">,</span>
+<a id="__codelineno-8-24" name="__codelineno-8-24" href="#__codelineno-8-24"></a><span class="w">              </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Rapid Security MTTR&quot;</span><span class="p">,</span>
+<a id="__codelineno-8-25" name="__codelineno-8-25" href="#__codelineno-8-25"></a><span class="w">              </span><span class="nt">&quot;sliId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;security-mttr&quot;</span><span class="p">,</span>
+<a id="__codelineno-8-26" name="__codelineno-8-26" href="#__codelineno-8-26"></a><span class="w">              </span><span class="nt">&quot;operator&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;lte&quot;</span><span class="p">,</span>
+<a id="__codelineno-8-27" name="__codelineno-8-27" href="#__codelineno-8-27"></a><span class="w">              </span><span class="nt">&quot;target&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<a id="__codelineno-8-28" name="__codelineno-8-28" href="#__codelineno-8-28"></a><span class="w">            </span><span class="p">}</span>
+<a id="__codelineno-8-29" name="__codelineno-8-29" href="#__codelineno-8-29"></a><span class="w">          </span><span class="p">]</span>
+<a id="__codelineno-8-30" name="__codelineno-8-30" href="#__codelineno-8-30"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-8-31" name="__codelineno-8-31" href="#__codelineno-8-31"></a><span class="w">      </span><span class="p">]</span>
+<a id="__codelineno-8-32" name="__codelineno-8-32" href="#__codelineno-8-32"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-8-33" name="__codelineno-8-33" href="#__codelineno-8-33"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-8-34" name="__codelineno-8-34" href="#__codelineno-8-34"></a><span class="p">}</span>
+</code></pre></div>
+<h3 id="how-it-works">How It Works</h3>
+<ol>
+<li><strong>SLI defined once</strong> - The metric "security-mttr" with framework mappings is defined in the <code>slis</code> section</li>
+<li><strong>Criteria reference SLI</strong> - M4 and M5 both use <code>sliId: "security-mttr"</code> with different targets</li>
+<li><strong>Framework mappings inherited</strong> - Both criteria inherit the NIST/SOC2 mappings from the SLI</li>
+<li><strong>Exports show mappings</strong> - XLSX and Markdown exports display framework columns for each criterion</li>
+</ol>
+<h3 id="criterion-fields">Criterion Fields</h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>string</td>
+<td>Yes</td>
+<td>Unique identifier</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>Yes</td>
+<td>Criterion name</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td>string</td>
+<td>No</td>
+<td>Description</td>
+</tr>
+<tr>
+<td><code>sliId</code></td>
+<td>string</td>
+<td>No</td>
+<td>Reference to SLI (preferred)</td>
+</tr>
+<tr>
+<td><code>operator</code></td>
+<td>string</td>
+<td>Yes</td>
+<td>Comparison operator (gte, lte, gt, lt, eq, exists)</td>
+</tr>
+<tr>
+<td><code>target</code></td>
+<td>number</td>
+<td>Yes</td>
+<td>Target threshold value</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td>string</td>
+<td>No</td>
+<td><code>quantitative</code> (default) or <code>qualitative</code></td>
+</tr>
+<tr>
+<td><code>metricName</code></td>
+<td>string</td>
+<td>No</td>
+<td>Inline metric name (if no sliId)</td>
+</tr>
+<tr>
+<td><code>unit</code></td>
+<td>string</td>
+<td>No</td>
+<td>Inline unit (if no sliId)</td>
+</tr>
+<tr>
+<td><code>frameworkMappings</code></td>
+<td>array</td>
+<td>No</td>
+<td>Inline mappings (if no sliId)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="backward-compatibility">Backward Compatibility</h3>
+<p>Criteria can still define fields inline without referencing an SLI:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="p">{</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">  </span><span class="nt">&quot;criteria&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">      </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;sec-m4-mttr&quot;</span><span class="p">,</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Security MTTR&quot;</span><span class="p">,</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="w">      </span><span class="nt">&quot;metricName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;security_mttr_days&quot;</span><span class="p">,</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="w">      </span><span class="nt">&quot;unit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;days&quot;</span><span class="p">,</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="w">      </span><span class="nt">&quot;operator&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;lte&quot;</span><span class="p">,</span>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="w">      </span><span class="nt">&quot;target&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span>
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="w">      </span><span class="nt">&quot;frameworkMappings&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="w">        </span><span class="p">{</span><span class="nt">&quot;framework&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;NIST_800_53&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;reference&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;IR-6&quot;</span><span class="p">}</span>
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="w">      </span><span class="p">]</span>
+<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a><span class="w">  </span><span class="p">]</span>
+<a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a><span class="p">}</span>
+</code></pre></div>
+<p>Inline <code>frameworkMappings</code> on a criterion take precedence over SLI mappings when both are present.</p>
+<h3 id="resolution-order">Resolution Order</h3>
+<p>When resolving framework mappings for a criterion:</p>
+<ol>
+<li>If the criterion has <code>frameworkMappings</code>, use them</li>
+<li>Otherwise, look up the SLI via <code>sliId</code> and use its <code>frameworkMappings</code></li>
+<li>If neither exists, no framework mappings are shown</li>
 </ol>
 
 

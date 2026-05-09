@@ -2,294 +2,306 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://grokify.github.io/prism/</loc>
-         <lastmod>2026-04-26</lastmod>
+         <lastmod>2026-05-09</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/prism/api/library/</loc>
-         <lastmod>2026-04-26</lastmod>
+         <lastmod>2026-05-09</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/prism/api/types/</loc>
-         <lastmod>2026-04-26</lastmod>
+         <lastmod>2026-05-09</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/prism/cli/</loc>
-         <lastmod>2026-04-26</lastmod>
+         <lastmod>2026-05-09</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/prism/cli/analyze/</loc>
-         <lastmod>2026-04-26</lastmod>
+         <lastmod>2026-05-09</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/prism/cli/catalog/</loc>
-         <lastmod>2026-04-26</lastmod>
+         <lastmod>2026-05-09</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/prism/cli/conventions/</loc>
-         <lastmod>2026-04-26</lastmod>
+         <lastmod>2026-05-09</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/prism/cli/dashboard/</loc>
-         <lastmod>2026-04-26</lastmod>
+         <lastmod>2026-05-09</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/prism/cli/export/</loc>
-         <lastmod>2026-04-26</lastmod>
+         <lastmod>2026-05-09</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/prism/cli/goal/</loc>
-         <lastmod>2026-04-26</lastmod>
+         <lastmod>2026-05-09</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/prism/cli/init/</loc>
-         <lastmod>2026-04-26</lastmod>
+         <lastmod>2026-05-09</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/prism/cli/initiative/</loc>
-         <lastmod>2026-04-26</lastmod>
+         <lastmod>2026-05-09</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/prism/cli/layer/</loc>
-         <lastmod>2026-04-26</lastmod>
+         <lastmod>2026-05-09</lastmod>
+    </url>
+    <url>
+         <loc>https://grokify.github.io/prism/cli/maturity-report/</loc>
+         <lastmod>2026-05-09</lastmod>
+    </url>
+    <url>
+         <loc>https://grokify.github.io/prism/cli/maturity-xlsx/</loc>
+         <lastmod>2026-05-09</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/prism/cli/phase/</loc>
-         <lastmod>2026-04-26</lastmod>
+         <lastmod>2026-05-09</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/prism/cli/report/</loc>
-         <lastmod>2026-04-26</lastmod>
+         <lastmod>2026-05-09</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/prism/cli/roadmap/</loc>
-         <lastmod>2026-04-26</lastmod>
+         <lastmod>2026-05-09</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/prism/cli/score/</loc>
-         <lastmod>2026-04-26</lastmod>
+         <lastmod>2026-05-09</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/prism/cli/service/</loc>
-         <lastmod>2026-04-26</lastmod>
+         <lastmod>2026-05-09</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/prism/cli/slo-report/</loc>
-         <lastmod>2026-04-26</lastmod>
+         <lastmod>2026-05-09</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/prism/cli/team/</loc>
-         <lastmod>2026-04-26</lastmod>
+         <lastmod>2026-05-09</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/prism/cli/validate/</loc>
-         <lastmod>2026-04-26</lastmod>
+         <lastmod>2026-05-09</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/prism/concepts/</loc>
-         <lastmod>2026-04-26</lastmod>
+         <lastmod>2026-05-09</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/prism/concepts/awareness/</loc>
-         <lastmod>2026-04-26</lastmod>
+         <lastmod>2026-05-09</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/prism/concepts/frameworks/</loc>
-         <lastmod>2026-04-26</lastmod>
+         <lastmod>2026-05-09</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/prism/concepts/goals/</loc>
-         <lastmod>2026-04-26</lastmod>
+         <lastmod>2026-05-09</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/prism/concepts/layers/</loc>
-         <lastmod>2026-04-26</lastmod>
+         <lastmod>2026-05-09</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/prism/concepts/maturity-strategies/</loc>
-         <lastmod>2026-04-26</lastmod>
+         <lastmod>2026-05-09</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/prism/concepts/maturity/</loc>
-         <lastmod>2026-04-26</lastmod>
+         <lastmod>2026-05-09</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/prism/concepts/phases/</loc>
-         <lastmod>2026-04-26</lastmod>
+         <lastmod>2026-05-09</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/prism/concepts/project-scoring/</loc>
-         <lastmod>2026-04-26</lastmod>
+         <lastmod>2026-05-09</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/prism/concepts/scoring/</loc>
-         <lastmod>2026-04-26</lastmod>
+         <lastmod>2026-05-09</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/prism/concepts/services/</loc>
-         <lastmod>2026-04-26</lastmod>
+         <lastmod>2026-05-09</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/prism/concepts/teams/</loc>
-         <lastmod>2026-04-26</lastmod>
+         <lastmod>2026-05-09</lastmod>
+    </url>
+    <url>
+         <loc>https://grokify.github.io/prism/design/core/PRD/</loc>
+         <lastmod>2026-05-09</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/prism/design/maturity/FEAT_MATURITYROADMAP_PLAN/</loc>
-         <lastmod>2026-04-26</lastmod>
+         <lastmod>2026-05-09</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/prism/design/maturity/FEAT_MATURITYROADMAP_PRD/</loc>
-         <lastmod>2026-04-26</lastmod>
+         <lastmod>2026-05-09</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/prism/design/maturity/FEAT_MATURITY_CODEGEN/</loc>
-         <lastmod>2026-04-26</lastmod>
+         <lastmod>2026-05-09</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/prism/design/maturity/FEAT_MATURITY_SLO_DESIGN/</loc>
-         <lastmod>2026-04-26</lastmod>
+         <lastmod>2026-05-09</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/prism/developer/</loc>
-         <lastmod>2026-04-26</lastmod>
+         <lastmod>2026-05-09</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/prism/developer/architecture/</loc>
-         <lastmod>2026-04-26</lastmod>
+         <lastmod>2026-05-09</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/prism/developer/contributing/</loc>
-         <lastmod>2026-04-26</lastmod>
+         <lastmod>2026-05-09</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/prism/examples/</loc>
-         <lastmod>2026-04-26</lastmod>
+         <lastmod>2026-05-09</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/prism/examples/goal-roadmap/</loc>
-         <lastmod>2026-04-26</lastmod>
+         <lastmod>2026-05-09</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/prism/examples/operations-layers/</loc>
-         <lastmod>2026-04-26</lastmod>
+         <lastmod>2026-05-09</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/prism/examples/operations/</loc>
-         <lastmod>2026-04-26</lastmod>
+         <lastmod>2026-05-09</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/prism/examples/quality-metrics/</loc>
-         <lastmod>2026-04-26</lastmod>
+         <lastmod>2026-05-09</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/prism/examples/team-topology/</loc>
-         <lastmod>2026-04-26</lastmod>
+         <lastmod>2026-05-09</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/prism/getting-started/first-document/</loc>
-         <lastmod>2026-04-26</lastmod>
+         <lastmod>2026-05-09</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/prism/getting-started/installation/</loc>
-         <lastmod>2026-04-26</lastmod>
+         <lastmod>2026-05-09</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/prism/getting-started/quickstart/</loc>
-         <lastmod>2026-04-26</lastmod>
+         <lastmod>2026-05-09</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/prism/integrations/</loc>
-         <lastmod>2026-04-26</lastmod>
+         <lastmod>2026-05-09</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/prism/integrations/dashforge/</loc>
-         <lastmod>2026-04-26</lastmod>
+         <lastmod>2026-05-09</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/prism/integrations/excel/</loc>
-         <lastmod>2026-04-26</lastmod>
+         <lastmod>2026-05-09</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/prism/integrations/marp/</loc>
-         <lastmod>2026-04-26</lastmod>
+         <lastmod>2026-05-09</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/prism/integrations/structured-plan/</loc>
-         <lastmod>2026-04-26</lastmod>
+         <lastmod>2026-05-09</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/prism/presentations/Organization-Maturity-Model/</loc>
-         <lastmod>2026-04-26</lastmod>
+         <lastmod>2026-05-09</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/prism/presentations/elt-overview/</loc>
-         <lastmod>2026-04-26</lastmod>
+         <lastmod>2026-05-09</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/prism/presentations/operations-domain/</loc>
-         <lastmod>2026-04-26</lastmod>
+         <lastmod>2026-05-09</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/prism/presentations/organization-maturity-generated/</loc>
-         <lastmod>2026-04-26</lastmod>
+         <lastmod>2026-05-09</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/prism/presentations/product-domain/</loc>
-         <lastmod>2026-04-26</lastmod>
+         <lastmod>2026-05-09</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/prism/presentations/quality-domain/</loc>
-         <lastmod>2026-04-26</lastmod>
+         <lastmod>2026-05-09</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/prism/presentations/security-domain/</loc>
-         <lastmod>2026-04-26</lastmod>
+         <lastmod>2026-05-09</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/prism/releases/changelog/</loc>
-         <lastmod>2026-04-26</lastmod>
+         <lastmod>2026-05-09</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/prism/releases/v0.1.0/</loc>
-         <lastmod>2026-04-26</lastmod>
+         <lastmod>2026-05-09</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/prism/releases/v0.2.0/</loc>
-         <lastmod>2026-04-26</lastmod>
+         <lastmod>2026-05-09</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/prism/releases/v0.3.0/</loc>
-         <lastmod>2026-04-26</lastmod>
+         <lastmod>2026-05-09</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/prism/schema/</loc>
-         <lastmod>2026-04-26</lastmod>
+         <lastmod>2026-05-09</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/prism/schema/categories/</loc>
-         <lastmod>2026-04-26</lastmod>
+         <lastmod>2026-05-09</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/prism/schema/domains/</loc>
-         <lastmod>2026-04-26</lastmod>
+         <lastmod>2026-05-09</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/prism/schema/metrics/</loc>
-         <lastmod>2026-04-26</lastmod>
+         <lastmod>2026-05-09</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/prism/schema/quality/</loc>
-         <lastmod>2026-04-26</lastmod>
+         <lastmod>2026-05-09</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/prism/schema/slos/</loc>
-         <lastmod>2026-04-26</lastmod>
+         <lastmod>2026-05-09</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/prism/schema/stages/</loc>
-         <lastmod>2026-04-26</lastmod>
+         <lastmod>2026-05-09</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/prism/schema/thresholds/</loc>
-         <lastmod>2026-04-26</lastmod>
+         <lastmod>2026-05-09</lastmod>
     </url>
 </urlset>
