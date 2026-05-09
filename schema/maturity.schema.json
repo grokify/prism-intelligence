@@ -1,0 +1,398 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/grokify/prism/schema/maturity.schema.json",
+  "$ref": "#/$defs/Spec",
+  "$defs": {
+    "Criterion": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "sliId": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "metricName": {
+          "type": "string"
+        },
+        "unit": {
+          "type": "string"
+        },
+        "layer": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string"
+        },
+        "operator": {
+          "type": "string"
+        },
+        "target": {
+          "type": "number"
+        },
+        "status": {
+          "type": "string"
+        },
+        "frameworkMappings": {
+          "items": {
+            "$ref": "#/$defs/FrameworkMapping"
+          },
+          "type": "array"
+        },
+        "current": {
+          "type": "number"
+        },
+        "isMet": {
+          "type": "boolean"
+        },
+        "weight": {
+          "type": "number"
+        },
+        "required": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "operator",
+        "target"
+      ]
+    },
+    "DomainAssessment": {
+      "properties": {
+        "domain": {
+          "type": "string"
+        },
+        "assessedAt": {
+          "type": "string"
+        },
+        "assessedBy": {
+          "type": "string"
+        },
+        "currentLevel": {
+          "type": "integer"
+        },
+        "targetLevel": {
+          "type": "integer"
+        },
+        "criteriaValues": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "type": "object"
+        },
+        "criteriaStatus": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "type": "object"
+        },
+        "enablerStatus": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "type": "object"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "domain",
+        "currentLevel",
+        "targetLevel"
+      ]
+    },
+    "DomainModel": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "owner": {
+          "type": "string"
+        },
+        "levels": {
+          "items": {
+            "$ref": "#/$defs/Level"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "name",
+        "levels"
+      ]
+    },
+    "Enabler": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "layer": {
+          "type": "string"
+        },
+        "effort": {
+          "type": "string"
+        },
+        "team": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "criteriaIds": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "dependsOn": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "id",
+        "name"
+      ]
+    },
+    "FrameworkMapping": {
+      "properties": {
+        "framework": {
+          "type": "string"
+        },
+        "reference": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "baseline": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "framework",
+        "reference"
+      ]
+    },
+    "KPIThreshold": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "unit": {
+          "type": "string"
+        },
+        "operator": {
+          "type": "string"
+        },
+        "thresholds": {
+          "$ref": "#/$defs/LevelThresholds"
+        },
+        "current": true
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "thresholds"
+      ]
+    },
+    "Level": {
+      "properties": {
+        "level": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "criteria": {
+          "items": {
+            "$ref": "#/$defs/Criterion"
+          },
+          "type": "array"
+        },
+        "enablers": {
+          "items": {
+            "$ref": "#/$defs/Enabler"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "level",
+        "name",
+        "description"
+      ]
+    },
+    "LevelThresholds": {
+      "properties": {
+        "m1": true,
+        "m2": true,
+        "m3": true,
+        "m4": true,
+        "m5": true
+      },
+      "additionalProperties": false,
+      "type": "object"
+    },
+    "SLI": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "metricName": {
+          "type": "string"
+        },
+        "unit": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "layer": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string"
+        },
+        "frameworkMappings": {
+          "items": {
+            "$ref": "#/$defs/FrameworkMapping"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "metricName"
+      ]
+    },
+    "Spec": {
+      "properties": {
+        "$schema": {
+          "type": "string"
+        },
+        "metadata": {
+          "$ref": "#/$defs/SpecMetadata"
+        },
+        "slis": {
+          "additionalProperties": {
+            "$ref": "#/$defs/SLI"
+          },
+          "type": "object"
+        },
+        "kpiThresholds": {
+          "additionalProperties": {
+            "items": {
+              "$ref": "#/$defs/KPIThreshold"
+            },
+            "type": "array"
+          },
+          "type": "object"
+        },
+        "domains": {
+          "additionalProperties": {
+            "$ref": "#/$defs/DomainModel"
+          },
+          "type": "object"
+        },
+        "assessments": {
+          "additionalProperties": {
+            "$ref": "#/$defs/DomainAssessment"
+          },
+          "type": "object"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "domains"
+      ]
+    },
+    "SpecMetadata": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "organization": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string"
+        },
+        "updatedAt": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object"
+    }
+  },
+  "title": "Maturity Specification",
+  "description": "PRISM Maturity Model specification with domains, levels, criteria, and framework mappings"
+}
