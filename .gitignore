@@ -30,3 +30,6 @@ TASKS.md
 node_modules/
 dist/
 *.tgz
+
+# MkDocs
+site/

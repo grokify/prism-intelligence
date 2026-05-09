@@ -305,7 +305,7 @@ prism export okr prism.json -o roadmap.okr.json
 prism export v2mom prism.json -o roadmap.v2mom.json
 ```
 
-### Maturity commands (v0.3.0)
+### Maturity commands (v0.4.0)
 
 ```bash
 # Generate Markdown report with SLI Catalog
