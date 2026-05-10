@@ -141,6 +141,11 @@
       "baseline": 500,
       "current": 95,
       "target": 100,
+      "sli": {
+        "name": "Response Latency",
+        "description": "P99 response time for API requests",
+        "sliType": "latency"
+      },
       "slo": {
         "target": "<=100ms",
         "operator": "lte",
@@ -160,7 +165,12 @@
       "unit": "req/s",
       "baseline": 1000,
       "current": 2500,
-      "target": 5000
+      "target": 5000,
+      "sli": {
+        "name": "Request Rate",
+        "description": "Traffic throughput in requests per second",
+        "sliType": "throughput"
+      }
     },
     {
       "id": "metric-runtime-errors",
@@ -176,6 +186,11 @@
       "baseline": 5.0,
       "current": 0.5,
       "target": 0.1,
+      "sli": {
+        "name": "Error Rate",
+        "description": "Percentage of failed requests",
+        "sliType": "error_rate"
+      },
       "slo": {
         "target": "<=0.1%",
         "operator": "lte",
@@ -195,7 +210,12 @@
       "unit": "%",
       "baseline": 70,
       "current": 45,
-      "target": 60
+      "target": 60,
+      "sli": {
+        "name": "CPU Saturation",
+        "description": "Service CPU utilization as saturation indicator",
+        "sliType": "saturation"
+      }
     },
     {
       "id": "metric-req-throughput",
