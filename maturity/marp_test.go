@@ -8,7 +8,7 @@ import (
 )
 
 func TestGenerateMarp(t *testing.T) {
-	specFile := "../maturity-models/organization.json"
+	specFile := "../examples/maturity-models/organization/model.json"
 	outputFile := filepath.Join(os.TempDir(), "organization-maturity-generated.md")
 
 	if err := GenerateMarp(specFile, outputFile); err != nil {
@@ -61,7 +61,7 @@ func TestGenerateMarp(t *testing.T) {
 }
 
 func TestKPIThresholdsParsing(t *testing.T) {
-	specFile := "../maturity-models/organization.json"
+	specFile := "../examples/maturity-models/organization/model.json"
 
 	spec, err := ReadSpecFile(specFile)
 	if err != nil {

@@ -7,7 +7,7 @@ import (
 )
 
 func TestGenerateOrganizationXLSX(t *testing.T) {
-	specFile := "../maturity-models/organization.json"
+	specFile := "../examples/maturity-models/organization/model.json"
 	outputFile := filepath.Join(os.TempDir(), "organization-maturity.xlsx")
 
 	// Use the simple XLSX generator (omniframe-based)
