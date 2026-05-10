@@ -51,8 +51,9 @@ func TestGenerateXLSX(t *testing.T) {
 		if c.ID == "" {
 			t.Error("Criterion has empty ID")
 		}
-		if c.MetricName == "" {
-			t.Error("Criterion has empty MetricName")
+		// MetricName can be resolved from SLI reference
+		if c.GetMetricName(spec) == "" && c.SLIID == "" {
+			t.Errorf("Criterion %s has no MetricName and no SLI reference", c.ID)
 		}
 	}
 
