@@ -217,7 +217,7 @@ const htmlTemplate = `<!DOCTYPE html>
 
     /* Maturity Bullet Chart Styles */
     /* D3 sorts ranges descending: s0=highest(M5), s1=middle(M4), s2=lowest(M1-3) */
-    .bullet { font: 10px sans-serif; }
+    .bullet { font: 12px sans-serif; }
     .bullet .marker { stroke: #000; stroke-width: 2px; }
     .bullet .tick line { stroke: #666; stroke-width: .5px; }
     .bullet .range.s0 { fill: #dcfce7; }
@@ -225,8 +225,8 @@ const htmlTemplate = `<!DOCTYPE html>
     .bullet .range.s2 { fill: #fee2e2; }
     .bullet .measure.s0 { fill: #3b82f6; }
     .bullet .measure.s1 { fill: #60a5fa; }
-    .bullet .title { font-size: 12px; font-weight: bold; }
-    .bullet .subtitle { fill: #999; font-size: 10px; }
+    .bullet .title { font-size: 14px; font-weight: bold; }
+    .bullet .subtitle { fill: #666; font-size: 12px; }
     .bullet-container { padding: 8px 0; }
     .bullet-legend {
       display: flex;
@@ -465,9 +465,9 @@ const htmlTemplate = `<!DOCTYPE html>
         const container = document.getElementById('bullet-' + widget.id);
         if (!container || !Array.isArray(data)) return;
 
-        const margin = {top: 5, right: 40, bottom: 30, left: 140};
+        const margin = {top: 5, right: 50, bottom: 35, left: 160};
         const width = container.offsetWidth - margin.left - margin.right;
-        const height = 30;
+        const height = 32;
 
         // Use maturity-specific bullet chart with M1-M5 ticks
         const chart = d3MaturityBullet().width(width).height(height);
@@ -543,8 +543,8 @@ const htmlTemplate = `<!DOCTYPE html>
             g.append('text')
                 .attr('class', 'measure-label')
                 .attr('x', x(currentLevel) + 4)
-                .attr('y', height / 2 + 4)
-                .style('font-size', '11px')
+                .attr('y', height / 2 + 5)
+                .style('font-size', '13px')
                 .style('font-weight', 'bold')
                 .style('fill', '#3b82f6')
                 .text(currentLevel.toFixed(1));
@@ -585,8 +585,8 @@ const htmlTemplate = `<!DOCTYPE html>
           // Level label (M1, M2, etc.)
           tickG.append('text')
               .attr('text-anchor', 'middle')
-              .attr('y', height + 14)
-              .style('font-size', '9px')
+              .attr('y', height + 16)
+              .style('font-size', '11px')
               .style('font-weight', 'bold')
               .style('fill', '#333')
               .text(d => 'M' + d);
@@ -594,8 +594,8 @@ const htmlTemplate = `<!DOCTYPE html>
           // Threshold value below level label
           tickG.append('text')
               .attr('text-anchor', 'middle')
-              .attr('y', height + 24)
-              .style('font-size', '8px')
+              .attr('y', height + 28)
+              .style('font-size', '10px')
               .style('fill', '#666')
               .text(d => thresholdByLevel[d] || '');
         });
