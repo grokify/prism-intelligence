@@ -236,6 +236,28 @@ func ValidateSLOOperator(operator string) error {
 	return nil
 }
 
+// ValidateSLIType validates an SLI type value.
+func ValidateSLIType(sliType string) error {
+	if sliType == "" {
+		return nil // Optional field
+	}
+	if !slices.Contains(AllSLITypes(), sliType) {
+		return fmt.Errorf("invalid SLI type %q, must be one of: %s", sliType, strings.Join(AllSLITypes(), ", "))
+	}
+	return nil
+}
+
+// ValidateMethodology validates an observability methodology value.
+func ValidateMethodology(methodology string) error {
+	if methodology == "" {
+		return nil // Optional field
+	}
+	if !slices.Contains(AllMethodologies(), methodology) {
+		return fmt.Errorf("invalid methodology %q, must be one of: %s", methodology, strings.Join(AllMethodologies(), ", "))
+	}
+	return nil
+}
+
 // Validate validates a Metric and returns validation errors.
 func (m *Metric) Validate() ValidationErrors {
 	var errs ValidationErrors
@@ -280,6 +302,13 @@ func (m *Metric) Validate() ValidationErrors {
 	if m.SLO != nil {
 		if err := ValidateWindow(m.SLO.Window); err != nil {
 			errs = append(errs, ValidationError{Field: "slo.window", Value: m.SLO.Window, Message: err.Error()})
+		}
+	}
+
+	// Validate SLI type if present
+	if m.SLI != nil {
+		if err := ValidateSLIType(m.SLI.SLIType); err != nil {
+			errs = append(errs, ValidationError{Field: "sli.sliType", Value: m.SLI.SLIType, Message: err.Error()})
 		}
 	}
 
