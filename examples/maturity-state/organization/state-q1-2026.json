@@ -1,0 +1,157 @@
+{
+  "$schema": "https://github.com/grokify/prism/schema/prism-maturity-state.schema.json",
+  "metadata": {
+    "name": "Organization Maturity State Q1 2026",
+    "description": "Current state tracking for Organization-wide maturity model across all domains",
+    "maturityModelRef": "../maturity-models/organization/model.json",
+    "assessedAt": "2026-01-15"
+  },
+
+  "sloWindows": ["30d", "quarterly"],
+
+  "maturityState": {
+    "security": {
+      "domainId": "security",
+      "current": {
+        "level": 2,
+        "achievedAt": "2025-09-01",
+        "assessedBy": "Security Team"
+      },
+      "target": {
+        "level": 4,
+        "targetDate": "2027-01-01"
+      },
+      "history": [
+        { "level": 1, "achievedAt": "2025-01-01" },
+        { "level": 2, "achievedAt": "2025-09-01" }
+      ]
+    },
+    "operational-excellence": {
+      "domainId": "operational-excellence",
+      "current": {
+        "level": 3,
+        "achievedAt": "2025-11-15",
+        "assessedBy": "SRE Team"
+      },
+      "target": {
+        "level": 4,
+        "targetDate": "2026-09-01"
+      },
+      "history": [
+        { "level": 1, "achievedAt": "2024-06-01" },
+        { "level": 2, "achievedAt": "2025-03-01" },
+        { "level": 3, "achievedAt": "2025-11-15" }
+      ]
+    },
+    "quality": {
+      "domainId": "quality",
+      "current": {
+        "level": 2,
+        "achievedAt": "2025-06-01",
+        "assessedBy": "QE Team"
+      },
+      "target": {
+        "level": 4,
+        "targetDate": "2027-01-01"
+      },
+      "history": [
+        { "level": 1, "achievedAt": "2024-09-01" },
+        { "level": 2, "achievedAt": "2025-06-01" }
+      ]
+    },
+    "product": {
+      "domainId": "product",
+      "current": {
+        "level": 2,
+        "achievedAt": "2025-08-01",
+        "assessedBy": "Product Team"
+      },
+      "target": {
+        "level": 4,
+        "targetDate": "2027-06-01"
+      },
+      "history": [
+        { "level": 1, "achievedAt": "2024-06-01" },
+        { "level": 2, "achievedAt": "2025-08-01" }
+      ]
+    },
+    "ai": {
+      "domainId": "ai",
+      "current": {
+        "level": 2,
+        "achievedAt": "2025-10-01",
+        "assessedBy": "AI Center of Excellence"
+      },
+      "target": {
+        "level": 4,
+        "targetDate": "2027-06-01"
+      },
+      "history": [
+        { "level": 1, "achievedAt": "2025-04-01" },
+        { "level": 2, "achievedAt": "2025-10-01" }
+      ]
+    }
+  },
+
+  "sliState": {
+    "sec-sast-coverage": {
+      "sliId": "sec-sast-coverage",
+      "windows": { "30d": { "value": 75, "timestamp": "2026-01-15T00:00:00Z" } }
+    },
+    "sec-sca-coverage": {
+      "sliId": "sec-sca-coverage",
+      "windows": { "30d": { "value": 80, "timestamp": "2026-01-15T00:00:00Z" } }
+    },
+    "ops-cicd-coverage": {
+      "sliId": "ops-cicd-coverage",
+      "windows": { "30d": { "value": 95, "timestamp": "2026-01-15T00:00:00Z" } }
+    },
+    "ops-slo-defined": {
+      "sliId": "ops-slo-defined",
+      "windows": { "30d": { "value": 80, "timestamp": "2026-01-15T00:00:00Z" } }
+    },
+    "ops-availability": {
+      "sliId": "ops-availability",
+      "windows": { "30d": { "value": 99.7, "timestamp": "2026-01-15T00:00:00Z" } }
+    },
+    "qa-unit-coverage": {
+      "sliId": "qa-unit-coverage",
+      "windows": { "30d": { "value": 68, "timestamp": "2026-01-15T00:00:00Z" } }
+    },
+    "qa-e2e-coverage": {
+      "sliId": "qa-e2e-coverage",
+      "windows": { "30d": { "value": 55, "timestamp": "2026-01-15T00:00:00Z" } }
+    },
+    "prod-feature-adoption": {
+      "sliId": "prod-feature-adoption",
+      "windows": { "30d": { "value": 50, "timestamp": "2026-01-15T00:00:00Z" } }
+    },
+    "prod-nps": {
+      "sliId": "prod-nps",
+      "windows": { "30d": { "value": 42, "timestamp": "2026-01-15T00:00:00Z" } }
+    },
+    "ai-tool-adoption": {
+      "sliId": "ai-tool-adoption",
+      "windows": { "30d": { "value": 60, "timestamp": "2026-01-15T00:00:00Z" } }
+    },
+    "ai-coding-assistant": {
+      "sliId": "ai-coding-assistant",
+      "windows": { "30d": { "value": 55, "timestamp": "2026-01-15T00:00:00Z" } }
+    }
+  },
+
+  "enablerState": {
+    "sec-m2-deploy-sast": { "enablerId": "sec-m2-deploy-sast", "status": "completed", "progress": 100 },
+    "sec-m2-deploy-sca": { "enablerId": "sec-m2-deploy-sca", "status": "completed", "progress": 100 },
+    "sec-m3-ci-integration": { "enablerId": "sec-m3-ci-integration", "status": "in_progress", "progress": 60 },
+    "sec-m3-secrets-scanning": { "enablerId": "sec-m3-secrets-scanning", "status": "in_progress", "progress": 40 },
+    "ops-m3-slo-program": { "enablerId": "ops-m3-slo-program", "status": "in_progress", "progress": 80 },
+    "ops-m3-runbook-program": { "enablerId": "ops-m3-runbook-program", "status": "in_progress", "progress": 75 },
+    "ops-m4-dora-dashboard": { "enablerId": "ops-m4-dora-dashboard", "status": "in_progress", "progress": 50 },
+    "qa-m3-coverage-enforcement": { "enablerId": "qa-m3-coverage-enforcement", "status": "in_progress", "progress": 68 },
+    "qa-m3-e2e-framework": { "enablerId": "qa-m3-e2e-framework", "status": "in_progress", "progress": 55 },
+    "prod-m3-acceptance-process": { "enablerId": "prod-m3-acceptance-process", "status": "in_progress", "progress": 65 },
+    "ai-m2-training-program": { "enablerId": "ai-m2-training-program", "status": "in_progress", "progress": 45 },
+    "ai-m3-coding-rollout": { "enablerId": "ai-m3-coding-rollout", "status": "in_progress", "progress": 55 }
+  }
+}

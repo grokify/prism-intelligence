@@ -1,0 +1,239 @@
+{
+  "$schema": "https://github.com/grokify/prism/schema/prism-maturity-state.schema.json",
+  "metadata": {
+    "name": "Operations Maturity State Q2 2026",
+    "description": "Current state tracking for Operations maturity model",
+    "maturityModelRef": "../maturity-models/operations/model.json",
+    "assessedAt": "2026-05-09",
+    "assessedBy": "SRE Team"
+  },
+
+  "sloWindows": ["7d", "30d", "90d", "quarterly"],
+
+  "sliState": {
+    "sli-availability": {
+      "sliId": "sli-availability",
+      "qualitativeState": "alerting",
+      "windows": {
+        "7d":  { "value": 99.7, "timestamp": "2026-05-09T00:00:00Z" },
+        "30d": { "value": 99.5, "timestamp": "2026-05-09T00:00:00Z" },
+        "90d": { "value": 99.3, "timestamp": "2026-05-09T00:00:00Z" }
+      },
+      "history": [
+        { "window": "30d", "value": 99.1, "timestamp": "2026-03-01T00:00:00Z" },
+        { "window": "30d", "value": 99.3, "timestamp": "2026-04-01T00:00:00Z" },
+        { "window": "30d", "value": 99.5, "timestamp": "2026-05-01T00:00:00Z" }
+      ],
+      "targets": {
+        "Q2_2026": { "value": 99.5, "maturityLevel": 3 },
+        "Q4_2026": { "value": 99.9, "maturityLevel": 4 },
+        "Q2_2027": { "value": 99.99, "maturityLevel": 5 }
+      }
+    },
+    "sli-latency-p99": {
+      "sliId": "sli-latency-p99",
+      "qualitativeState": "measured",
+      "windows": {
+        "7d":  { "value": 420, "timestamp": "2026-05-09T00:00:00Z" },
+        "30d": { "value": 450, "timestamp": "2026-05-09T00:00:00Z" }
+      },
+      "targets": {
+        "Q2_2026": { "value": 500, "maturityLevel": 3 },
+        "Q4_2026": { "value": 200, "maturityLevel": 4 }
+      }
+    },
+    "sli-latency-p50": {
+      "sliId": "sli-latency-p50",
+      "qualitativeState": "measured",
+      "windows": {
+        "30d": { "value": 75, "timestamp": "2026-05-09T00:00:00Z" }
+      },
+      "targets": {
+        "Q2_2026": { "value": 100, "maturityLevel": 3 },
+        "Q4_2026": { "value": 50, "maturityLevel": 4 }
+      }
+    },
+    "sli-error-rate": {
+      "sliId": "sli-error-rate",
+      "qualitativeState": "alerting",
+      "windows": {
+        "7d":  { "value": 0.6, "timestamp": "2026-05-09T00:00:00Z" },
+        "30d": { "value": 0.8, "timestamp": "2026-05-09T00:00:00Z" }
+      },
+      "history": [
+        { "window": "30d", "value": 1.2, "timestamp": "2026-03-01T00:00:00Z" },
+        { "window": "30d", "value": 0.9, "timestamp": "2026-04-01T00:00:00Z" },
+        { "window": "30d", "value": 0.8, "timestamp": "2026-05-01T00:00:00Z" }
+      ],
+      "targets": {
+        "Q2_2026": { "value": 1.0, "maturityLevel": 3 },
+        "Q4_2026": { "value": 0.1, "maturityLevel": 4 }
+      }
+    },
+    "sli-cpu-saturation": {
+      "sliId": "sli-cpu-saturation",
+      "qualitativeState": "measured",
+      "windows": {
+        "30d": { "value": 65, "timestamp": "2026-05-09T00:00:00Z" }
+      },
+      "targets": {
+        "Q2_2026": { "value": 80, "maturityLevel": 3 },
+        "Q4_2026": { "value": 70, "maturityLevel": 4 }
+      }
+    },
+    "sli-memory-saturation": {
+      "sliId": "sli-memory-saturation",
+      "qualitativeState": "measured",
+      "windows": {
+        "30d": { "value": 70, "timestamp": "2026-05-09T00:00:00Z" }
+      },
+      "targets": {
+        "Q4_2026": { "value": 75, "maturityLevel": 4 }
+      }
+    },
+    "sli-monitoring-coverage": {
+      "sliId": "sli-monitoring-coverage",
+      "qualitativeState": "measured",
+      "windows": {
+        "30d": { "value": 85, "timestamp": "2026-05-09T00:00:00Z" }
+      },
+      "history": [
+        { "window": "30d", "value": 50, "timestamp": "2026-01-01T00:00:00Z" },
+        { "window": "30d", "value": 70, "timestamp": "2026-03-01T00:00:00Z" },
+        { "window": "30d", "value": 85, "timestamp": "2026-05-01T00:00:00Z" }
+      ],
+      "targets": {
+        "Q2_2026": { "value": 80, "maturityLevel": 3 },
+        "Q4_2026": { "value": 95, "maturityLevel": 4 }
+      }
+    },
+    "sli-mttr": {
+      "sliId": "sli-mttr",
+      "qualitativeState": "measured",
+      "windows": {
+        "30d": { "value": 45, "timestamp": "2026-05-09T00:00:00Z" }
+      },
+      "targets": {
+        "Q2_2026": { "value": 60, "maturityLevel": 3 },
+        "Q4_2026": { "value": 30, "maturityLevel": 4 }
+      }
+    },
+    "sli-deployment-frequency": {
+      "sliId": "sli-deployment-frequency",
+      "qualitativeState": "tracked",
+      "windows": {
+        "30d": { "value": 0.5, "timestamp": "2026-05-09T00:00:00Z" }
+      },
+      "targets": {
+        "Q4_2026": { "value": 1, "maturityLevel": 4 }
+      }
+    },
+    "sli-lead-time": {
+      "sliId": "sli-lead-time",
+      "qualitativeState": "tracked",
+      "windows": {
+        "30d": { "value": 48, "timestamp": "2026-05-09T00:00:00Z" }
+      },
+      "targets": {
+        "Q4_2026": { "value": 24, "maturityLevel": 4 }
+      }
+    },
+    "sli-alerting-defined": {
+      "sliId": "sli-alerting-defined",
+      "qualitativeState": "measured"
+    },
+    "sli-slos-defined": {
+      "sliId": "sli-slos-defined",
+      "qualitativeState": "measured"
+    },
+    "sli-runbooks-exist": {
+      "sliId": "sli-runbooks-exist",
+      "qualitativeState": "measured"
+    },
+    "sli-error-budget-policy": {
+      "sliId": "sli-error-budget-policy",
+      "qualitativeState": "tracked"
+    }
+  },
+
+  "maturityState": {
+    "operations": {
+      "domainId": "operations",
+      "current": {
+        "level": 3,
+        "achievedAt": "2026-03-15",
+        "assessedBy": "SRE Team",
+        "note": "All M3 criteria met, working toward M4"
+      },
+      "target": {
+        "level": 5,
+        "targetDate": "2027-06-30",
+        "rationale": "Strategic goal: industry-leading reliability"
+      },
+      "history": [
+        { "level": 1, "achievedAt": "2025-01-01" },
+        { "level": 2, "achievedAt": "2025-06-15" },
+        { "level": 3, "achievedAt": "2026-03-15" }
+      ]
+    }
+  },
+
+  "enablerState": {
+    "ops-m2-deploy-monitoring": {
+      "enablerId": "ops-m2-deploy-monitoring",
+      "status": "completed",
+      "progress": 100,
+      "completedAt": "2025-04-01",
+      "owner": "SRE Team"
+    },
+    "ops-m2-setup-alerts": {
+      "enablerId": "ops-m2-setup-alerts",
+      "status": "completed",
+      "progress": 100,
+      "completedAt": "2025-05-15",
+      "owner": "SRE Team"
+    },
+    "ops-m3-define-slos": {
+      "enablerId": "ops-m3-define-slos",
+      "status": "completed",
+      "progress": 100,
+      "completedAt": "2025-12-01",
+      "owner": "SRE + Product"
+    },
+    "ops-m3-create-runbooks": {
+      "enablerId": "ops-m3-create-runbooks",
+      "status": "completed",
+      "progress": 100,
+      "completedAt": "2026-02-15",
+      "owner": "SRE Team"
+    },
+    "ops-m3-expand-monitoring": {
+      "enablerId": "ops-m3-expand-monitoring",
+      "status": "in_progress",
+      "progress": 70,
+      "startedAt": "2026-01-15",
+      "owner": "SRE Team",
+      "note": "85% coverage achieved, targeting 95% by Q3"
+    },
+    "ops-m4-error-budgets": {
+      "enablerId": "ops-m4-error-budgets",
+      "status": "in_progress",
+      "progress": 40,
+      "startedAt": "2026-04-01",
+      "owner": "SRE + Engineering",
+      "note": "Policy defined, automation in development"
+    },
+    "ops-m4-capacity-planning": {
+      "enablerId": "ops-m4-capacity-planning",
+      "status": "not_started",
+      "progress": 0,
+      "note": "Scheduled for Q3 2026"
+    },
+    "ops-m4-cicd-improvements": {
+      "enablerId": "ops-m4-cicd-improvements",
+      "status": "not_started",
+      "progress": 0,
+      "note": "Scheduled for Q3 2026"
+    }
+  }
+}

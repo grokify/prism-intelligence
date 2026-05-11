@@ -1,0 +1,214 @@
+{
+  "$schema": "https://github.com/grokify/prism/schema/prism-maturity-state.schema.json",
+  "metadata": {
+    "name": "Security Maturity State Q2 2026",
+    "description": "Current state tracking for Security maturity model",
+    "maturityModelRef": "../maturity-models/security/model.json",
+    "assessedAt": "2026-05-09",
+    "assessedBy": "Security Team"
+  },
+
+  "sloWindows": ["7d", "30d", "90d", "quarterly"],
+
+  "sliState": {
+    "sli-sast-coverage": {
+      "sliId": "sli-sast-coverage",
+      "qualitativeState": "measured",
+      "windows": {
+        "30d": { "value": 75, "timestamp": "2026-05-09T00:00:00Z" }
+      },
+      "history": [
+        { "window": "30d", "value": 50, "timestamp": "2026-01-01T00:00:00Z" },
+        { "window": "30d", "value": 65, "timestamp": "2026-03-01T00:00:00Z" },
+        { "window": "30d", "value": 75, "timestamp": "2026-05-01T00:00:00Z" }
+      ],
+      "targets": {
+        "Q2_2026": { "value": 80, "maturityLevel": 2 },
+        "Q4_2026": { "value": 95, "maturityLevel": 3 }
+      }
+    },
+    "sli-sca-coverage": {
+      "sliId": "sli-sca-coverage",
+      "qualitativeState": "measured",
+      "windows": {
+        "30d": { "value": 80, "timestamp": "2026-05-09T00:00:00Z" }
+      },
+      "targets": {
+        "Q2_2026": { "value": 80, "maturityLevel": 2 },
+        "Q4_2026": { "value": 95, "maturityLevel": 3 }
+      }
+    },
+    "sli-secrets-exposed": {
+      "sliId": "sli-secrets-exposed",
+      "qualitativeState": "alerting",
+      "windows": {
+        "30d": { "value": 3, "timestamp": "2026-05-09T00:00:00Z" }
+      },
+      "history": [
+        { "window": "30d", "value": 12, "timestamp": "2026-01-01T00:00:00Z" },
+        { "window": "30d", "value": 7, "timestamp": "2026-03-01T00:00:00Z" },
+        { "window": "30d", "value": 3, "timestamp": "2026-05-01T00:00:00Z" }
+      ],
+      "targets": {
+        "Q3_2026": { "value": 0, "maturityLevel": 3 }
+      }
+    },
+    "sli-critical-vulns": {
+      "sliId": "sli-critical-vulns",
+      "qualitativeState": "alerting",
+      "windows": {
+        "30d": { "value": 5, "timestamp": "2026-05-09T00:00:00Z" }
+      },
+      "targets": {
+        "Q3_2026": { "value": 0, "maturityLevel": 3 }
+      }
+    },
+    "sli-cloud-posture": {
+      "sliId": "sli-cloud-posture",
+      "qualitativeState": "measured",
+      "windows": {
+        "30d": { "value": 72, "timestamp": "2026-05-09T00:00:00Z" }
+      },
+      "targets": {
+        "Q4_2026": { "value": 85, "maturityLevel": 3 },
+        "Q2_2027": { "value": 95, "maturityLevel": 4 }
+      }
+    },
+    "sli-mttr-critical": {
+      "sliId": "sli-mttr-critical",
+      "qualitativeState": "tracked",
+      "windows": {
+        "30d": { "value": 14, "timestamp": "2026-05-09T00:00:00Z" }
+      },
+      "targets": {
+        "Q4_2026": { "value": 7, "maturityLevel": 4 }
+      }
+    },
+    "sli-mttr-high": {
+      "sliId": "sli-mttr-high",
+      "qualitativeState": "tracked",
+      "windows": {
+        "30d": { "value": 45, "timestamp": "2026-05-09T00:00:00Z" }
+      },
+      "targets": {
+        "Q4_2026": { "value": 30, "maturityLevel": 4 }
+      }
+    },
+    "sli-detection-coverage": {
+      "sliId": "sli-detection-coverage",
+      "qualitativeState": "tracked",
+      "windows": {
+        "30d": { "value": 55, "timestamp": "2026-05-09T00:00:00Z" }
+      },
+      "targets": {
+        "Q4_2026": { "value": 80, "maturityLevel": 4 }
+      }
+    },
+    "sli-detection-latency": {
+      "sliId": "sli-detection-latency",
+      "qualitativeState": "tracked",
+      "windows": {
+        "30d": { "value": 300, "timestamp": "2026-05-09T00:00:00Z" }
+      },
+      "targets": {
+        "Q4_2026": { "value": 60, "maturityLevel": 4 }
+      }
+    },
+    "sli-pentest-coverage": {
+      "sliId": "sli-pentest-coverage",
+      "qualitativeState": "tracked",
+      "windows": {
+        "quarterly": { "value": 60, "timestamp": "2026-05-09T00:00:00Z" }
+      },
+      "targets": {
+        "Q4_2026": { "value": 100, "maturityLevel": 4 }
+      }
+    },
+    "sli-vulns-tracked": {
+      "sliId": "sli-vulns-tracked",
+      "qualitativeState": "measured"
+    },
+    "sli-incident-process": {
+      "sliId": "sli-incident-process",
+      "qualitativeState": "measured"
+    },
+    "sli-security-gates": {
+      "sliId": "sli-security-gates",
+      "qualitativeState": "tracked"
+    }
+  },
+
+  "maturityState": {
+    "security": {
+      "domainId": "security",
+      "current": {
+        "level": 2,
+        "achievedAt": "2025-11-15",
+        "assessedBy": "Security Team",
+        "note": "Basic security tooling in place, working toward M3"
+      },
+      "target": {
+        "level": 4,
+        "targetDate": "2027-06-30",
+        "rationale": "Enterprise security compliance requirements"
+      },
+      "history": [
+        { "level": 1, "achievedAt": "2025-01-01" },
+        { "level": 2, "achievedAt": "2025-11-15" }
+      ]
+    }
+  },
+
+  "enablerState": {
+    "sec-m2-deploy-sast": {
+      "enablerId": "sec-m2-deploy-sast",
+      "status": "completed",
+      "progress": 100,
+      "completedAt": "2025-06-15"
+    },
+    "sec-m2-deploy-sca": {
+      "enablerId": "sec-m2-deploy-sca",
+      "status": "completed",
+      "progress": 100,
+      "completedAt": "2025-07-01"
+    },
+    "sec-m2-vuln-tracking": {
+      "enablerId": "sec-m2-vuln-tracking",
+      "status": "completed",
+      "progress": 100,
+      "completedAt": "2025-08-15"
+    },
+    "sec-m2-incident-runbook": {
+      "enablerId": "sec-m2-incident-runbook",
+      "status": "completed",
+      "progress": 100,
+      "completedAt": "2025-09-01"
+    },
+    "sec-m3-ci-integration": {
+      "enablerId": "sec-m3-ci-integration",
+      "status": "in_progress",
+      "progress": 60,
+      "startedAt": "2026-01-15",
+      "note": "SAST integrated, working on SCA integration"
+    },
+    "sec-m3-security-gates-impl": {
+      "enablerId": "sec-m3-security-gates-impl",
+      "status": "not_started",
+      "progress": 0,
+      "note": "Scheduled for Q3 2026"
+    },
+    "sec-m3-secrets-scanning": {
+      "enablerId": "sec-m3-secrets-scanning",
+      "status": "in_progress",
+      "progress": 70,
+      "startedAt": "2026-02-01",
+      "note": "Scanning active, working on remediation of existing secrets"
+    },
+    "sec-m3-cspm-deploy": {
+      "enablerId": "sec-m3-cspm-deploy",
+      "status": "not_started",
+      "progress": 0,
+      "note": "Evaluating CSPM vendors"
+    }
+  }
+}
