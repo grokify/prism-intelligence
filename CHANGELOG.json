@@ -34,6 +34,13 @@
         { "description": "`prism maturity model validate` for model document validation" },
         { "description": "`prism maturity state validate` with --model flag for cross-validation" },
         { "description": "`prism maturity state show` with text/json output formats" },
+        { "description": "`prism maturity model lint` command for identifying dashboard display issues and threshold gaps" },
+        { "description": "Dashboard qualitative threshold display showing 'Tracked' for `exists` operator" },
+        { "description": "Dashboard qualitative state in SLI subtitles (e.g., 'Measured (M1)', 'Tracked (M1)')" },
+        { "description": "Dashboard 'Not Tracked' display for qualitative SLIs without state data" },
+        { "description": "Dashboard '-' display for maturity levels without defined thresholds" },
+        { "description": "Security methodology groupings: Prevention, Detection, Response" },
+        { "description": "AI security methodology groupings: AI Prevention, AI Detection, AI Response" },
         { "description": "New `prism-maturity-state.schema.json` for state tracking documents" },
         { "description": "`MaturityStateDocument` type for PRISM Maturity State documents" },
         { "description": "`MaturityStateMetadata` type with maturityModelRef field" },
@@ -41,6 +48,9 @@
         { "description": "Schema constants: `MaturityModelSchemaID`, `MaturityStateSchemaID`, `MaturityPlanSchemaID`" },
         { "description": "Domain directories: `examples/operations/`, `examples/security/`, `examples/organization/`, `examples/quality/`" },
         { "description": "`schema/generate_state.go` for state schema generation" }
+      ],
+      "fixed": [
+        { "description": "Dashboard threshold display for models without sliType (flat bullet list now includes thresholds)" }
       ],
       "changed": [
         { "description": "Examples organized by domain instead of by document type" },
