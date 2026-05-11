@@ -118,20 +118,18 @@ func (g *MarpGenerator) execOverviewSlides() string {
 
 `)
 
-	// Build current state table from assessments
-	sb.WriteString("| Domain | Current | Target | Gap |\n")
-	sb.WriteString("|--------|---------|--------|-----|\n")
+	// Build current state table from domains (state tracking done via PRISM Maturity State documents)
+	sb.WriteString("| Domain | Levels Defined |\n")
+	sb.WriteString("|--------|----------------|\n")
 
 	domainOrder := []string{"security", "operational-excellence", "quality", "product", "ai"}
 	for _, domainKey := range domainOrder {
-		assessment, ok := g.spec.Assessments[domainKey]
+		domain, ok := g.spec.Domains[domainKey]
 		if !ok {
 			continue
 		}
-		domain := g.spec.Domains[domainKey]
-		gap := assessment.TargetLevel - assessment.CurrentLevel
-		sb.WriteString(fmt.Sprintf("| **%s** | M%d | M%d | %d levels |\n",
-			domain.Name, assessment.CurrentLevel, assessment.TargetLevel, gap))
+		sb.WriteString(fmt.Sprintf("| **%s** | M1-M%d |\n",
+			domain.Name, len(domain.Levels)))
 	}
 
 	sb.WriteString("\n---\n\n")
@@ -152,42 +150,25 @@ func (g *MarpGenerator) domainSlides(domainKey string, domain *DomainModel) stri
 
 `, domain.Name, domain.Description))
 
-	// KPI Thresholds table
-	thresholds := g.spec.KPIThresholds[domainKey]
-	if len(thresholds) > 0 {
-		sb.WriteString(fmt.Sprintf("# %s KPIs\n\n## Thresholds by Maturity Level\n\n", domain.Name))
-		sb.WriteString("| Metric | M2 | M3 | M4 | M5 |\n")
-		sb.WriteString("|--------|-----|-----|-----|-----|\n")
+	// SLI-based criteria table (using new SLI structure)
+	if len(g.spec.SLIs) > 0 {
+		// Collect SLIs for this domain
+		domainSLIs := g.collectDomainSLIs(domainKey, domain)
+		if len(domainSLIs) > 0 {
+			sb.WriteString(fmt.Sprintf("# %s SLIs\n\n## Service Level Indicators\n\n", domain.Name))
+			sb.WriteString("| SLI | Type | Unit | Category |\n")
+			sb.WriteString("|-----|------|------|----------|\n")
 
-		for _, kpi := range thresholds {
-			sb.WriteString(fmt.Sprintf("| **%s** | %s | %s | %s | %s |\n",
-				kpi.Name,
-				formatThreshold(kpi.Thresholds.M2, kpi.Unit),
-				formatThreshold(kpi.Thresholds.M3, kpi.Unit),
-				formatThreshold(kpi.Thresholds.M4, kpi.Unit),
-				formatThreshold(kpi.Thresholds.M5, kpi.Unit),
-			))
+			for _, sli := range domainSLIs {
+				sb.WriteString(fmt.Sprintf("| **%s** | %s | %s | %s |\n",
+					sli.Name,
+					formatSLIType(sli.SLIType),
+					formatUnit(sli.Unit),
+					formatCategory(sli.Category),
+				))
+			}
+			sb.WriteString("\n---\n\n")
 		}
-		sb.WriteString("\n---\n\n")
-	}
-
-	// Current state with level assessment
-	if len(thresholds) > 0 {
-		sb.WriteString(fmt.Sprintf("# %s Current State\n\n## Assessment Summary\n\n", domain.Name))
-		sb.WriteString("| KPI | Current | Level | M3 Target | M4 Target |\n")
-		sb.WriteString("|-----|---------|-------|-----------|------------|\n")
-
-		for _, kpi := range thresholds {
-			level := determineLevelFromKPI(kpi)
-			sb.WriteString(fmt.Sprintf("| %s | %s | %s | %s | %s |\n",
-				kpi.Name,
-				formatCurrentAny(kpi.Current, kpi.Unit),
-				level,
-				formatThreshold(kpi.Thresholds.M3, kpi.Unit),
-				formatThreshold(kpi.Thresholds.M4, kpi.Unit),
-			))
-		}
-		sb.WriteString("\n---\n\n")
 	}
 
 	// Level definitions
@@ -203,17 +184,16 @@ func (g *MarpGenerator) domainSlides(domainKey string, domain *DomainModel) stri
 
 	// Enablers/Roadmap
 	sb.WriteString(fmt.Sprintf("# %s Roadmap\n\n## Key Initiatives\n\n", domain.Name))
-	sb.WriteString("| Project | Impact | Status |\n")
-	sb.WriteString("|---------|--------|--------|\n")
+	sb.WriteString("| Project | Level | Type | Layer |\n")
+	sb.WriteString("|---------|-------|------|-------|\n")
 
-	assessment := g.spec.Assessments[domainKey]
-	enablers := g.collectEnablers(domain, assessment)
+	enablers := g.collectEnablersFromModel(domain)
 	for i, e := range enablers {
 		if i >= 5 {
 			break
 		}
-		sb.WriteString(fmt.Sprintf("| %s | M%d %s | %s |\n",
-			e.Name, e.Level, e.Layer, formatStatus(e.Status)))
+		sb.WriteString(fmt.Sprintf("| %s | M%d | %s | %s |\n",
+			e.Name, e.Level, formatEnablerType(e.Type), formatLayer(e.Layer)))
 	}
 	sb.WriteString("\n---\n\n")
 
@@ -225,17 +205,13 @@ type enablerWithLevel struct {
 	Level int
 }
 
-func (g *MarpGenerator) collectEnablers(domain *DomainModel, assessment *DomainAssessment) []enablerWithLevel {
+// collectEnablersFromModel collects enablers from the maturity model definition.
+// State tracking (status) should be done via PRISM Maturity State documents.
+func (g *MarpGenerator) collectEnablersFromModel(domain *DomainModel) []enablerWithLevel {
 	var enablers []enablerWithLevel
 
 	for _, level := range domain.Levels {
 		for _, e := range level.Enablers {
-			status := e.Status
-			if assessment != nil && assessment.EnablerStatus != nil {
-				if s, ok := assessment.EnablerStatus[e.ID]; ok {
-					status = s
-				}
-			}
 			enablers = append(enablers, enablerWithLevel{
 				Enabler: Enabler{
 					ID:          e.ID,
@@ -243,25 +219,45 @@ func (g *MarpGenerator) collectEnablers(domain *DomainModel, assessment *DomainA
 					Description: e.Description,
 					Type:        e.Type,
 					Layer:       e.Layer,
-					Status:      status,
 				},
 				Level: level.Level,
 			})
 		}
 	}
 
-	// Sort by status (in_progress first, then not_started, then completed)
+	// Sort by level, then by name
 	sort.Slice(enablers, func(i, j int) bool {
-		statusOrder := map[string]int{
-			StatusInProgress: 0,
-			StatusNotStarted: 1,
-			StatusCompleted:  2,
-			StatusBlocked:    3,
+		if enablers[i].Level != enablers[j].Level {
+			return enablers[i].Level < enablers[j].Level
 		}
-		return statusOrder[enablers[i].Status] < statusOrder[enablers[j].Status]
+		return enablers[i].Name < enablers[j].Name
 	})
 
 	return enablers
+}
+
+// collectDomainSLIs collects SLIs referenced by criteria in a domain.
+func (g *MarpGenerator) collectDomainSLIs(_ string, domain *DomainModel) []*SLI {
+	seen := make(map[string]bool)
+	var slis []*SLI
+
+	for _, level := range domain.Levels {
+		for _, criterion := range level.Criteria {
+			if criterion.SLIID != "" && !seen[criterion.SLIID] {
+				if sli, ok := g.spec.SLIs[criterion.SLIID]; ok && sli != nil {
+					slis = append(slis, sli)
+					seen[criterion.SLIID] = true
+				}
+			}
+		}
+	}
+
+	// Sort by name
+	sort.Slice(slis, func(i, j int) bool {
+		return slis[i].Name < slis[j].Name
+	})
+
+	return slis
 }
 
 func (g *MarpGenerator) summarySlides() string {
@@ -334,151 +330,82 @@ func (g *MarpGenerator) appendixSlides() string {
 `
 }
 
-func formatThreshold(val any, unit string) string {
-	if val == nil {
+func formatSLIType(sliType string) string {
+	switch sliType {
+	case "availability":
+		return "Availability"
+	case "latency":
+		return "Latency"
+	case "error_rate":
+		return "Error Rate"
+	case "throughput":
+		return "Throughput"
+	case "saturation":
+		return "Saturation"
+	case "utilization":
+		return "Utilization"
+	case "quality":
+		return "Quality"
+	case "freshness":
+		return "Freshness"
+	default:
+		if sliType == "" {
+			return "-"
+		}
+		return sliType
+	}
+}
+
+func formatUnit(unit string) string {
+	if unit == "" {
 		return "-"
 	}
+	return unit
+}
 
-	switch v := val.(type) {
-	case float64:
-		if unit == "%" {
-			return fmt.Sprintf("≥%.0f%%", v)
-		}
-		if unit == "days" || unit == "time" {
-			return fmt.Sprintf("≤%.0f", v)
-		}
-		if unit == "count" || unit == "per KLOC" {
-			return fmt.Sprintf("≤%.1f", v)
-		}
-		return fmt.Sprintf("%.0f", v)
-	case string:
-		return v
-	case bool:
-		if v {
-			return "Yes"
-		}
-		return "No"
+func formatCategory(category string) string {
+	switch category {
+	case "prevention":
+		return "Prevention"
+	case "detection":
+		return "Detection"
+	case "response":
+		return "Response"
+	case "reliability":
+		return "Reliability"
+	case "efficiency":
+		return "Efficiency"
 	default:
-		return fmt.Sprintf("%v", v)
+		if category == "" {
+			return "-"
+		}
+		return category
 	}
 }
 
-func formatCurrentAny(val any, unit string) string {
-	if val == nil {
+func formatEnablerType(t string) string {
+	switch t {
+	case TypeImplementation:
+		return "Implementation"
+	case TypeProcess:
+		return "Process"
+	case TypeTraining:
+		return "Training"
+	case TypeTooling:
+		return "Tooling"
+	default:
+		if t == "" {
+			return "-"
+		}
+		return t
+	}
+}
+
+func formatLayer(layer string) string {
+	if layer == "" {
 		return "-"
 	}
-
-	switch v := val.(type) {
-	case float64:
-		if unit == "%" {
-			return fmt.Sprintf("%.0f%%", v)
-		}
-		if unit == "days" {
-			return fmt.Sprintf("%.0f days", v)
-		}
-		return fmt.Sprintf("%.1f", v)
-	case bool:
-		if v {
-			return "Yes"
-		}
-		return "No"
-	case string:
-		return v
-	default:
-		return fmt.Sprintf("%v", v)
-	}
-}
-
-func formatStatus(status string) string {
-	switch status {
-	case StatusCompleted:
-		return "Done"
-	case StatusInProgress:
-		return "In Progress"
-	case StatusBlocked:
-		return "Blocked"
-	default:
-		return "Not Started"
-	}
-}
-
-func determineLevelFromKPI(kpi KPIThreshold) string {
-	if kpi.Current == nil {
-		return "M1"
-	}
-
-	// Handle boolean current values
-	if currentBool, ok := kpi.Current.(bool); ok {
-		if m5, ok := kpi.Thresholds.M5.(bool); ok && m5 && currentBool {
-			return "M5"
-		}
-		if m4, ok := kpi.Thresholds.M4.(bool); ok && m4 && currentBool {
-			return "M4"
-		}
-		if m3, ok := kpi.Thresholds.M3.(bool); ok && m3 && currentBool {
-			return "M3"
-		}
-		return "M1"
-	}
-
-	// Handle numeric current values
-	currentVal, ok := toFloat64(kpi.Current)
-	if !ok {
-		// String current values (like "2x/week") - can't auto-determine level
-		return "~M3" // Approximate
-	}
-
-	isLowerBetter := kpi.Operator == "lte"
-
-	// Check each level from highest to lowest
-	levels := []struct {
-		name      string
-		threshold any
-	}{
-		{"M5", kpi.Thresholds.M5},
-		{"M4", kpi.Thresholds.M4},
-		{"M3", kpi.Thresholds.M3},
-		{"M2", kpi.Thresholds.M2},
-	}
-
-	for _, level := range levels {
-		if level.threshold == nil {
-			continue
-		}
-		if _, isString := level.threshold.(string); isString {
-			continue // Skip string thresholds like "tracked"
-		}
-
-		threshold, ok := toFloat64(level.threshold)
-		if !ok {
-			continue
-		}
-
-		if isLowerBetter {
-			if currentVal <= threshold {
-				return level.name
-			}
-		} else {
-			if currentVal >= threshold {
-				return level.name
-			}
-		}
-	}
-
-	return "M1"
-}
-
-func toFloat64(v any) (float64, bool) {
-	switch val := v.(type) {
-	case float64:
-		return val, true
-	case int:
-		return float64(val), true
-	case int64:
-		return float64(val), true
-	default:
-		return 0, false
-	}
+	return layer
 }
 
 func truncate(s string, maxLen int) string {

@@ -15,12 +15,10 @@ import (
 // State tracking (current values, history, targets) should use PRISM Maturity State documents instead.
 // See docs/design/REFACTOR_MATURITY_STATE.md for migration guidance.
 type Spec struct {
-	Schema        string                       `json:"$schema,omitempty"`
-	Metadata      *SpecMetadata                `json:"metadata,omitempty"`
-	SLIs          map[string]*SLI              `json:"slis,omitempty"`          // Service Level Indicators with framework mappings
-	KPIThresholds map[string][]KPIThreshold    `json:"kpiThresholds,omitempty"` // Deprecated: use SLIs instead
-	Domains       map[string]*DomainModel      `json:"domains"`
-	Assessments   map[string]*DomainAssessment `json:"assessments,omitempty"` // Deprecated: use PRISM Maturity State documents instead
+	Schema   string                  `json:"$schema,omitempty"`
+	Metadata *SpecMetadata           `json:"metadata,omitempty"`
+	SLIs     map[string]*SLI         `json:"slis,omitempty"` // Service Level Indicators with framework mappings
+	Domains  map[string]*DomainModel `json:"domains"`
 }
 
 // SLI defines a Service Level Indicator (the metric being measured).
@@ -53,26 +51,6 @@ type SLI struct {
 
 	// Framework mappings - defined once on the SLI, inherited by all SLOs
 	FrameworkMappings []FrameworkMapping `json:"frameworkMappings,omitempty"`
-}
-
-// KPIThreshold defines the progression of a KPI across maturity levels.
-type KPIThreshold struct {
-	ID          string          `json:"id"`
-	Name        string          `json:"name"`
-	Description string          `json:"description,omitempty"`
-	Unit        string          `json:"unit,omitempty"`
-	Operator    string          `json:"operator,omitempty"` // gte (default), lte for "lower is better"
-	Thresholds  LevelThresholds `json:"thresholds"`
-	Current     any             `json:"current,omitempty"` // Current value for assessment
-}
-
-// LevelThresholds holds threshold values for each maturity level.
-type LevelThresholds struct {
-	M1 any `json:"m1,omitempty"`
-	M2 any `json:"m2,omitempty"`
-	M3 any `json:"m3,omitempty"`
-	M4 any `json:"m4,omitempty"`
-	M5 any `json:"m5,omitempty"`
 }
 
 // SpecMetadata contains metadata about the maturity specification.
@@ -253,23 +231,6 @@ type Enabler struct {
 
 	// Dependencies
 	DependsOn []string `json:"dependsOn,omitempty"` // Other enabler IDs
-}
-
-// DomainAssessment captures current state against a domain's maturity model.
-//
-// Deprecated: As of v0.5.0, use PRISM Maturity State documents for state tracking.
-// State should be stored separately from the maturity model definition.
-// Use prism.DomainMaturityState, prism.SLIState, and prism.EnablerState instead.
-// See docs/design/REFACTOR_MATURITY_STATE.md for migration guidance.
-type DomainAssessment struct {
-	Domain         string             `json:"domain"`
-	AssessedAt     string             `json:"assessedAt,omitempty"`
-	AssessedBy     string             `json:"assessedBy,omitempty"`
-	CurrentLevel   int                `json:"currentLevel"`             // Achieved level (1-5)
-	TargetLevel    int                `json:"targetLevel"`              // Goal level
-	CriteriaValues map[string]float64 `json:"criteriaValues,omitempty"` // Current values by criterion ID (quantitative)
-	CriteriaStatus map[string]string  `json:"criteriaStatus,omitempty"` // Current status by criterion ID (qualitative)
-	EnablerStatus  map[string]string  `json:"enablerStatus,omitempty"`  // Status by enabler ID
 }
 
 // Enabler status constants.

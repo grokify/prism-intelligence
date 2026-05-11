@@ -187,8 +187,8 @@ func TestLevelProgress(t *testing.T) {
 	}
 }
 
-func TestXLSXGenerator_NilAssessments(t *testing.T) {
-	// Test that XLSX generation works when assessments are nil
+func TestXLSXGenerator_BasicGeneration(t *testing.T) {
+	// Test that XLSX generation works with a basic spec
 	spec := &Spec{
 		Domains: map[string]*DomainModel{
 			"Security": {
@@ -211,43 +211,17 @@ func TestXLSXGenerator_NilAssessments(t *testing.T) {
 				},
 			},
 		},
-		Assessments: nil, // Explicitly nil
 	}
 
 	gen := NewXLSXGenerator(spec)
 	err := gen.Generate()
 	if err != nil {
-		t.Fatalf("Generate() failed with nil assessments: %v", err)
+		t.Fatalf("Generate() failed: %v", err)
 	}
 }
 
-func TestXLSXGenerator_EmptyAssessments(t *testing.T) {
-	// Test that XLSX generation works when assessments map is empty
-	spec := &Spec{
-		Domains: map[string]*DomainModel{
-			"Operations": {
-				Name: "Operations",
-				Levels: []Level{
-					{
-						Level:       1,
-						Name:        "Reactive",
-						Description: "Basic operations",
-					},
-				},
-			},
-		},
-		Assessments: map[string]*DomainAssessment{}, // Empty map
-	}
-
-	gen := NewXLSXGenerator(spec)
-	err := gen.Generate()
-	if err != nil {
-		t.Fatalf("Generate() failed with empty assessments: %v", err)
-	}
-}
-
-func TestXLSXGenerator_WithAssessments(t *testing.T) {
-	// Test that XLSX generation works with full assessments
+func TestXLSXGenerator_WithEnablers(t *testing.T) {
+	// Test that XLSX generation works with enablers
 	spec := &Spec{
 		Domains: map[string]*DomainModel{
 			"Security": {
@@ -276,25 +250,12 @@ func TestXLSXGenerator_WithAssessments(t *testing.T) {
 				},
 			},
 		},
-		Assessments: map[string]*DomainAssessment{
-			"Security": {
-				Domain:       "Security",
-				CurrentLevel: 1,
-				TargetLevel:  3,
-				CriteriaValues: map[string]float64{
-					"SEC-001": 85.0,
-				},
-				EnablerStatus: map[string]string{
-					"SEC-E-001": "completed",
-				},
-			},
-		},
 	}
 
 	gen := NewXLSXGenerator(spec)
 	err := gen.Generate()
 	if err != nil {
-		t.Fatalf("Generate() failed with assessments: %v", err)
+		t.Fatalf("Generate() failed with enablers: %v", err)
 	}
 }
 
@@ -383,16 +344,6 @@ func TestXLSXGenerator_QualitativeCriteria(t *testing.T) {
 				},
 			},
 		},
-		Assessments: map[string]*DomainAssessment{
-			"Security": {
-				Domain:       "Security",
-				CurrentLevel: 1,
-				TargetLevel:  2,
-				CriteriaStatus: map[string]string{
-					"SEC-Q-001": "implemented",
-				},
-			},
-		},
 	}
 
 	gen := NewXLSXGenerator(spec)
@@ -468,7 +419,7 @@ func TestXLSXGenerator_FrameworkMappingsSheet(t *testing.T) {
 }
 
 func TestXLSXGenerator_MultipleDomains(t *testing.T) {
-	// Test with multiple domains where some have assessments and some don't
+	// Test with multiple domains
 	spec := &Spec{
 		Domains: map[string]*DomainModel{
 			"Security": {
@@ -489,14 +440,6 @@ func TestXLSXGenerator_MultipleDomains(t *testing.T) {
 					{Level: 1, Name: "Reactive", Description: "Basic"},
 				},
 			},
-		},
-		Assessments: map[string]*DomainAssessment{
-			"Security": {
-				Domain:       "Security",
-				CurrentLevel: 2,
-				TargetLevel:  4,
-			},
-			// Operations and Quality have no assessments
 		},
 	}
 

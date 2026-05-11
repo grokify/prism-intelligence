@@ -224,19 +224,12 @@ func (s *Spec) writeDomainView(sb *strings.Builder, opts *MarkdownOptions) {
 
 	for _, name := range domainNames {
 		domain := s.Domains[name]
-		assessment := s.Assessments[name]
 
 		// Domain header
 		sb.WriteString(fmt.Sprintf("## %s\n\n", domain.Name))
 
 		if domain.Description != "" {
 			sb.WriteString(fmt.Sprintf("%s\n\n", domain.Description))
-		}
-
-		// Current assessment
-		if assessment != nil {
-			sb.WriteString(fmt.Sprintf("**Current Level:** %d (%s)  \n", assessment.CurrentLevel, levelName(assessment.CurrentLevel)))
-			sb.WriteString(fmt.Sprintf("**Target Level:** %d (%s)\n\n", assessment.TargetLevel, levelName(assessment.TargetLevel)))
 		}
 
 		// Levels
@@ -251,8 +244,8 @@ func (s *Spec) writeDomainView(sb *strings.Builder, opts *MarkdownOptions) {
 			// Criteria table
 			if len(level.Criteria) > 0 {
 				sb.WriteString("#### Criteria (SLOs)\n\n")
-				sb.WriteString("| ID | Name | Type | Target | Status | Frameworks |\n")
-				sb.WriteString("|----|------|------|--------|--------|------------|\n")
+				sb.WriteString("| ID | Name | Type | Target | Frameworks |\n")
+				sb.WriteString("|----|------|------|--------|------------|\n")
 
 				for _, c := range level.Criteria {
 					criterionType := "Quantitative"
@@ -262,26 +255,11 @@ func (s *Spec) writeDomainView(sb *strings.Builder, opts *MarkdownOptions) {
 						target = "Tracked"
 					}
 
-					status := "⏳"
-					if assessment != nil {
-						if c.IsQualitative() {
-							if assessment.CriteriaStatus != nil {
-								if st, ok := assessment.CriteriaStatus[c.ID]; ok && IsQualitativeStatusMet(st) {
-									status = "✅"
-								}
-							}
-						} else if assessment.CriteriaValues != nil {
-							if v, ok := assessment.CriteriaValues[c.ID]; ok && c.CheckMet(v) {
-								status = "✅"
-							}
-						}
-					}
-
 					// Resolve framework mappings from SLI if needed
 					fwMappings := c.GetFrameworkMappings(s)
 					frameworks := formatCriterionFrameworks(fwMappings)
-					sb.WriteString(fmt.Sprintf("| %s | %s | %s | %s | %s | %s |\n",
-						c.ID, c.Name, criterionType, target, status, frameworks))
+					sb.WriteString(fmt.Sprintf("| %s | %s | %s | %s | %s |\n",
+						c.ID, c.Name, criterionType, target, frameworks))
 				}
 				sb.WriteString("\n")
 
@@ -317,18 +295,16 @@ func (s *Spec) writeDomainView(sb *strings.Builder, opts *MarkdownOptions) {
 			// Enablers
 			if len(level.Enablers) > 0 {
 				sb.WriteString("#### Enablers\n\n")
-				sb.WriteString("| ID | Name | Type | Status |\n")
-				sb.WriteString("|----|------|------|--------|\n")
+				sb.WriteString("| ID | Name | Type | Layer |\n")
+				sb.WriteString("|----|------|------|-------|\n")
 
 				for _, e := range level.Enablers {
-					status := e.Status
-					if assessment != nil && assessment.EnablerStatus != nil {
-						if s, ok := assessment.EnablerStatus[e.ID]; ok {
-							status = s
-						}
+					layer := e.Layer
+					if layer == "" {
+						layer = "-"
 					}
 					sb.WriteString(fmt.Sprintf("| %s | %s | %s | %s |\n",
-						e.ID, e.Name, e.Type, formatEnablerStatus(status)))
+						e.ID, e.Name, e.Type, layer))
 				}
 				sb.WriteString("\n")
 			}
@@ -388,8 +364,8 @@ func (s *Spec) writeFrameworkView(sb *strings.Builder, opts *MarkdownOptions) {
 		})
 
 		// Group by control ID
-		sb.WriteString("| Control | Name | Domain | Level | Criterion | Status |\n")
-		sb.WriteString("|---------|------|--------|-------|-----------|--------|\n")
+		sb.WriteString("| Control | Name | Domain | Level | Criterion |\n")
+		sb.WriteString("|---------|------|--------|-------|----------|\n")
 
 		for _, ref := range refs {
 			controlName := ref.Mapping.Name
@@ -402,47 +378,13 @@ func (s *Spec) writeFrameworkView(sb *strings.Builder, opts *MarkdownOptions) {
 				baseline = fmt.Sprintf(" [%s]", ref.Mapping.Baseline)
 			}
 
-			status := "⏳"
-			assessment := s.Assessments[ref.Domain]
-			if assessment != nil {
-				if ref.Criterion.IsQualitative() {
-					if assessment.CriteriaStatus != nil {
-						if st, ok := assessment.CriteriaStatus[ref.Criterion.ID]; ok && IsQualitativeStatusMet(st) {
-							status = "✅"
-						}
-					}
-				} else if assessment.CriteriaValues != nil {
-					if v, ok := assessment.CriteriaValues[ref.Criterion.ID]; ok && ref.Criterion.CheckMet(v) {
-						status = "✅"
-					}
-				}
-			}
-
-			sb.WriteString(fmt.Sprintf("| %s%s | %s | %s | M%d | %s | %s |\n",
-				ref.Mapping.Reference, baseline, controlName, ref.Domain, ref.Level, ref.Criterion.Name, status))
+			sb.WriteString(fmt.Sprintf("| %s%s | %s | %s | M%d | %s |\n",
+				ref.Mapping.Reference, baseline, controlName, ref.Domain, ref.Level, ref.Criterion.Name))
 		}
 		sb.WriteString("\n")
 
 		// Summary
-		met := 0
-		for _, ref := range refs {
-			assessment := s.Assessments[ref.Domain]
-			if assessment != nil {
-				if ref.Criterion.IsQualitative() {
-					if assessment.CriteriaStatus != nil {
-						if st, ok := assessment.CriteriaStatus[ref.Criterion.ID]; ok && IsQualitativeStatusMet(st) {
-							met++
-						}
-					}
-				} else if assessment.CriteriaValues != nil {
-					if v, ok := assessment.CriteriaValues[ref.Criterion.ID]; ok && ref.Criterion.CheckMet(v) {
-						met++
-					}
-				}
-			}
-		}
-		pct := float64(met) / float64(len(refs)) * 100
-		sb.WriteString(fmt.Sprintf("**Coverage:** %d/%d controls satisfied (%.0f%%)\n\n", met, len(refs), pct))
+		sb.WriteString(fmt.Sprintf("**Total Controls:** %d\n\n", len(refs)))
 	}
 }
 
@@ -536,29 +478,6 @@ func formatCriterionFrameworks(mappings []FrameworkMapping) string {
 		parts = append(parts, fmt.Sprintf("%s:%s", fm.Framework, fm.Reference))
 	}
 	return strings.Join(parts, ", ")
-}
-
-func formatEnablerStatus(status string) string {
-	switch status {
-	case StatusCompleted:
-		return "✅ Completed"
-	case StatusInProgress:
-		return "🔄 In Progress"
-	case StatusBlocked:
-		return "🚫 Blocked"
-	case StatusNotStarted, "":
-		return "⏳ Not Started"
-	default:
-		return status
-	}
-}
-
-func levelName(level int) string {
-	names := DefaultLevelNames()
-	if name, ok := names[level]; ok {
-		return name
-	}
-	return fmt.Sprintf("Level %d", level)
 }
 
 func escapeYAML(s string) string {

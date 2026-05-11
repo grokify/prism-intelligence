@@ -102,26 +102,9 @@ func (g *XLSXGenerator) createRequirementsSheet() error {
 				g.setCellValue(sheetName, fmt.Sprintf("G%d", row), e.Layer)
 				g.setCellValue(sheetName, fmt.Sprintf("H%d", row), e.Team)
 				g.setCellValue(sheetName, fmt.Sprintf("I%d", row), e.Effort)
-
-				// Get status from assessment if available
-				status := e.Status
-				if assessment, ok := g.spec.Assessments[domainName]; ok {
-					if s, ok := assessment.EnablerStatus[e.ID]; ok {
-						status = s
-					}
-				}
-				g.setCellValue(sheetName, fmt.Sprintf("J%d", row), status)
-
+				g.setCellValue(sheetName, fmt.Sprintf("J%d", row), "-") // Status tracked via PRISM Maturity State
 				g.setCellValue(sheetName, fmt.Sprintf("K%d", row), strings.Join(e.CriteriaIDs, ", "))
 				g.setCellValue(sheetName, fmt.Sprintf("L%d", row), strings.Join(e.DependsOn, ", "))
-
-				// Color code status
-				if status != "" {
-					statusStyle := g.statusStyle(status)
-					if statusStyle != 0 {
-						g.setCellStyle(sheetName, fmt.Sprintf("J%d", row), fmt.Sprintf("J%d", row), statusStyle)
-					}
-				}
 
 				row++
 			}
@@ -185,12 +168,6 @@ func (g *XLSXGenerator) createSLOsSheet() error {
 	for _, domainName := range domainNames {
 		domain := g.spec.Domains[domainName]
 
-		// Get assessment for domain (may be nil)
-		var assessment *DomainAssessment
-		if g.spec.Assessments != nil {
-			assessment = g.spec.Assessments[domainName]
-		}
-
 		for _, level := range domain.Levels {
 			for _, c := range level.Criteria {
 				g.setCellValue(sheetName, fmt.Sprintf("A%d", row), c.ID)
@@ -218,35 +195,9 @@ func (g *XLSXGenerator) createSLOsSheet() error {
 
 				g.setCellValue(sheetName, fmt.Sprintf("I%d", row), c.GetUnit(g.spec))
 
-				// Get current value/status from assessment
-				var isMet bool
-				if isQual {
-					// For qualitative, check if status is set
-					status := c.Status
-					if assessment != nil && assessment.CriteriaStatus != nil {
-						if s, ok := assessment.CriteriaStatus[c.ID]; ok {
-							status = s
-						}
-					}
-					isMet = IsQualitativeStatusMet(status)
-					g.setCellValue(sheetName, fmt.Sprintf("J%d", row), formatQualitativeStatus(status))
-				} else {
-					// For quantitative, use numeric value
-					var current float64
-					if assessment != nil && assessment.CriteriaValues != nil {
-						if v, ok := assessment.CriteriaValues[c.ID]; ok {
-							current = v
-							isMet = c.CheckMet(current)
-						}
-					}
-					g.setCellValue(sheetName, fmt.Sprintf("J%d", row), current)
-				}
-
-				metStatus := "No"
-				if isMet {
-					metStatus = "Yes"
-				}
-				g.setCellValue(sheetName, fmt.Sprintf("K%d", row), metStatus)
+				// Current value/status tracked via PRISM Maturity State
+				g.setCellValue(sheetName, fmt.Sprintf("J%d", row), "-")
+				g.setCellValue(sheetName, fmt.Sprintf("K%d", row), "-")
 
 				g.setCellValue(sheetName, fmt.Sprintf("L%d", row), c.GetLayer(g.spec))
 				g.setCellValue(sheetName, fmt.Sprintf("M%d", row), c.GetCategory(g.spec))
@@ -256,12 +207,6 @@ func (g *XLSXGenerator) createSLOsSheet() error {
 					required = "No"
 				}
 				g.setCellValue(sheetName, fmt.Sprintf("N%d", row), required)
-
-				// Color code met status
-				metStyle := g.metStyle(isMet)
-				if metStyle != 0 {
-					g.setCellStyle(sheetName, fmt.Sprintf("K%d", row), fmt.Sprintf("K%d", row), metStyle)
-				}
 
 				// Framework columns - show control reference if mapped (resolve from SLI)
 				frameworkRefs := make(map[string]string)
@@ -361,39 +306,12 @@ func (g *XLSXGenerator) createFrameworkMappingsSheet() error {
 	for _, domainName := range domainNames {
 		domain := g.spec.Domains[domainName]
 
-		// Get assessment for domain (may be nil)
-		var assessment *DomainAssessment
-		if g.spec.Assessments != nil {
-			assessment = g.spec.Assessments[domainName]
-		}
-
 		for _, level := range domain.Levels {
 			for _, c := range level.Criteria {
 				// Get framework mappings (resolve from SLI if needed)
 				frameworkMappings := c.GetFrameworkMappings(g.spec)
 				if len(frameworkMappings) == 0 {
 					continue
-				}
-
-				// Determine status
-				var isMet bool
-				if c.IsQualitativeWithSpec(g.spec) {
-					status := c.Status
-					if assessment != nil && assessment.CriteriaStatus != nil {
-						if s, ok := assessment.CriteriaStatus[c.ID]; ok {
-							status = s
-						}
-					}
-					isMet = IsQualitativeStatusMet(status)
-				} else if assessment != nil && assessment.CriteriaValues != nil {
-					if v, ok := assessment.CriteriaValues[c.ID]; ok {
-						isMet = c.CheckMet(v)
-					}
-				}
-
-				metStatus := "Pending"
-				if isMet {
-					metStatus = "Met"
 				}
 
 				// Create a row for each framework mapping
@@ -407,13 +325,7 @@ func (g *XLSXGenerator) createFrameworkMappingsSheet() error {
 					g.setCellValue(sheetName, fmt.Sprintf("G%d", row), fm.Name)
 					g.setCellValue(sheetName, fmt.Sprintf("H%d", row), fm.Baseline)
 					g.setCellValue(sheetName, fmt.Sprintf("I%d", row), fm.Version)
-					g.setCellValue(sheetName, fmt.Sprintf("J%d", row), metStatus)
-
-					// Color code status
-					statusStyle := g.frameworkStatusStyle(isMet)
-					if statusStyle != 0 {
-						g.setCellStyle(sheetName, fmt.Sprintf("J%d", row), fmt.Sprintf("J%d", row), statusStyle)
-					}
+					g.setCellValue(sheetName, fmt.Sprintf("J%d", row), "-") // Status tracked via PRISM Maturity State
 
 					row++
 				}
@@ -436,21 +348,9 @@ func (g *XLSXGenerator) createFrameworkMappingsSheet() error {
 	return nil
 }
 
-func (g *XLSXGenerator) frameworkStatusStyle(isMet bool) int {
-	var color string
-	if isMet {
-		color = "C6EFCE" // Green
-	} else {
-		color = "FFEB9C" // Yellow (pending)
-	}
-
-	style, _ := g.file.NewStyle(&excelize.Style{
-		Fill: excelize.Fill{Type: "pattern", Color: []string{color}, Pattern: 1},
-	})
-	return style
-}
-
 // createProgressSheet creates the Progress Summary sheet.
+// Note: Actual progress tracking should be done via PRISM Maturity State documents.
+// This sheet shows the maturity model structure without current state data.
 func (g *XLSXGenerator) createProgressSheet() error {
 	sheetName := "Progress"
 	_, err := g.file.NewSheet(sheetName)
@@ -460,9 +360,7 @@ func (g *XLSXGenerator) createProgressSheet() error {
 
 	// Headers
 	headers := []string{
-		"Domain", "Current Level", "Target Level",
-		"M2 Progress", "M3 Progress", "M4 Progress", "M5 Progress",
-		"Next Actions",
+		"Domain", "Levels Defined", "Total Criteria", "Total Enablers",
 	}
 
 	for i, h := range headers {
@@ -476,7 +374,7 @@ func (g *XLSXGenerator) createProgressSheet() error {
 		Fill:      excelize.Fill{Type: "pattern", Color: []string{"7030A0"}, Pattern: 1},
 		Alignment: &excelize.Alignment{Horizontal: "center"},
 	})
-	g.setCellStyle(sheetName, "A1", "H1", headerStyle)
+	g.setCellStyle(sheetName, "A1", "D1", headerStyle)
 
 	// Data rows
 	row := 2
@@ -485,82 +383,25 @@ func (g *XLSXGenerator) createProgressSheet() error {
 	for _, domainName := range domainNames {
 		domain := g.spec.Domains[domainName]
 
-		// Get assessment for domain (may be nil)
-		var assessment *DomainAssessment
-		if g.spec.Assessments != nil {
-			assessment = g.spec.Assessments[domainName]
-		}
-
 		g.setCellValue(sheetName, fmt.Sprintf("A%d", row), domain.Name)
+		g.setCellValue(sheetName, fmt.Sprintf("B%d", row), fmt.Sprintf("M1-M%d", len(domain.Levels)))
 
-		// Show current/target levels if assessment exists
-		if assessment != nil {
-			g.setCellValue(sheetName, fmt.Sprintf("B%d", row), fmt.Sprintf("M%d", assessment.CurrentLevel))
-			g.setCellValue(sheetName, fmt.Sprintf("C%d", row), fmt.Sprintf("M%d", assessment.TargetLevel))
-		} else {
-			g.setCellValue(sheetName, fmt.Sprintf("B%d", row), "-")
-			g.setCellValue(sheetName, fmt.Sprintf("C%d", row), "-")
+		// Count total criteria and enablers
+		totalCriteria := 0
+		totalEnablers := 0
+		for _, level := range domain.Levels {
+			totalCriteria += len(level.Criteria)
+			totalEnablers += len(level.Enablers)
 		}
-
-		// Calculate progress for each level
-		for level := 2; level <= 5; level++ {
-			col, _ := excelize.CoordinatesToCellName(level+2, row)
-
-			levelDef, found := domain.GetLevel(level)
-			if !found || len(levelDef.Criteria) == 0 {
-				g.setCellValue(sheetName, col, "N/A")
-				continue
-			}
-
-			var criteriaValues map[string]float64
-			var enablerStatus map[string]string
-			if assessment != nil {
-				criteriaValues = assessment.CriteriaValues
-				enablerStatus = assessment.EnablerStatus
-			}
-
-			progress := levelDef.CalculateLevelProgress(criteriaValues, enablerStatus)
-			g.setCellValue(sheetName, col, fmt.Sprintf("%.0f%%", progress.ProgressPercent))
-
-			// Color code based on progress
-			progressStyle := g.progressStyle(progress.ProgressPercent)
-			if progressStyle != 0 {
-				g.setCellStyle(sheetName, col, col, progressStyle)
-			}
-		}
-
-		// Next actions: list incomplete enablers for next level
-		nextLevel := 1
-		if assessment != nil {
-			nextLevel = assessment.CurrentLevel + 1
-		}
-		if nextLevel <= 5 {
-			enablers := domain.EnablersForLevel(nextLevel)
-			var nextActions []string
-			for _, e := range enablers {
-				status := StatusNotStarted
-				if assessment != nil && assessment.EnablerStatus != nil {
-					if s, ok := assessment.EnablerStatus[e.ID]; ok {
-						status = s
-					}
-				}
-				if status != StatusCompleted {
-					nextActions = append(nextActions, e.Name)
-				}
-			}
-			if len(nextActions) > 3 {
-				nextActions = nextActions[:3]
-				nextActions = append(nextActions, "...")
-			}
-			g.setCellValue(sheetName, fmt.Sprintf("H%d", row), strings.Join(nextActions, "; "))
-		}
+		g.setCellValue(sheetName, fmt.Sprintf("C%d", row), totalCriteria)
+		g.setCellValue(sheetName, fmt.Sprintf("D%d", row), totalEnablers)
 
 		row++
 	}
 
 	// Set column widths
 	colWidths := map[string]float64{
-		"A": 15, "B": 15, "C": 15, "D": 12, "E": 12, "F": 12, "G": 12, "H": 60,
+		"A": 20, "B": 15, "C": 15, "D": 15,
 	}
 	for col, width := range colWidths {
 		g.setColWidth(sheetName, col, col, width)
@@ -668,62 +509,6 @@ func (g *XLSXGenerator) sortedDomainNames() []string {
 	return names
 }
 
-func (g *XLSXGenerator) statusStyle(status string) int {
-	var color string
-	switch status {
-	case StatusCompleted:
-		color = "C6EFCE" // Green
-	case StatusInProgress:
-		color = "FFEB9C" // Yellow
-	case StatusBlocked:
-		color = "FFC7CE" // Red
-	case StatusNotStarted:
-		color = "DDDDDD" // Gray
-	default:
-		return 0
-	}
-
-	style, _ := g.file.NewStyle(&excelize.Style{
-		Fill: excelize.Fill{Type: "pattern", Color: []string{color}, Pattern: 1},
-	})
-	return style
-}
-
-func (g *XLSXGenerator) metStyle(isMet bool) int {
-	var color string
-	if isMet {
-		color = "C6EFCE" // Green
-	} else {
-		color = "FFC7CE" // Red
-	}
-
-	style, _ := g.file.NewStyle(&excelize.Style{
-		Fill: excelize.Fill{Type: "pattern", Color: []string{color}, Pattern: 1},
-	})
-	return style
-}
-
-func (g *XLSXGenerator) progressStyle(percent float64) int {
-	var color string
-	switch {
-	case percent >= 100:
-		color = "C6EFCE" // Green
-	case percent >= 75:
-		color = "C6EFCE" // Light green
-	case percent >= 50:
-		color = "FFEB9C" // Yellow
-	case percent >= 25:
-		color = "FFCC99" // Orange
-	default:
-		color = "FFC7CE" // Red
-	}
-
-	style, _ := g.file.NewStyle(&excelize.Style{
-		Fill: excelize.Fill{Type: "pattern", Color: []string{color}, Pattern: 1},
-	})
-	return style
-}
-
 // GenerateXLSX is a convenience function to generate XLSX from a spec file.
 func GenerateXLSX(specFile, outputFile string) error {
 	spec, err := ReadSpecFile(specFile)
@@ -782,7 +567,7 @@ func GenerateSimpleXLSX(specFile, outputFile string) error {
 func buildRequirementsFrame(spec *Spec) (*omniframe.Frame, error) {
 	columns := []string{
 		"ID", "Domain", "Level", "Name", "Description", "Type",
-		"Layer", "Team", "Effort", "Status", "Enables", "Depends On",
+		"Layer", "Team", "Effort", "Enables", "Depends On",
 	}
 
 	var rows [][]any
@@ -792,15 +577,6 @@ func buildRequirementsFrame(spec *Spec) (*omniframe.Frame, error) {
 		domain := spec.Domains[domainName]
 		for _, level := range domain.Levels {
 			for _, e := range level.Enablers {
-				status := e.Status
-				if spec.Assessments != nil {
-					if assessment, ok := spec.Assessments[domainName]; ok && assessment != nil {
-						if s, ok := assessment.EnablerStatus[e.ID]; ok {
-							status = s
-						}
-					}
-				}
-
 				rows = append(rows, []any{
 					e.ID,
 					domainName,
@@ -811,7 +587,6 @@ func buildRequirementsFrame(spec *Spec) (*omniframe.Frame, error) {
 					e.Layer,
 					e.Team,
 					e.Effort,
-					status,
 					strings.Join(e.CriteriaIDs, ", "),
 					strings.Join(e.DependsOn, ", "),
 				})
@@ -835,7 +610,7 @@ func buildRequirementsFrame(spec *Spec) (*omniframe.Frame, error) {
 func buildSLOsFrame(spec *Spec) (*omniframe.Frame, error) {
 	columns := []string{
 		"ID", "Domain", "Level", "Name", "Metric", "Type", "Operator",
-		"Target", "Unit", "Current", "Met", "Layer", "Category", "Required",
+		"Target", "Unit", "Layer", "Category", "Required",
 	}
 
 	var rows [][]any
@@ -843,10 +618,6 @@ func buildSLOsFrame(spec *Spec) (*omniframe.Frame, error) {
 
 	for _, domainName := range domainNames {
 		domain := spec.Domains[domainName]
-		var assessment *DomainAssessment
-		if spec.Assessments != nil {
-			assessment = spec.Assessments[domainName]
-		}
 
 		for _, level := range domain.Levels {
 			for _, c := range level.Criteria {
@@ -865,34 +636,6 @@ func buildSLOsFrame(spec *Spec) (*omniframe.Frame, error) {
 					targetDisplay = c.Target
 				}
 
-				// Get current value/status
-				var currentDisplay any
-				var isMet bool
-				if isQual {
-					status := c.Status
-					if assessment != nil && assessment.CriteriaStatus != nil {
-						if s, ok := assessment.CriteriaStatus[c.ID]; ok {
-							status = s
-						}
-					}
-					isMet = IsQualitativeStatusMet(status)
-					currentDisplay = formatQualitativeStatus(status)
-				} else {
-					var current float64
-					if assessment != nil && assessment.CriteriaValues != nil {
-						if v, ok := assessment.CriteriaValues[c.ID]; ok {
-							current = v
-							isMet = c.CheckMet(current)
-						}
-					}
-					currentDisplay = current
-				}
-
-				metStatus := "No"
-				if isMet {
-					metStatus = "Yes"
-				}
-
 				required := "Yes"
 				if !c.Required && c.Weight > 0 {
 					required = "No"
@@ -908,8 +651,6 @@ func buildSLOsFrame(spec *Spec) (*omniframe.Frame, error) {
 					OperatorSymbol(c.Operator),
 					targetDisplay,
 					c.GetUnit(spec),
-					currentDisplay,
-					metStatus,
 					c.GetLayer(spec),
 					c.GetCategory(spec),
 					required,
@@ -933,8 +674,7 @@ func buildSLOsFrame(spec *Spec) (*omniframe.Frame, error) {
 
 func buildProgressFrame(spec *Spec) (*omniframe.Frame, error) {
 	columns := []string{
-		"Domain", "Current Level", "Target Level",
-		"M2 Progress", "M3 Progress", "M4 Progress", "M5 Progress",
+		"Domain", "Levels Defined", "Total Criteria", "Total Enablers",
 	}
 
 	var rows [][]any
@@ -942,41 +682,21 @@ func buildProgressFrame(spec *Spec) (*omniframe.Frame, error) {
 
 	for _, domainName := range domainNames {
 		domain := spec.Domains[domainName]
-		var assessment *DomainAssessment
-		if spec.Assessments != nil {
-			assessment = spec.Assessments[domainName]
+
+		// Count total criteria and enablers
+		totalCriteria := 0
+		totalEnablers := 0
+		for _, level := range domain.Levels {
+			totalCriteria += len(level.Criteria)
+			totalEnablers += len(level.Enablers)
 		}
 
-		// Handle case when no assessment data is available
-		currentLevel := 1
-		targetLevel := 5
-		var criteriaValues map[string]float64
-		var enablerStatus map[string]string
-		if assessment != nil {
-			currentLevel = assessment.CurrentLevel
-			targetLevel = assessment.TargetLevel
-			criteriaValues = assessment.CriteriaValues
-			enablerStatus = assessment.EnablerStatus
-		}
-
-		row := []any{
+		rows = append(rows, []any{
 			domain.Name,
-			fmt.Sprintf("M%d", currentLevel),
-			fmt.Sprintf("M%d", targetLevel),
-		}
-
-		for level := 2; level <= 5; level++ {
-			levelDef, found := domain.GetLevel(level)
-			if !found || len(levelDef.Criteria) == 0 {
-				row = append(row, "N/A")
-				continue
-			}
-
-			progress := levelDef.CalculateLevelProgress(criteriaValues, enablerStatus)
-			row = append(row, fmt.Sprintf("%.0f%%", progress.ProgressPercent))
-		}
-
-		rows = append(rows, row)
+			fmt.Sprintf("M1-M%d", len(domain.Levels)),
+			totalCriteria,
+			totalEnablers,
+		})
 	}
 
 	frame, err := omniframe.FromRows("Progress", columns, rows)
@@ -984,7 +704,7 @@ func buildProgressFrame(spec *Spec) (*omniframe.Frame, error) {
 		return nil, err
 	}
 
-	_ = frame.SetColumnWidth("Domain", 15)
+	_ = frame.SetColumnWidth("Domain", 20)
 
 	return frame, nil
 }

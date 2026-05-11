@@ -211,9 +211,9 @@ type domainState struct {
 }
 
 // getDomainState returns maturity state for a domain.
-// Reads from PRISM Maturity State document first, falls back to legacy assessments.
+// Reads from PRISM Maturity State document.
 func (g *Generator) getDomainState(domainKey string) *domainState {
-	// Try new state document first
+	// Try state document
 	if g.stateDoc != nil && g.stateDoc.MaturityState != nil {
 		if state, ok := g.stateDoc.MaturityState[domainKey]; ok && state != nil {
 			ds := &domainState{
@@ -232,19 +232,7 @@ func (g *Generator) getDomainState(domainKey string) *domainState {
 		}
 	}
 
-	// Fall back to legacy assessments
-	if g.spec.Assessments != nil {
-		if assessment, ok := g.spec.Assessments[domainKey]; ok && assessment != nil {
-			return &domainState{
-				CurrentLevel: assessment.CurrentLevel,
-				TargetLevel:  assessment.TargetLevel,
-				AssessedAt:   assessment.AssessedAt,
-				AssessedBy:   assessment.AssessedBy,
-			}
-		}
-	}
-
-	// Default values
+	// Default values (no state document provided)
 	return &domainState{
 		CurrentLevel: 1,
 		TargetLevel:  5,
@@ -252,10 +240,10 @@ func (g *Generator) getDomainState(domainKey string) *domainState {
 }
 
 // getSLIValue returns the current value for an SLI.
-// Reads from PRISM Maturity State document first, falls back to legacy assessments.
+// Reads from PRISM Maturity State document.
 // Returns the value and whether it was found.
 func (g *Generator) getSLIValue(sliID string, window string) (float64, bool) {
-	// Try new state document first
+	// Try state document
 	if g.stateDoc != nil && g.stateDoc.SLIState != nil {
 		if state, ok := g.stateDoc.SLIState[sliID]; ok && state != nil {
 			// Try specific window first
@@ -279,39 +267,16 @@ func (g *Generator) getSLIValue(sliID string, window string) (float64, bool) {
 		}
 	}
 
-	// Fall back to legacy assessments - search all domains for criterion value
-	if g.spec.Assessments != nil {
-		for _, assessment := range g.spec.Assessments {
-			if assessment != nil && assessment.CriteriaValues != nil {
-				// Match by SLI ID or criterion ID
-				if val, ok := assessment.CriteriaValues[sliID]; ok {
-					return val, true
-				}
-			}
-		}
-	}
-
 	return 0, false
 }
 
 // getSLIQualitativeState returns the qualitative state for an SLI.
-// Reads from PRISM Maturity State document first, falls back to legacy assessments.
+// Reads from PRISM Maturity State document.
 func (g *Generator) getSLIQualitativeState(sliID string) string {
-	// Try new state document first
+	// Try state document
 	if g.stateDoc != nil && g.stateDoc.SLIState != nil {
 		if state, ok := g.stateDoc.SLIState[sliID]; ok && state != nil {
 			return state.QualitativeState
-		}
-	}
-
-	// Fall back to legacy assessments - search all domains
-	if g.spec.Assessments != nil {
-		for _, assessment := range g.spec.Assessments {
-			if assessment != nil && assessment.CriteriaStatus != nil {
-				if status, ok := assessment.CriteriaStatus[sliID]; ok {
-					return status
-				}
-			}
 		}
 	}
 
@@ -319,21 +284,12 @@ func (g *Generator) getSLIQualitativeState(sliID string) string {
 }
 
 // getCriterionValue returns the current value for a criterion.
-// Reads from PRISM Maturity State (by SLI ID) or legacy assessments (by criterion ID).
-func (g *Generator) getCriterionValue(domainKey string, criterion maturity.Criterion) (float64, bool) {
-	// Try by SLI ID from new state document
+// Reads from PRISM Maturity State document by SLI ID.
+func (g *Generator) getCriterionValue(_ string, criterion maturity.Criterion) (float64, bool) {
+	// Try by SLI ID from state document
 	if criterion.SLIID != "" {
 		if val, ok := g.getSLIValue(criterion.SLIID, ""); ok {
 			return val, true
-		}
-	}
-
-	// Try by criterion ID from legacy assessments
-	if g.spec.Assessments != nil {
-		if assessment, ok := g.spec.Assessments[domainKey]; ok && assessment != nil {
-			if val, ok := assessment.CriteriaValues[criterion.ID]; ok {
-				return val, true
-			}
 		}
 	}
 

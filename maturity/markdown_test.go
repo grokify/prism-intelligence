@@ -69,19 +69,6 @@ func TestGenerateMarkdown(t *testing.T) {
 				},
 			},
 		},
-		Assessments: map[string]*DomainAssessment{
-			"security": {
-				Domain:       "security",
-				CurrentLevel: 2,
-				TargetLevel:  4,
-				CriteriaValues: map[string]float64{
-					"sec-sast": 60,
-				},
-				CriteriaStatus: map[string]string{
-					"sec-enc": QualStatusImplemented,
-				},
-			},
-		},
 	}
 
 	t.Run("default options", func(t *testing.T) {
@@ -172,17 +159,17 @@ func TestGenerateMarkdown(t *testing.T) {
 		}
 	})
 
-	t.Run("criteria status indicators", func(t *testing.T) {
+	t.Run("criteria table format", func(t *testing.T) {
 		md := spec.GenerateMarkdown(nil)
 
-		// SAST coverage should be met (60 >= 50)
-		if !strings.Contains(md, "| sec-sast | SAST Coverage | Quantitative | >=50% | ✅ |") {
-			t.Error("Expected SAST criterion with met status")
+		// SAST coverage should be in table
+		if !strings.Contains(md, "| sec-sast | SAST Coverage | Quantitative | >=50% |") {
+			t.Error("Expected SAST criterion in table")
 		}
 
-		// Encryption should be met (implemented)
-		if !strings.Contains(md, "| sec-enc | Encryption | Qualitative | Tracked | ✅ |") {
-			t.Error("Expected Encryption criterion with met status")
+		// Encryption should be in table
+		if !strings.Contains(md, "| sec-enc | Encryption | Qualitative | Tracked |") {
+			t.Error("Expected Encryption criterion in table")
 		}
 	})
 }

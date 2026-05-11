@@ -37,11 +37,6 @@ func TestGenerateMarp(t *testing.T) {
 		}
 	}
 
-	// Should have KPI threshold tables
-	if !strings.Contains(contentStr, "Thresholds by Maturity Level") {
-		t.Error("Missing KPI threshold tables")
-	}
-
 	// Should NOT have PRISM references
 	if strings.Contains(contentStr, "PRISM") {
 		t.Error("Found PRISM reference - should be removed")
@@ -57,33 +52,5 @@ func TestGenerateMarp(t *testing.T) {
 		t.Logf("Could not copy to docs: %v", err)
 	} else {
 		t.Logf("Copied to: %s", docsOutput)
-	}
-}
-
-func TestKPIThresholdsParsing(t *testing.T) {
-	specFile := "../examples/organization/model.json"
-
-	spec, err := ReadSpecFile(specFile)
-	if err != nil {
-		t.Fatalf("Failed to read spec: %v", err)
-	}
-
-	// Check KPI thresholds are loaded
-	if len(spec.KPIThresholds) == 0 {
-		t.Fatal("KPIThresholds not loaded")
-	}
-
-	// Check each domain has thresholds
-	expectedDomains := []string{"security", "operational-excellence", "quality", "product", "ai"}
-	for _, domain := range expectedDomains {
-		thresholds, ok := spec.KPIThresholds[domain]
-		if !ok {
-			t.Errorf("Missing KPIThresholds for domain: %s", domain)
-			continue
-		}
-		if len(thresholds) == 0 {
-			t.Errorf("Empty KPIThresholds for domain: %s", domain)
-		}
-		t.Logf("%s: %d KPIs defined", domain, len(thresholds))
 	}
 }
