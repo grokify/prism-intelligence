@@ -762,28 +762,28 @@ func TestCatalogCommand(t *testing.T) {
 	}
 }
 
-// TestReportCommand tests the report command
-func TestReportCommand(t *testing.T) {
+// TestPlanReportCommand tests the maturity plan report command
+func TestPlanReportCommand(t *testing.T) {
 	exampleFile := getExampleFile()
 	if _, err := os.Stat(exampleFile); os.IsNotExist(err) {
 		t.Skip("example file not found, skipping integration test")
 	}
 
 	// Reset flags
-	reportFormat = "markdown"
-	reportOutput = ""
-	reportView = "both"
+	planFormat = "markdown"
+	planOutputFile = ""
+	planView = "both"
 
 	var runErr error
 	output, captureErr := testutil.CaptureStdout(func() {
-		runErr = runReport(reportCmd, []string{exampleFile})
+		runErr = runMaturityPlanReport(maturityPlanReportCmd, []string{exampleFile})
 	})
 	if captureErr != nil {
 		t.Fatalf("CaptureStdout failed: %v", captureErr)
 	}
 
 	if runErr != nil {
-		t.Errorf("runReport failed: %v", runErr)
+		t.Errorf("runMaturityPlanReport failed: %v", runErr)
 	}
 
 	// Verify markdown output
@@ -792,28 +792,28 @@ func TestReportCommand(t *testing.T) {
 	}
 }
 
-// TestReportCommandJSON tests the report command with JSON output
-func TestReportCommandJSON(t *testing.T) {
+// TestPlanReportCommandJSON tests the maturity plan report command with JSON output
+func TestPlanReportCommandJSON(t *testing.T) {
 	exampleFile := getExampleFile()
 	if _, err := os.Stat(exampleFile); os.IsNotExist(err) {
 		t.Skip("example file not found, skipping integration test")
 	}
 
-	reportFormat = "json"
-	reportOutput = ""
-	reportView = "both"
-	defer func() { reportFormat = "markdown" }()
+	planFormat = "json"
+	planOutputFile = ""
+	planView = "both"
+	defer func() { planFormat = "markdown" }()
 
 	var runErr error
 	output, captureErr := testutil.CaptureStdout(func() {
-		runErr = runReport(reportCmd, []string{exampleFile})
+		runErr = runMaturityPlanReport(maturityPlanReportCmd, []string{exampleFile})
 	})
 	if captureErr != nil {
 		t.Fatalf("CaptureStdout failed: %v", captureErr)
 	}
 
 	if runErr != nil {
-		t.Errorf("runReport with JSON failed: %v", runErr)
+		t.Errorf("runMaturityPlanReport with JSON failed: %v", runErr)
 	}
 
 	// Verify JSON output
@@ -822,8 +822,8 @@ func TestReportCommandJSON(t *testing.T) {
 	}
 }
 
-// TestReportCommandToFile tests the report command writing to a file
-func TestReportCommandToFile(t *testing.T) {
+// TestPlanReportCommandToFile tests the maturity plan report command writing to a file
+func TestPlanReportCommandToFile(t *testing.T) {
 	exampleFile := getExampleFile()
 	if _, err := os.Stat(exampleFile); os.IsNotExist(err) {
 		t.Skip("example file not found, skipping integration test")
@@ -832,14 +832,14 @@ func TestReportCommandToFile(t *testing.T) {
 	tmpDir := t.TempDir()
 	outputPath := filepath.Join(tmpDir, "report.md")
 
-	reportFormat = "markdown"
-	reportOutput = outputPath
-	reportView = "both"
-	defer func() { reportOutput = "" }()
+	planFormat = "markdown"
+	planOutputFile = outputPath
+	planView = "both"
+	defer func() { planOutputFile = "" }()
 
-	err := runReport(reportCmd, []string{exampleFile})
+	err := runMaturityPlanReport(maturityPlanReportCmd, []string{exampleFile})
 	if err != nil {
-		t.Errorf("runReport to file failed: %v", err)
+		t.Errorf("runMaturityPlanReport to file failed: %v", err)
 	}
 
 	// Verify file was created
@@ -848,27 +848,27 @@ func TestReportCommandToFile(t *testing.T) {
 	}
 }
 
-// TestDashboardCommand tests the dashboard command
-func TestDashboardCommand(t *testing.T) {
+// TestPlanDashboardCommand tests the maturity plan dashboard command
+func TestPlanDashboardCommand(t *testing.T) {
 	exampleFile := getExampleFile()
 	if _, err := os.Stat(exampleFile); os.IsNotExist(err) {
 		t.Skip("example file not found, skipping integration test")
 	}
 
 	// Reset flags
-	dashboardFormat = "json"
-	dashboardOutput = ""
+	planFormat = "json"
+	planOutputFile = ""
 
 	var runErr error
 	output, captureErr := testutil.CaptureStdout(func() {
-		runErr = runDashboard(dashboardCmd, []string{exampleFile})
+		runErr = runMaturityPlanDashboard(maturityPlanDashboardCmd, []string{exampleFile})
 	})
 	if captureErr != nil {
 		t.Fatalf("CaptureStdout failed: %v", captureErr)
 	}
 
 	if runErr != nil {
-		t.Errorf("runDashboard failed: %v", runErr)
+		t.Errorf("runMaturityPlanDashboard failed: %v", runErr)
 	}
 
 	// Verify JSON output
@@ -877,27 +877,27 @@ func TestDashboardCommand(t *testing.T) {
 	}
 }
 
-// TestDashboardCommandMarkdown tests the dashboard command with markdown output
-func TestDashboardCommandMarkdown(t *testing.T) {
+// TestPlanDashboardCommandMarkdown tests the maturity plan dashboard command with markdown output
+func TestPlanDashboardCommandMarkdown(t *testing.T) {
 	exampleFile := getExampleFile()
 	if _, err := os.Stat(exampleFile); os.IsNotExist(err) {
 		t.Skip("example file not found, skipping integration test")
 	}
 
-	dashboardFormat = "markdown"
-	dashboardOutput = ""
-	defer func() { dashboardFormat = "json" }()
+	planFormat = "markdown"
+	planOutputFile = ""
+	defer func() { planFormat = "json" }()
 
 	var runErr error
 	output, captureErr := testutil.CaptureStdout(func() {
-		runErr = runDashboard(dashboardCmd, []string{exampleFile})
+		runErr = runMaturityPlanDashboard(maturityPlanDashboardCmd, []string{exampleFile})
 	})
 	if captureErr != nil {
 		t.Fatalf("CaptureStdout failed: %v", captureErr)
 	}
 
 	if runErr != nil {
-		t.Errorf("runDashboard markdown failed: %v", runErr)
+		t.Errorf("runMaturityPlanDashboard markdown failed: %v", runErr)
 	}
 
 	// Verify markdown output
