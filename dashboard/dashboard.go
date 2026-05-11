@@ -1146,6 +1146,7 @@ func (g *Generator) getBulletsForMethodology(methodology MethodologyInfo, slisBy
 				info.Target,
 				info.ActualValue,
 				info.Unit,
+				info.QualitativeState,
 				info.Thresholds,
 			)
 			bullets = append(bullets, bullet)
@@ -1178,6 +1179,7 @@ func (g *Generator) getOtherBullets(slisByType map[string][]sliInfo) []MaturityB
 				info.Target,
 				info.ActualValue,
 				info.Unit,
+				info.QualitativeState,
 				info.Thresholds,
 			)
 			bullets = append(bullets, bullet)

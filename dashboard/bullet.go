@@ -3,6 +3,7 @@ package dashboard
 import (
 	"encoding/json"
 	"fmt"
+	"strings"
 )
 
 // MaturityBullet represents a D3 bullet chart for maturity visualization.
@@ -52,7 +53,7 @@ func NewMaturityBullet(title, subtitle string, currentLevel, targetLevel float64
 }
 
 // NewMaturityBulletWithDetails creates a bullet chart with actual SLI value and thresholds.
-func NewMaturityBulletWithDetails(title string, currentLevel, targetLevel, actualValue float64, unit string, thresholds []LevelThreshold) MaturityBullet {
+func NewMaturityBulletWithDetails(title string, currentLevel, targetLevel, actualValue float64, unit, qualitativeState string, thresholds []LevelThreshold) MaturityBullet {
 	// Format actual value with unit
 	actualValueStr := ""
 	if actualValue != 0 || unit != "" {
@@ -67,6 +68,9 @@ func NewMaturityBulletWithDetails(title string, currentLevel, targetLevel, actua
 	subtitle := MaturityLevel(currentLevel)
 	if actualValueStr != "" {
 		subtitle = fmt.Sprintf("%s (%s)", actualValueStr, MaturityLevel(currentLevel))
+	} else if qualitativeState != "" {
+		// For qualitative SLIs, show the state (e.g., "Tracked", "Measured")
+		subtitle = fmt.Sprintf("%s (%s)", titleCase(qualitativeState), MaturityLevel(currentLevel))
 	}
 
 	bullet := MaturityBullet{
@@ -134,6 +138,14 @@ func MaturityLevel(value float64) string {
 	default:
 		return "M0"
 	}
+}
+
+// titleCase capitalizes the first letter of a string.
+func titleCase(s string) string {
+	if len(s) == 0 {
+		return s
+	}
+	return strings.ToUpper(s[:1]) + s[1:]
 }
 
 // MaturityStatus returns the status (green/yellow/red) for a maturity level.
