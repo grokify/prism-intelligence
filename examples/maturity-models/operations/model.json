@@ -767,53 +767,5 @@
         }
       ]
     }
-  },
-  "assessments": {
-    "operations": {
-      "domain": "operations",
-      "assessedAt": "2026-05-09",
-      "assessedBy": "SRE Team",
-      "currentLevel": 3,
-      "targetLevel": 5,
-      "criteriaValues": {
-        "ops-m2-availability": 99.5,
-        "ops-m2-latency-p99": 450,
-        "ops-m2-error-rate": 0.8,
-        "ops-m2-monitoring": 85,
-        "ops-m3-availability": 99.5,
-        "ops-m3-latency-p99": 450,
-        "ops-m3-latency-p50": 75,
-        "ops-m3-error-rate": 0.8,
-        "ops-m3-cpu-saturation": 65,
-        "ops-m3-monitoring": 85,
-        "ops-m3-mttr": 45,
-        "ops-m4-availability": 99.5,
-        "ops-m4-latency-p99": 450,
-        "ops-m4-latency-p50": 75,
-        "ops-m4-error-rate": 0.8,
-        "ops-m4-cpu-saturation": 65,
-        "ops-m4-memory-saturation": 70,
-        "ops-m4-monitoring": 85,
-        "ops-m4-mttr": 45,
-        "ops-m4-deployment-frequency": 0.5,
-        "ops-m4-lead-time": 48
-      },
-      "criteriaStatus": {
-        "ops-m2-alerting": "defined",
-        "ops-m3-slos-defined": "defined",
-        "ops-m3-runbooks": "documented",
-        "ops-m4-error-budget-policy": "partial"
-      },
-      "enablerStatus": {
-        "ops-m2-deploy-monitoring": "completed",
-        "ops-m2-setup-alerts": "completed",
-        "ops-m3-define-slos": "completed",
-        "ops-m3-create-runbooks": "completed",
-        "ops-m3-expand-monitoring": "in_progress",
-        "ops-m4-error-budgets": "in_progress",
-        "ops-m4-capacity-planning": "not_started",
-        "ops-m4-cicd-improvements": "not_started"
-      }
-    }
   }
 }

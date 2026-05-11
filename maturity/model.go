@@ -10,13 +10,17 @@ import (
 
 // Spec defines a complete maturity specification for an organization.
 // It contains maturity models for multiple domains.
+//
+// NOTE: As of v0.5.0, maturity models should only contain reference data (SLIs, domains, levels, criteria).
+// State tracking (current values, history, targets) should use PRISM Maturity State documents instead.
+// See docs/design/REFACTOR_MATURITY_STATE.md for migration guidance.
 type Spec struct {
 	Schema        string                       `json:"$schema,omitempty"`
 	Metadata      *SpecMetadata                `json:"metadata,omitempty"`
 	SLIs          map[string]*SLI              `json:"slis,omitempty"`          // Service Level Indicators with framework mappings
 	KPIThresholds map[string][]KPIThreshold    `json:"kpiThresholds,omitempty"` // Deprecated: use SLIs instead
 	Domains       map[string]*DomainModel      `json:"domains"`
-	Assessments   map[string]*DomainAssessment `json:"assessments,omitempty"`
+	Assessments   map[string]*DomainAssessment `json:"assessments,omitempty"` // Deprecated: use PRISM Maturity State documents instead
 }
 
 // SLI defines a Service Level Indicator (the metric being measured).
@@ -30,7 +34,17 @@ type SLI struct {
 	// Metric definition
 	MetricName string `json:"metricName"`     // Human-readable metric description
 	Unit       string `json:"unit,omitempty"` // %, days, count, seconds, etc.
-	Type       string `json:"type,omitempty"` // "quantitative" (default), "qualitative"
+	Type       string `json:"type,omitempty"` // DEPRECATED: use MeasurementType instead. "quantitative" (default), "qualitative"
+
+	// Measurement type - how this SLI can be measured
+	// "quantitative" (default): numeric values only (e.g., 99.9% availability)
+	// "qualitative": state-based only (e.g., "tracked", "measured")
+	// "hybrid": supports both quantitative and qualitative (e.g., "tracked" -> "99.9%")
+	MeasurementType string `json:"measurementType,omitempty"`
+
+	// Qualitative states - progression from lowest to highest maturity
+	// Only applicable when MeasurementType is "qualitative" or "hybrid"
+	QualitativeStates []QualitativeState `json:"qualitativeStates,omitempty"`
 
 	// Classification
 	Layer    string `json:"layer,omitempty"`    // requirements, code, infra, runtime, adoption, support
@@ -134,6 +148,71 @@ type FrameworkMapping struct {
 	Version     string `json:"version,omitempty"`     // Framework version (e.g., "2.0", "Rev 5")
 }
 
+// QualitativeState defines a state in a qualitative progression.
+// Used for SLIs that progress through states like "not tracked" → "tracked" → "measured".
+type QualitativeState struct {
+	ID          string `json:"id"`                    // State identifier (e.g., "tracked", "measured")
+	Label       string `json:"label"`                 // Human-readable label
+	Description string `json:"description,omitempty"` // What this state means
+	Order       int    `json:"order"`                 // Progression order (0 = lowest)
+}
+
+// Measurement type constants for SLIs.
+const (
+	MeasurementTypeQuantitative = "quantitative" // Numeric values only (e.g., 99.9%)
+	MeasurementTypeQualitative  = "qualitative"  // State-based only (e.g., "tracked")
+	MeasurementTypeHybrid       = "hybrid"       // Both numeric and state (e.g., "tracked" → 99.9%)
+)
+
+// DefaultQualitativeStates returns the standard progression of qualitative states.
+func DefaultQualitativeStates() []QualitativeState {
+	return []QualitativeState{
+		{ID: "none", Label: "Not Tracked", Description: "Metric is not being tracked", Order: 0},
+		{ID: "adhoc", Label: "Ad-hoc", Description: "Tracked inconsistently or manually", Order: 1},
+		{ID: "tracked", Label: "Tracked", Description: "Tracked regularly but no SLO", Order: 2},
+		{ID: "measured", Label: "Measured", Description: "Measured with defined SLO", Order: 3},
+		{ID: "alerting", Label: "SLO + Alerting", Description: "SLO with automated alerting", Order: 4},
+		{ID: "optimized", Label: "Optimized", Description: "Continuously optimized with automation", Order: 5},
+	}
+}
+
+// GetQualitativeStates returns the qualitative states for this SLI.
+// Returns default states if none are defined.
+func (s *SLI) GetQualitativeStates() []QualitativeState {
+	if len(s.QualitativeStates) > 0 {
+		return s.QualitativeStates
+	}
+	return DefaultQualitativeStates()
+}
+
+// GetMeasurementType returns the measurement type for this SLI.
+// Falls back to Type field for backward compatibility, then defaults to quantitative.
+func (s *SLI) GetMeasurementType() string {
+	if s.MeasurementType != "" {
+		return s.MeasurementType
+	}
+	// Backward compatibility with Type field
+	if s.Type != "" {
+		return s.Type
+	}
+	return MeasurementTypeQuantitative
+}
+
+// IsHybrid returns true if this SLI supports both qualitative and quantitative measurement.
+func (s *SLI) IsHybrid() bool {
+	return s.GetMeasurementType() == MeasurementTypeHybrid
+}
+
+// IsQualitativeOnly returns true if this SLI only supports qualitative measurement.
+func (s *SLI) IsQualitativeOnly() bool {
+	return s.GetMeasurementType() == MeasurementTypeQualitative
+}
+
+// IsQuantitativeOnly returns true if this SLI only supports quantitative measurement.
+func (s *SLI) IsQuantitativeOnly() bool {
+	return s.GetMeasurementType() == MeasurementTypeQuantitative
+}
+
 // IsQualitative returns true if this is a qualitative criterion.
 func (c *Criterion) IsQualitative() bool {
 	return c.Type == CriterionTypeQualitative || c.Operator == OperatorExists
@@ -177,6 +256,11 @@ type Enabler struct {
 }
 
 // DomainAssessment captures current state against a domain's maturity model.
+//
+// Deprecated: As of v0.5.0, use PRISM Maturity State documents for state tracking.
+// State should be stored separately from the maturity model definition.
+// Use prism.DomainMaturityState, prism.SLIState, and prism.EnablerState instead.
+// See docs/design/REFACTOR_MATURITY_STATE.md for migration guidance.
 type DomainAssessment struct {
 	Domain         string             `json:"domain"`
 	AssessedAt     string             `json:"assessedAt,omitempty"`

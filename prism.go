@@ -21,6 +21,22 @@ type PRISMDocument struct {
 	Goals   []Goal         `json:"goals,omitempty"`
 	Phases  []Phase        `json:"phases,omitempty"`
 	Roadmap *RoadmapConfig `json:"roadmap,omitempty"`
+
+	// Temporal State Tracking (REFACTOR_MATURITY_STATE)
+	// Reference to the maturity model this document tracks against
+	MaturityModelRef string `json:"maturityModelRef,omitempty"`
+
+	// Standard SLO windows used in this document
+	SLOWindows []string `json:"sloWindows,omitempty"`
+
+	// SLI state with temporal tracking (past, present, future)
+	SLIState SLIStateMap `json:"sliState,omitempty"`
+
+	// Maturity level state per domain
+	MaturityState MaturityStateMap `json:"maturityState,omitempty"`
+
+	// Enabler/initiative state
+	EnablerState EnablerStateMap `json:"enablerState,omitempty"`
 }
 
 // Metadata contains document-level metadata.
@@ -653,4 +669,158 @@ func abs(x float64) float64 {
 		return -x
 	}
 	return x
+}
+
+// =============================================================================
+// Temporal State Tracking (REFACTOR_MATURITY_STATE)
+// =============================================================================
+
+// SLOWindow represents a standard SLO measurement window.
+const (
+	SLOWindow7Days     = "7d"
+	SLOWindow30Days    = "30d"
+	SLOWindow90Days    = "90d"
+	SLOWindowQuarterly = "quarterly"
+	SLOWindowAnnual    = "annual"
+)
+
+// AllSLOWindows returns all standard SLO windows.
+func AllSLOWindows() []string {
+	return []string{
+		SLOWindow7Days,
+		SLOWindow30Days,
+		SLOWindow90Days,
+		SLOWindowQuarterly,
+		SLOWindowAnnual,
+	}
+}
+
+// SLIStateMap holds state for all SLIs in a PRISM document.
+type SLIStateMap map[string]*SLIState
+
+// SLIState tracks temporal state for a single SLI.
+type SLIState struct {
+	SLIID            string                  `json:"sliId"`                      // Reference to maturity model SLI
+	QualitativeState string                  `json:"qualitativeState,omitempty"` // Current qualitative state (e.g., "tracked", "measured")
+	Windows          map[string]*WindowState `json:"windows,omitempty"`          // State by window (7d, 30d, 90d, quarterly, annual)
+	History          []HistoricalValue       `json:"history,omitempty"`          // Historical values over time
+	Targets          map[string]*TargetValue `json:"targets,omitempty"`          // Future targets by period (e.g., "Q2_2026")
+}
+
+// WindowState represents the current value for a specific SLO window.
+type WindowState struct {
+	Value     float64   `json:"value"`               // Current measured value
+	Target    float64   `json:"target,omitempty"`    // Target value for this window
+	Met       bool      `json:"met,omitempty"`       // Whether target is met
+	Timestamp time.Time `json:"timestamp,omitempty"` // When this was measured
+}
+
+// HistoricalValue represents a point-in-time measurement.
+type HistoricalValue struct {
+	Window    string    `json:"window"`         // Which SLO window (7d, 30d, etc.)
+	Value     float64   `json:"value"`          // Measured value
+	Timestamp time.Time `json:"timestamp"`      // When measured
+	Note      string    `json:"note,omitempty"` // Optional note
+}
+
+// TargetValue represents a future target.
+type TargetValue struct {
+	Value         float64 `json:"value"`                   // Target value
+	MaturityLevel int     `json:"maturityLevel,omitempty"` // Target maturity level (1-5)
+	TargetDate    string  `json:"targetDate,omitempty"`    // Target date (ISO 8601)
+}
+
+// MaturityStateMap holds maturity state for all domains.
+type MaturityStateMap map[string]*DomainMaturityState
+
+// DomainMaturityState tracks maturity level progression for a domain.
+type DomainMaturityState struct {
+	DomainID string               `json:"domainId"`          // Reference to maturity model domain
+	Current  *MaturityLevelState  `json:"current"`           // Current achieved level
+	Target   *MaturityLevelTarget `json:"target,omitempty"`  // Target level
+	History  []MaturityLevelState `json:"history,omitempty"` // Level progression history
+}
+
+// MaturityLevelState represents a maturity level at a point in time.
+type MaturityLevelState struct {
+	Level      int    `json:"level"`                // Maturity level (1-5)
+	AchievedAt string `json:"achievedAt,omitempty"` // When this level was achieved (ISO 8601)
+	AssessedBy string `json:"assessedBy,omitempty"` // Who performed the assessment
+	Note       string `json:"note,omitempty"`       // Assessment notes
+}
+
+// MaturityLevelTarget represents a target maturity level.
+type MaturityLevelTarget struct {
+	Level      int    `json:"level"`                // Target maturity level (1-5)
+	TargetDate string `json:"targetDate,omitempty"` // Target date (ISO 8601)
+	Rationale  string `json:"rationale,omitempty"`  // Why this target was chosen
+}
+
+// EnablerStateMap holds state for all enablers.
+type EnablerStateMap map[string]*EnablerState
+
+// EnablerState tracks progress on an enabler (project/capability).
+type EnablerState struct {
+	EnablerID   string  `json:"enablerId"`             // Reference to maturity model enabler
+	Status      string  `json:"status"`                // not_started, in_progress, completed, blocked
+	Progress    float64 `json:"progress,omitempty"`    // Completion percentage (0-100)
+	StartedAt   string  `json:"startedAt,omitempty"`   // When work started
+	CompletedAt string  `json:"completedAt,omitempty"` // When completed
+	Owner       string  `json:"owner,omitempty"`       // Who owns this enabler
+	Note        string  `json:"note,omitempty"`        // Status notes
+}
+
+// EnablerStatus constants.
+const (
+	EnablerStatusNotStarted = "not_started"
+	EnablerStatusInProgress = "in_progress"
+	EnablerStatusCompleted  = "completed"
+	EnablerStatusBlocked    = "blocked"
+)
+
+// QualitativeStateDefinition defines a qualitative state for an SLI.
+type QualitativeStateDefinition struct {
+	ID          string `json:"id"`                    // State identifier (e.g., "tracked")
+	Label       string `json:"label"`                 // Human-readable label
+	Description string `json:"description,omitempty"` // What this state means
+	Order       int    `json:"order"`                 // Progression order (0 = lowest)
+}
+
+// StandardQualitativeStates returns the default progression of qualitative states.
+func StandardQualitativeStates() []QualitativeStateDefinition {
+	return []QualitativeStateDefinition{
+		{ID: "none", Label: "Not Tracked", Description: "Metric is not being tracked", Order: 0},
+		{ID: "adhoc", Label: "Ad-hoc", Description: "Tracked inconsistently or manually", Order: 1},
+		{ID: "tracked", Label: "Tracked", Description: "Tracked regularly but no SLO", Order: 2},
+		{ID: "measured", Label: "Measured", Description: "Measured with defined SLO", Order: 3},
+		{ID: "alerting", Label: "SLO + Alerting", Description: "SLO with automated alerting", Order: 4},
+		{ID: "optimized", Label: "Optimized", Description: "Continuously optimized with automation", Order: 5},
+	}
+}
+
+// CompareQualitativeStates compares two qualitative states.
+// Returns -1 if a < b, 0 if a == b, 1 if a > b.
+func CompareQualitativeStates(a, b string) int {
+	states := StandardQualitativeStates()
+	orderA, orderB := -1, -1
+	for _, s := range states {
+		if s.ID == a {
+			orderA = s.Order
+		}
+		if s.ID == b {
+			orderB = s.Order
+		}
+	}
+	if orderA < orderB {
+		return -1
+	}
+	if orderA > orderB {
+		return 1
+	}
+	return 0
+}
+
+// MeetsQualitativeTarget returns true if current state meets or exceeds target.
+func MeetsQualitativeTarget(current, target string) bool {
+	return CompareQualitativeStates(current, target) >= 0
 }

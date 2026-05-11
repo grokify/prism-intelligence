@@ -793,9 +793,11 @@ func buildRequirementsFrame(spec *Spec) (*omniframe.Frame, error) {
 		for _, level := range domain.Levels {
 			for _, e := range level.Enablers {
 				status := e.Status
-				if assessment, ok := spec.Assessments[domainName]; ok {
-					if s, ok := assessment.EnablerStatus[e.ID]; ok {
-						status = s
+				if spec.Assessments != nil {
+					if assessment, ok := spec.Assessments[domainName]; ok && assessment != nil {
+						if s, ok := assessment.EnablerStatus[e.ID]; ok {
+							status = s
+						}
 					}
 				}
 
@@ -841,7 +843,10 @@ func buildSLOsFrame(spec *Spec) (*omniframe.Frame, error) {
 
 	for _, domainName := range domainNames {
 		domain := spec.Domains[domainName]
-		assessment := spec.Assessments[domainName]
+		var assessment *DomainAssessment
+		if spec.Assessments != nil {
+			assessment = spec.Assessments[domainName]
+		}
 
 		for _, level := range domain.Levels {
 			for _, c := range level.Criteria {
@@ -937,12 +942,27 @@ func buildProgressFrame(spec *Spec) (*omniframe.Frame, error) {
 
 	for _, domainName := range domainNames {
 		domain := spec.Domains[domainName]
-		assessment := spec.Assessments[domainName]
+		var assessment *DomainAssessment
+		if spec.Assessments != nil {
+			assessment = spec.Assessments[domainName]
+		}
+
+		// Handle case when no assessment data is available
+		currentLevel := 1
+		targetLevel := 5
+		var criteriaValues map[string]float64
+		var enablerStatus map[string]string
+		if assessment != nil {
+			currentLevel = assessment.CurrentLevel
+			targetLevel = assessment.TargetLevel
+			criteriaValues = assessment.CriteriaValues
+			enablerStatus = assessment.EnablerStatus
+		}
 
 		row := []any{
 			domain.Name,
-			fmt.Sprintf("M%d", assessment.CurrentLevel),
-			fmt.Sprintf("M%d", assessment.TargetLevel),
+			fmt.Sprintf("M%d", currentLevel),
+			fmt.Sprintf("M%d", targetLevel),
 		}
 
 		for level := 2; level <= 5; level++ {
@@ -952,7 +972,7 @@ func buildProgressFrame(spec *Spec) (*omniframe.Frame, error) {
 				continue
 			}
 
-			progress := levelDef.CalculateLevelProgress(assessment.CriteriaValues, assessment.EnablerStatus)
+			progress := levelDef.CalculateLevelProgress(criteriaValues, enablerStatus)
 			row = append(row, fmt.Sprintf("%.0f%%", progress.ProgressPercent))
 		}
 

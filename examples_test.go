@@ -13,7 +13,7 @@ func TestExampleFiles(t *testing.T) {
 		expectedCount int
 		domain        string
 	}{
-		{"examples/operations-metrics.json", 8, DomainOperations},
+		{"examples/prism-documents/operations-metrics.json", 8, DomainOperations},
 	}
 
 	for _, ex := range examples {
@@ -67,7 +67,7 @@ func TestExampleFiles(t *testing.T) {
 
 func TestAllExampleFilesExist(t *testing.T) {
 	expectedFiles := []string{
-		"examples/operations-metrics.json",
+		"examples/prism-documents/operations-metrics.json",
 	}
 
 	for _, f := range expectedFiles {
@@ -78,7 +78,7 @@ func TestAllExampleFilesExist(t *testing.T) {
 }
 
 func TestExampleFilesHaveSchema(t *testing.T) {
-	pattern := "examples/*.json"
+	pattern := "examples/prism-documents/*.json"
 	files, err := filepath.Glob(pattern)
 	if err != nil {
 		t.Fatalf("failed to glob %s: %v", pattern, err)
@@ -104,7 +104,7 @@ func TestExampleFilesHaveSchema(t *testing.T) {
 }
 
 func TestExampleMetricsHaveRequiredFields(t *testing.T) {
-	pattern := "examples/*.json"
+	pattern := "examples/prism-documents/*.json"
 	files, err := filepath.Glob(pattern)
 	if err != nil {
 		t.Fatalf("failed to glob %s: %v", pattern, err)

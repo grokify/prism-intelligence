@@ -831,44 +831,5 @@
         }
       ]
     }
-  },
-  "assessments": {
-    "security": {
-      "domain": "security",
-      "assessedAt": "2026-05-09",
-      "assessedBy": "Security Team",
-      "currentLevel": 2,
-      "targetLevel": 4,
-      "criteriaValues": {
-        "sec-m2-sast-coverage": 75,
-        "sec-m2-sca-coverage": 80,
-        "sec-m3-sast-coverage": 60,
-        "sec-m3-sca-coverage": 65,
-        "sec-m3-secrets-zero": 3,
-        "sec-m3-critical-zero": 5,
-        "sec-m3-cloud-posture": 72,
-        "sec-m4-mttr-critical": 14,
-        "sec-m4-mttr-high": 45,
-        "sec-m4-detection-coverage": 55,
-        "sec-m4-detection-latency": 300,
-        "sec-m4-cloud-posture": 72,
-        "sec-m4-pentest-coverage": 60
-      },
-      "criteriaStatus": {
-        "sec-m2-vulns-tracked": "tracked",
-        "sec-m2-incident-process": "documented",
-        "sec-m3-security-gates": "partial"
-      },
-      "enablerStatus": {
-        "sec-m2-deploy-sast": "completed",
-        "sec-m2-deploy-sca": "completed",
-        "sec-m2-vuln-tracking": "completed",
-        "sec-m2-incident-runbook": "completed",
-        "sec-m3-ci-integration": "in_progress",
-        "sec-m3-security-gates-impl": "not_started",
-        "sec-m3-secrets-scanning": "in_progress",
-        "sec-m3-cspm-deploy": "not_started"
-      }
-    }
   }
 }
