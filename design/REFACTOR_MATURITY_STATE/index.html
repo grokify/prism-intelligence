@@ -10,13 +10,13 @@
       
       
       
-        <link rel="canonical" href="https://grokify.github.io/prism/integrations/marp/">
+        <link rel="canonical" href="https://grokify.github.io/prism/design/REFACTOR_MATURITY_STATE/">
       
       
-        <link rel="prev" href="../dashforge/">
+        <link rel="prev" href="../core/PRD/">
       
       
-        <link rel="next" href="../excel/">
+        <link rel="next" href="../maturity/FEAT_MATURITY_CODEGEN/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -24,7 +24,7 @@
     
     
       
-        <title>Marp Presentations - PRISM</title>
+        <title>Model State Separation - PRISM</title>
       
     
     
@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#marp-presentations" class="md-skip">
+        <a href="#refactor-separate-maturity-model-from-state" class="md-skip">
           Skip to content
         </a>
       
@@ -110,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Marp Presentations
+              Model State Separation
             
           </span>
         </div>
@@ -340,13 +340,11 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="../" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../../integrations/" class="md-tabs__link">
           
   
   
@@ -382,6 +380,8 @@
   
   
   
+    
+  
   
     
     
@@ -389,11 +389,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../../design/core/PRD/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../core/PRD/" class="md-tabs__link">
           
   
   
@@ -1906,31 +1908,28 @@
       
   
   
-    
   
   
-  
     
     
     
     
-      
-        
-        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
         
           
-          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
             
   
   
@@ -1943,7 +1942,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_7">
             <span class="md-nav__icon md-icon"></span>
             Integrations
@@ -1957,7 +1956,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../../integrations/" class="md-nav__link">
         
   
   
@@ -1980,7 +1979,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../structured-plan/" class="md-nav__link">
+      <a href="../../integrations/structured-plan/" class="md-nav__link">
         
   
   
@@ -2003,7 +2002,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../dashforge/" class="md-nav__link">
+      <a href="../../integrations/dashforge/" class="md-nav__link">
         
   
   
@@ -2023,32 +2022,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    Marp Presentations
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../integrations/marp/" class="md-nav__link">
         
   
   
@@ -2059,170 +2036,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#overview" class="md-nav__link">
-    <span class="md-ellipsis">
-      Overview
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#planned-features" class="md-nav__link">
-    <span class="md-ellipsis">
-      Planned Features
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Planned Features">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#slide-templates" class="md-nav__link">
-    <span class="md-ellipsis">
-      Slide Templates
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#generated-slides" class="md-nav__link">
-    <span class="md-ellipsis">
-      Generated Slides
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#example-output" class="md-nav__link">
-    <span class="md-ellipsis">
-      Example Output
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#configuration" class="md-nav__link">
-    <span class="md-ellipsis">
-      Configuration
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Configuration">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#document-configuration" class="md-nav__link">
-    <span class="md-ellipsis">
-      Document Configuration
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#template-options" class="md-nav__link">
-    <span class="md-ellipsis">
-      Template Options
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#planned-cli-commands" class="md-nav__link">
-    <span class="md-ellipsis">
-      Planned CLI Commands
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#chart-generation" class="md-nav__link">
-    <span class="md-ellipsis">
-      Chart Generation
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#use-cases" class="md-nav__link">
-    <span class="md-ellipsis">
-      Use Cases
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Use Cases">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#monthly-executive-report" class="md-nav__link">
-    <span class="md-ellipsis">
-      Monthly Executive Report
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#quarterly-review" class="md-nav__link">
-    <span class="md-ellipsis">
-      Quarterly Review
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#roadmap" class="md-nav__link">
-    <span class="md-ellipsis">
-      Roadmap
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -2235,7 +2048,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../excel/" class="md-nav__link">
+      <a href="../../integrations/excel/" class="md-nav__link">
         
   
   
@@ -2383,28 +2196,31 @@
       
   
   
+    
   
   
+  
     
     
     
     
+      
+        
+        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" checked>
         
           
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9" >
-        
-          
-          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
             
   
   
@@ -2417,7 +2233,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_9">
             <span class="md-nav__icon md-icon"></span>
             Design
@@ -2437,10 +2253,13 @@
       
       
         
+          
+          
+        
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
@@ -2449,7 +2268,7 @@
         <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9_1" >
         
           
-          <label class="md-nav__link" for="__nav_9_1" id="__nav_9_1_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_9_1" id="__nav_9_1_label" tabindex="">
             
   
   
@@ -2476,7 +2295,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../design/core/PRD/" class="md-nav__link">
+      <a href="../core/PRD/" class="md-nav__link">
         
   
   
@@ -2504,28 +2323,31 @@
                 
   
   
+    
   
   
+  
     
     
     
     
       
       
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
         
           
+          
         
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9_2" >
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9_2" checked>
         
           
-          <label class="md-nav__link" for="__nav_9_2" id="__nav_9_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_9_2" id="__nav_9_2_label" tabindex="">
             
   
   
@@ -2538,7 +2360,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_9_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_9_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_9_2">
             <span class="md-nav__icon md-icon"></span>
             Maturity
@@ -2549,10 +2371,32 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../design/REFACTOR_MATURITY_STATE/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Model State Separation
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -2563,6 +2407,197 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#document-relationship" class="md-nav__link">
+    <span class="md-ellipsis">
+      Document Relationship
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#current-state-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      Current State Analysis
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Current State Analysis">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#functionality-using-maturityassessments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Functionality Using maturity.Assessments
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#current-domainassessment-fields" class="md-nav__link">
+    <span class="md-ellipsis">
+      Current DomainAssessment Fields
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#new-schema-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      New Schema Design
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="New Schema Design">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-prism-maturity-model-reference-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. PRISM Maturity Model (Reference Only)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-prism-maturity-state-state-planning" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. PRISM Maturity State (State + Planning)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#file-organization" class="md-nav__link">
+    <span class="md-ellipsis">
+      File Organization
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#migration-plan" class="md-nav__link">
+    <span class="md-ellipsis">
+      Migration Plan
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Migration Plan">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#phase-1-add-new-types-no-breaking-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 1: Add New Types (No Breaking Changes)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-2-update-generators-dual-support" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 2: Update Generators (Dual Support)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-3-update-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 3: Update Examples
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-4-deprecation-user-approval-required" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 4: Deprecation (User Approval Required)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#potential-functionality-loss" class="md-nav__link">
+    <span class="md-ellipsis">
+      Potential Functionality Loss
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#new-capabilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      New Capabilities
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#naming-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Naming Summary
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -2575,7 +2610,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../design/maturity/FEAT_MATURITY_CODEGEN/" class="md-nav__link">
+      <a href="../maturity/FEAT_MATURITY_CODEGEN/" class="md-nav__link">
         
   
   
@@ -2598,7 +2633,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../design/maturity/FEAT_MATURITY_SLO_DESIGN/" class="md-nav__link">
+      <a href="../maturity/FEAT_MATURITY_SLO_DESIGN/" class="md-nav__link">
         
   
   
@@ -2621,7 +2656,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../design/maturity/FEAT_MATURITYROADMAP_PLAN/" class="md-nav__link">
+      <a href="../maturity/FEAT_MATURITYROADMAP_PLAN/" class="md-nav__link">
         
   
   
@@ -2644,7 +2679,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../design/maturity/FEAT_MATURITYROADMAP_PRD/" class="md-nav__link">
+      <a href="../maturity/FEAT_MATURITYROADMAP_PRD/" class="md-nav__link">
         
   
   
@@ -2681,10 +2716,13 @@
       
       
         
+          
+          
+        
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
@@ -2693,7 +2731,7 @@
         <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9_3" >
         
           
-          <label class="md-nav__link" for="__nav_9_3" id="__nav_9_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_9_3" id="__nav_9_3_label" tabindex="">
             
   
   
@@ -2720,7 +2758,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../design/maturity-plan/PRD/" class="md-nav__link">
+      <a href="../maturity-plan/PRD/" class="md-nav__link">
         
   
   
@@ -3075,37 +3113,37 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#planned-features" class="md-nav__link">
+  <a href="#document-relationship" class="md-nav__link">
     <span class="md-ellipsis">
-      Planned Features
+      Document Relationship
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Planned Features">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#current-state-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      Current State Analysis
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Current State Analysis">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#slide-templates" class="md-nav__link">
+  <a href="#functionality-using-maturityassessments" class="md-nav__link">
     <span class="md-ellipsis">
-      Slide Templates
+      Functionality Using maturity.Assessments
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#generated-slides" class="md-nav__link">
+  <a href="#current-domainassessment-fields" class="md-nav__link">
     <span class="md-ellipsis">
-      Generated Slides
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#example-output" class="md-nav__link">
-    <span class="md-ellipsis">
-      Example Output
+      Current DomainAssessment Fields
     </span>
   </a>
   
@@ -3117,28 +3155,28 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#configuration" class="md-nav__link">
+  <a href="#new-schema-design" class="md-nav__link">
     <span class="md-ellipsis">
-      Configuration
+      New Schema Design
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Configuration">
+    <nav class="md-nav" aria-label="New Schema Design">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#document-configuration" class="md-nav__link">
+  <a href="#1-prism-maturity-model-reference-only" class="md-nav__link">
     <span class="md-ellipsis">
-      Document Configuration
+      1. PRISM Maturity Model (Reference Only)
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#template-options" class="md-nav__link">
+  <a href="#2-prism-maturity-state-state-planning" class="md-nav__link">
     <span class="md-ellipsis">
-      Template Options
+      2. PRISM Maturity State (State + Planning)
     </span>
   </a>
   
@@ -3150,46 +3188,55 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#planned-cli-commands" class="md-nav__link">
+  <a href="#file-organization" class="md-nav__link">
     <span class="md-ellipsis">
-      Planned CLI Commands
+      File Organization
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#chart-generation" class="md-nav__link">
+  <a href="#migration-plan" class="md-nav__link">
     <span class="md-ellipsis">
-      Chart Generation
+      Migration Plan
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#use-cases" class="md-nav__link">
-    <span class="md-ellipsis">
-      Use Cases
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Use Cases">
+    <nav class="md-nav" aria-label="Migration Plan">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#monthly-executive-report" class="md-nav__link">
+  <a href="#phase-1-add-new-types-no-breaking-changes" class="md-nav__link">
     <span class="md-ellipsis">
-      Monthly Executive Report
+      Phase 1: Add New Types (No Breaking Changes)
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#quarterly-review" class="md-nav__link">
+  <a href="#phase-2-update-generators-dual-support" class="md-nav__link">
     <span class="md-ellipsis">
-      Quarterly Review
+      Phase 2: Update Generators (Dual Support)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-3-update-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 3: Update Examples
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-4-deprecation-user-approval-required" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 4: Deprecation (User Approval Required)
     </span>
   </a>
   
@@ -3201,9 +3248,27 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#roadmap" class="md-nav__link">
+  <a href="#potential-functionality-loss" class="md-nav__link">
     <span class="md-ellipsis">
-      Roadmap
+      Potential Functionality Loss
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#new-capabilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      New Capabilities
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#naming-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Naming Summary
     </span>
   </a>
   
@@ -3228,190 +3293,294 @@
   
 
 
-<h1 id="marp-presentations">Marp Presentations</h1>
-<div class="admonition note">
-<p class="admonition-title">Coming Soon</p>
-<p>Marp integration is planned for a future release.</p>
-</div>
+<h1 id="refactor-separate-maturity-model-from-state">Refactor: Separate Maturity Model from State</h1>
 <h2 id="overview">Overview</h2>
-<p>Generate executive presentations from PRISM documents using <a href="https://marp.app/">Marp</a>.</p>
-<h2 id="planned-features">Planned Features</h2>
-<h3 id="slide-templates">Slide Templates</h3>
+<p>Split the current maturity model into two document types:</p>
+<ol>
+<li><strong>PRISM Maturity Model</strong> - Pure reference (levels, criteria, thresholds, SLI definitions)</li>
+<li><strong>PRISM Maturity State</strong> - State tracking (past, present, future values and targets)</li>
+</ol>
+<h2 id="document-relationship">Document Relationship</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>┌─────────────────────────┐         ┌─────────────────────────┐
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>│  PRISM Maturity Model   │◄────────│  PRISM Maturity State   │
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>│  (Reference/Definition) │         │  (Tracking/Assessment)  │
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>├─────────────────────────┤         ├─────────────────────────┤
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>│ • SLI definitions       │         │ • Current SLI values    │
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>│ • Qualitative states    │         │ • Historical values     │
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>│ • Domain levels (M1-M5) │         │ • Future targets        │
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>│ • Criteria &amp; thresholds │         │ • Maturity level state  │
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>│ • Enabler definitions   │         │ • Enabler progress      │
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>│ • Framework mappings    │         │ • Temporal windows      │
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>└─────────────────────────┘         └─────────────────────────┘
+</code></pre></div>
+<h2 id="current-state-analysis">Current State Analysis</h2>
+<h3 id="functionality-using-maturityassessments">Functionality Using <code>maturity.Assessments</code></h3>
 <table>
 <thead>
 <tr>
-<th>Template</th>
-<th>Description</th>
-<th>Slides</th>
+<th>File</th>
+<th>Usage</th>
+<th>Migration Path</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Executive Summary</td>
-<td>High-level overview</td>
-<td>3-5</td>
+<td><code>dashboard/dashboard.go</code></td>
+<td><code>currentLevel</code>, <code>targetLevel</code>, <code>criteriaValues</code></td>
+<td>Read from Maturity State</td>
 </tr>
 <tr>
-<td>Full Report</td>
-<td>Detailed breakdown</td>
-<td>10-15</td>
+<td><code>maturity/xlsx.go</code></td>
+<td>Current values for spreadsheet</td>
+<td>Read from Maturity State</td>
 </tr>
 <tr>
-<td>Domain Focus</td>
-<td>Single domain deep-dive</td>
-<td>5-7</td>
+<td><code>maturity/marp.go</code></td>
+<td>Values for presentations</td>
+<td>Read from Maturity State</td>
 </tr>
 <tr>
-<td>Trend Report</td>
-<td>Historical comparison</td>
-<td>5-8</td>
+<td><code>maturity/xlsx_test.go</code></td>
+<td>Test data</td>
+<td>Update test fixtures</td>
 </tr>
 </tbody>
 </table>
-<h3 id="generated-slides">Generated Slides</h3>
-<p><strong>Executive Summary Template:</strong></p>
-<ol>
-<li><strong>Title Slide</strong> - PRISM report title, date, period</li>
-<li><strong>Score Overview</strong> - Overall score, interpretation, health status</li>
-<li><strong>Domain Summary</strong> - Security vs Operations scores</li>
-<li><strong>Key Metrics</strong> - Top performing and at-risk metrics</li>
-<li><strong>Recommendations</strong> - Action items based on scores</li>
-</ol>
-<h3 id="example-output">Example Output</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>---
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>marp: true
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="gu">theme: corporate</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="gu">---</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="gh"># PRISM Report</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="gu">## Acme Corporation</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="gu">### Q1 2024</span>
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>---
-<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>
-<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="gh"># Overall Score</span>
-<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>
-<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="gu">## 78.2% - Strong</span>
-<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>
-<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="k">-</span><span class="w"> </span>Reliability: 82.5%
-<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="k">-</span><span class="w"> </span>Efficiency: 84.0%
-<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>
-<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>![<span class="nt">bg right:40%</span>](<span class="na">score-gauge.svg</span>)
-<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>
-<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>---
-<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>
-<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="gh"># Domain × Stage Heatmap</span>
-<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>
-<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>|            | Design | Build | Test | Runtime | Response |
-<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>|------------|--------|-------|------|---------|----------|
-<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>| Reliability| 🟡 68  | 🟢 85 | 🟡 75| 🟢 95   | 🟢 82    |
-<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>| Efficiency | 🟡 65  | 🟢 92 | 🟡 70| 🟢 88   | 🟡 72    |
-<a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>
-<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>---
-<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>
-<a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a><span class="gh"># Top Performing Metrics</span>
-<a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a>
-<a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a><span class="k">1.</span> <span class="gs">**Service Availability**</span> - 99.95% (Target: 99.99%)
-<a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a><span class="k">2.</span> <span class="gs">**Deployment Frequency**</span> - 5/day (Target: 10/day)
-<a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a><span class="k">3.</span> <span class="gs">**P99 Latency**</span> - 150ms (Target: 200ms)
-<a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a>
-<a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a>---
-<a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a>
-<a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a><span class="gh"># Areas Needing Attention</span>
-<a id="__codelineno-0-41" name="__codelineno-0-41" href="#__codelineno-0-41"></a>
-<a id="__codelineno-0-42" name="__codelineno-0-42" href="#__codelineno-0-42"></a><span class="k">1.</span> <span class="gs">**Lead Time**</span> - 24 hours (Target: 1 hour)
-<a id="__codelineno-0-43" name="__codelineno-0-43" href="#__codelineno-0-43"></a><span class="k">2.</span> <span class="gs">**Change Failure Rate**</span> - 10% (Target: 5%)
-<a id="__codelineno-0-44" name="__codelineno-0-44" href="#__codelineno-0-44"></a><span class="k">3.</span> <span class="gs">**Error Rate**</span> - 0.15% (Target: 0.1%)
-</code></pre></div>
-<h2 id="configuration">Configuration</h2>
-<h3 id="document-configuration">Document Configuration</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">{</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">&quot;integrations&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="nt">&quot;marp&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">      </span><span class="nt">&quot;enabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">      </span><span class="nt">&quot;template&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;executive&quot;</span><span class="p">,</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">      </span><span class="nt">&quot;theme&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;corporate&quot;</span><span class="p">,</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">      </span><span class="nt">&quot;includeCharts&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">  </span><span class="p">}</span>
+<h3 id="current-domainassessment-fields">Current <code>DomainAssessment</code> Fields</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">type</span><span class="w"> </span><span class="nx">DomainAssessment</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="nx">Domain</span><span class="w">         </span><span class="kt">string</span><span class="w">             </span><span class="c1">// → Move to Maturity State</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="nx">AssessedAt</span><span class="w">     </span><span class="kt">string</span><span class="w">             </span><span class="c1">// → Move to Maturity State</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="nx">AssessedBy</span><span class="w">     </span><span class="kt">string</span><span class="w">             </span><span class="c1">// → Move to Maturity State</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="nx">CurrentLevel</span><span class="w">   </span><span class="kt">int</span><span class="w">                </span><span class="c1">// → Move to Maturity State</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="nx">TargetLevel</span><span class="w">    </span><span class="kt">int</span><span class="w">                </span><span class="c1">// → Move to Maturity State</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="nx">CriteriaValues</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">float64</span><span class="w"> </span><span class="c1">// → Move to Maturity State (with windows)</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">    </span><span class="nx">CriteriaStatus</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span><span class="w">  </span><span class="c1">// → Move to Maturity State (qualitative)</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">    </span><span class="nx">EnablerStatus</span><span class="w">  </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span><span class="w">  </span><span class="c1">// → Move to Maturity State</span>
 <a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="p">}</span>
 </code></pre></div>
-<h3 id="template-options">Template Options</h3>
+<h2 id="new-schema-design">New Schema Design</h2>
+<h3 id="1-prism-maturity-model-reference-only">1. PRISM Maturity Model (Reference Only)</h3>
+<p>The Maturity Model defines <strong>what</strong> is measured and <strong>how</strong> levels are achieved. It contains no current state.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="p">{</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">&quot;$schema&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;prism-maturity-model.schema.json&quot;</span><span class="p">,</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span><span class="nt">&quot;metadata&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Operations Maturity&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.0.0&quot;</span><span class="w"> </span><span class="p">},</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">  </span><span class="nt">&quot;slis&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="nt">&quot;sli-availability&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Service Availability&quot;</span><span class="p">,</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">      </span><span class="nt">&quot;unit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;%&quot;</span><span class="p">,</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">      </span><span class="nt">&quot;sliType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;availability&quot;</span><span class="p">,</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">      </span><span class="nt">&quot;measurementType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;hybrid&quot;</span><span class="p">,</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">      </span><span class="nt">&quot;qualitativeStates&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;none&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Not tracked&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;order&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">},</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;adhoc&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Ad-hoc&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;order&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">},</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;tracked&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Tracked&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;order&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">},</span>
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;measured&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Measured with SLO&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;order&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="p">},</span>
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;alerting&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SLO + Alerting&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;order&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="p">},</span>
+<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;optimized&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Optimized&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;order&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="w">      </span><span class="p">]</span>
+<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a><span class="w">  </span><span class="p">},</span>
+<a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a>
+<a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a><span class="w">  </span><span class="nt">&quot;domains&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a><span class="w">    </span><span class="nt">&quot;reliability&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a><span class="w">      </span><span class="nt">&quot;levels&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a><span class="w">        </span><span class="p">{</span>
+<a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a><span class="w">          </span><span class="nt">&quot;level&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a><span class="w">          </span><span class="nt">&quot;criteria&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span>
+<a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a><span class="w">            </span><span class="nt">&quot;sliId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;sli-availability&quot;</span><span class="p">,</span>
+<a id="__codelineno-2-29" name="__codelineno-2-29" href="#__codelineno-2-29"></a><span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;qualitative&quot;</span><span class="p">,</span>
+<a id="__codelineno-2-30" name="__codelineno-2-30" href="#__codelineno-2-30"></a><span class="w">            </span><span class="nt">&quot;operator&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&gt;=&quot;</span><span class="p">,</span>
+<a id="__codelineno-2-31" name="__codelineno-2-31" href="#__codelineno-2-31"></a><span class="w">            </span><span class="nt">&quot;target&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;tracked&quot;</span>
+<a id="__codelineno-2-32" name="__codelineno-2-32" href="#__codelineno-2-32"></a><span class="w">          </span><span class="p">}]</span>
+<a id="__codelineno-2-33" name="__codelineno-2-33" href="#__codelineno-2-33"></a><span class="w">        </span><span class="p">},</span>
+<a id="__codelineno-2-34" name="__codelineno-2-34" href="#__codelineno-2-34"></a><span class="w">        </span><span class="p">{</span>
+<a id="__codelineno-2-35" name="__codelineno-2-35" href="#__codelineno-2-35"></a><span class="w">          </span><span class="nt">&quot;level&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<a id="__codelineno-2-36" name="__codelineno-2-36" href="#__codelineno-2-36"></a><span class="w">          </span><span class="nt">&quot;criteria&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span>
+<a id="__codelineno-2-37" name="__codelineno-2-37" href="#__codelineno-2-37"></a><span class="w">            </span><span class="nt">&quot;sliId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;sli-availability&quot;</span><span class="p">,</span>
+<a id="__codelineno-2-38" name="__codelineno-2-38" href="#__codelineno-2-38"></a><span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;quantitative&quot;</span><span class="p">,</span>
+<a id="__codelineno-2-39" name="__codelineno-2-39" href="#__codelineno-2-39"></a><span class="w">            </span><span class="nt">&quot;operator&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&gt;=&quot;</span><span class="p">,</span>
+<a id="__codelineno-2-40" name="__codelineno-2-40" href="#__codelineno-2-40"></a><span class="w">            </span><span class="nt">&quot;target&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">95</span>
+<a id="__codelineno-2-41" name="__codelineno-2-41" href="#__codelineno-2-41"></a><span class="w">          </span><span class="p">}]</span>
+<a id="__codelineno-2-42" name="__codelineno-2-42" href="#__codelineno-2-42"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-2-43" name="__codelineno-2-43" href="#__codelineno-2-43"></a><span class="w">      </span><span class="p">]</span>
+<a id="__codelineno-2-44" name="__codelineno-2-44" href="#__codelineno-2-44"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-2-45" name="__codelineno-2-45" href="#__codelineno-2-45"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-2-46" name="__codelineno-2-46" href="#__codelineno-2-46"></a><span class="p">}</span>
+</code></pre></div>
+<h3 id="2-prism-maturity-state-state-planning">2. PRISM Maturity State (State + Planning)</h3>
+<p>The Maturity State tracks <strong>where</strong> you are, <strong>where</strong> you've been, and <strong>where</strong> you're going.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">{</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">&quot;$schema&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;prism-maturity-state.schema.json&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span><span class="nt">&quot;metadata&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Operations Status Q2 2026&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="nt">&quot;maturityModelRef&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;examples/maturity-models/operations/model.json&quot;</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">  </span><span class="p">},</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">  </span><span class="nt">&quot;sloWindows&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;7d&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;30d&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;90d&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;quarterly&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;annual&quot;</span><span class="p">],</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">  </span><span class="nt">&quot;sliState&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">    </span><span class="nt">&quot;sli-availability&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">      </span><span class="nt">&quot;qualitativeState&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;measured&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">      </span><span class="nt">&quot;windows&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">        </span><span class="nt">&quot;7d&quot;</span><span class="p">:</span><span class="w">   </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">99.97</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-05-10T00:00:00Z&quot;</span><span class="w"> </span><span class="p">},</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="w">        </span><span class="nt">&quot;30d&quot;</span><span class="p">:</span><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">99.92</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-05-10T00:00:00Z&quot;</span><span class="w"> </span><span class="p">},</span>
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="w">        </span><span class="nt">&quot;90d&quot;</span><span class="p">:</span><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">99.88</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-05-10T00:00:00Z&quot;</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="w">      </span><span class="p">},</span>
+<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="w">      </span><span class="nt">&quot;history&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;window&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;30d&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">99.88</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-04-01T00:00:00Z&quot;</span><span class="w"> </span><span class="p">},</span>
+<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;window&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;30d&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">99.90</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-04-15T00:00:00Z&quot;</span><span class="w"> </span><span class="p">},</span>
+<a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a><span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;window&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;30d&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">99.92</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-05-01T00:00:00Z&quot;</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a><span class="w">      </span><span class="p">],</span>
+<a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a><span class="w">      </span><span class="nt">&quot;targets&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a><span class="w">        </span><span class="nt">&quot;Q2_2026&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">99.9</span><span class="w"> </span><span class="p">},</span>
+<a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a><span class="w">        </span><span class="nt">&quot;Q4_2026&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">99.95</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a><span class="w">      </span><span class="p">}</span>
+<a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a><span class="w">  </span><span class="p">},</span>
+<a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a>
+<a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a><span class="w">  </span><span class="nt">&quot;maturityState&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-31" name="__codelineno-3-31" href="#__codelineno-3-31"></a><span class="w">    </span><span class="nt">&quot;reliability&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-32" name="__codelineno-3-32" href="#__codelineno-3-32"></a><span class="w">      </span><span class="nt">&quot;current&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;level&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;achievedAt&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-03-15&quot;</span><span class="w"> </span><span class="p">},</span>
+<a id="__codelineno-3-33" name="__codelineno-3-33" href="#__codelineno-3-33"></a><span class="w">      </span><span class="nt">&quot;target&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;level&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;targetDate&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-06-30&quot;</span><span class="w"> </span><span class="p">},</span>
+<a id="__codelineno-3-34" name="__codelineno-3-34" href="#__codelineno-3-34"></a><span class="w">      </span><span class="nt">&quot;history&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-3-35" name="__codelineno-3-35" href="#__codelineno-3-35"></a><span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;level&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;achievedAt&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-09-01&quot;</span><span class="w"> </span><span class="p">},</span>
+<a id="__codelineno-3-36" name="__codelineno-3-36" href="#__codelineno-3-36"></a><span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;level&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;achievedAt&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-03-15&quot;</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-3-37" name="__codelineno-3-37" href="#__codelineno-3-37"></a><span class="w">      </span><span class="p">]</span>
+<a id="__codelineno-3-38" name="__codelineno-3-38" href="#__codelineno-3-38"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-3-39" name="__codelineno-3-39" href="#__codelineno-3-39"></a><span class="w">  </span><span class="p">},</span>
+<a id="__codelineno-3-40" name="__codelineno-3-40" href="#__codelineno-3-40"></a>
+<a id="__codelineno-3-41" name="__codelineno-3-41" href="#__codelineno-3-41"></a><span class="w">  </span><span class="nt">&quot;enablerState&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-42" name="__codelineno-3-42" href="#__codelineno-3-42"></a><span class="w">    </span><span class="nt">&quot;enabler-monitoring&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;completed&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;completedAt&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-02-01&quot;</span><span class="w"> </span><span class="p">},</span>
+<a id="__codelineno-3-43" name="__codelineno-3-43" href="#__codelineno-3-43"></a><span class="w">    </span><span class="nt">&quot;enabler-alerting&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;in_progress&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;progress&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">60</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-3-44" name="__codelineno-3-44" href="#__codelineno-3-44"></a><span class="w">  </span><span class="p">},</span>
+<a id="__codelineno-3-45" name="__codelineno-3-45" href="#__codelineno-3-45"></a>
+<a id="__codelineno-3-46" name="__codelineno-3-46" href="#__codelineno-3-46"></a><span class="w">  </span><span class="nt">&quot;goals&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">...</span><span class="p">],</span>
+<a id="__codelineno-3-47" name="__codelineno-3-47" href="#__codelineno-3-47"></a><span class="w">  </span><span class="nt">&quot;phases&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">...</span><span class="p">],</span>
+<a id="__codelineno-3-48" name="__codelineno-3-48" href="#__codelineno-3-48"></a><span class="w">  </span><span class="nt">&quot;initiatives&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">...</span><span class="p">]</span>
+<a id="__codelineno-3-49" name="__codelineno-3-49" href="#__codelineno-3-49"></a><span class="p">}</span>
+</code></pre></div>
+<h2 id="file-organization">File Organization</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>examples/
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>├── maturity-models/           # PRISM Maturity Model files
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>│   ├── operations/
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>│   │   └── model.json
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>│   └── organization/
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>│       └── model.json
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>│
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>└── maturity-state/            # PRISM Maturity State files
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>    ├── operations/
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>    │   ├── state-q1-2026.json
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>    │   └── state-q2-2026.json
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>    └── organization/
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>        └── state-current.json
+</code></pre></div>
+<h2 id="migration-plan">Migration Plan</h2>
+<h3 id="phase-1-add-new-types-no-breaking-changes">Phase 1: Add New Types (No Breaking Changes)</h3>
+<ol>
+<li>Add <code>SLIState</code> type to <code>prism.go</code></li>
+<li>Add <code>MaturityState</code> type to <code>prism.go</code></li>
+<li>Add <code>QualitativeState</code> to maturity model</li>
+<li>Update schemas (additive only)</li>
+</ol>
+<h3 id="phase-2-update-generators-dual-support">Phase 2: Update Generators (Dual Support)</h3>
+<ol>
+<li>Dashboard reads from:</li>
+<li>New: <code>PRISMDocument.SLIState</code> / <code>PRISMDocument.MaturityState</code></li>
+<li>
+<p>Fallback: <code>maturity.Spec.Assessments</code> (deprecated)</p>
+</li>
+<li>
+<p>XLSX generator supports both sources</p>
+</li>
+</ol>
+<h3 id="phase-3-update-examples">Phase 3: Update Examples</h3>
+<ol>
+<li>Remove <code>assessments</code> from maturity model examples</li>
+<li>Create PRISM Maturity State examples</li>
+</ol>
+<h3 id="phase-4-deprecation-user-approval-required">Phase 4: Deprecation (User Approval Required)</h3>
+<ol>
+<li>Mark <code>maturity.Spec.Assessments</code> as deprecated</li>
+<li>Add migration CLI command</li>
+<li>Remove after confirmation</li>
+</ol>
+<h2 id="potential-functionality-loss">Potential Functionality Loss</h2>
 <table>
 <thead>
 <tr>
-<th>Option</th>
-<th>Values</th>
+<th>Functionality</th>
+<th>Risk</th>
+<th>Mitigation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Dashboard maturity display</td>
+<td>LOW</td>
+<td>Dual-read support</td>
+</tr>
+<tr>
+<td>XLSX generation</td>
+<td>LOW</td>
+<td>Dual-read support</td>
+</tr>
+<tr>
+<td>Marp presentation</td>
+<td>LOW</td>
+<td>Dual-read support</td>
+</tr>
+<tr>
+<td>Existing JSON files</td>
+<td>NONE</td>
+<td>Old format still works</td>
+</tr>
+</tbody>
+</table>
+<h2 id="new-capabilities">New Capabilities</h2>
+<ol>
+<li><strong>Temporal tracking</strong>: 7d, 30d, 90d, quarterly, annual windows</li>
+<li><strong>History</strong>: Track progression over time</li>
+<li><strong>Qualitative states</strong>: Track "tracked", "measured", etc.</li>
+<li><strong>Hybrid criteria</strong>: Mix qualitative + quantitative</li>
+<li><strong>Target planning</strong>: Future state targets by date</li>
+<li><strong>Model reference</strong>: Link Maturity State to its Model</li>
+</ol>
+<h2 id="naming-summary">Naming Summary</h2>
+<table>
+<thead>
+<tr>
+<th>Term</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>template</code></td>
-<td>executive, full, domain, trend</td>
-<td>Slide template</td>
+<td><strong>PRISM Maturity Model</strong></td>
+<td>Reference document defining SLIs, levels, criteria, thresholds</td>
 </tr>
 <tr>
-<td><code>theme</code></td>
-<td>default, corporate, dark</td>
-<td>Marp theme</td>
+<td><strong>PRISM Maturity State</strong></td>
+<td>State document tracking current values, history, and targets</td>
 </tr>
 <tr>
-<td><code>includeCharts</code></td>
-<td>true/false</td>
-<td>Include generated charts</td>
+<td><strong>SLI</strong></td>
+<td>Service Level Indicator - what is measured</td>
 </tr>
 <tr>
-<td><code>format</code></td>
-<td>pdf, pptx, html</td>
-<td>Output format</td>
+<td><strong>SLO</strong></td>
+<td>Service Level Objective - target for an SLI</td>
+</tr>
+<tr>
+<td><strong>Qualitative State</strong></td>
+<td>Non-numeric state (e.g., "tracked", "measured", "alerting")</td>
+</tr>
+<tr>
+<td><strong>Temporal Window</strong></td>
+<td>Time period for SLO measurement (7d, 30d, 90d, quarterly, annual)</td>
 </tr>
 </tbody>
 </table>
-<h2 id="planned-cli-commands">Planned CLI Commands</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># Generate Marp markdown</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>prism<span class="w"> </span>slides<span class="w"> </span>prism.json<span class="w"> </span>-o<span class="w"> </span>slides.md
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="c1"># Generate PDF directly</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>prism<span class="w"> </span>slides<span class="w"> </span>prism.json<span class="w"> </span>--format<span class="w"> </span>pdf<span class="w"> </span>-o<span class="w"> </span>report.pdf
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="c1"># Generate with custom template</span>
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>prism<span class="w"> </span>slides<span class="w"> </span>prism.json<span class="w"> </span>--template<span class="w"> </span>executive<span class="w"> </span>-o<span class="w"> </span>slides.md
-<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>
-<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="c1"># Generate PowerPoint</span>
-<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>prism<span class="w"> </span>slides<span class="w"> </span>prism.json<span class="w"> </span>--format<span class="w"> </span>pptx<span class="w"> </span>-o<span class="w"> </span>report.pptx
-</code></pre></div>
-<h2 id="chart-generation">Chart Generation</h2>
-<p>Charts will be generated as SVG for embedding:</p>
-<ul>
-<li><strong>Score Gauge</strong> - Circular gauge with score</li>
-<li><strong>Trend Line</strong> - Historical score trend</li>
-<li><strong>Heatmap</strong> - Domain × Stage matrix</li>
-<li><strong>Bar Charts</strong> - Metric comparisons</li>
-</ul>
-<h2 id="use-cases">Use Cases</h2>
-<h3 id="monthly-executive-report">Monthly Executive Report</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>prism<span class="w"> </span>slides<span class="w"> </span>prism.json<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span>--template<span class="w"> </span>executive<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span>--title<span class="w"> </span><span class="s2">&quot;Monthly PRISM Report&quot;</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span>--period<span class="w"> </span><span class="s2">&quot;January 2024&quot;</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">  </span>--format<span class="w"> </span>pdf<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">  </span>-o<span class="w"> </span>monthly-report.pdf
-</code></pre></div>
-<h3 id="quarterly-review">Quarterly Review</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>prism<span class="w"> </span>slides<span class="w"> </span>prism.json<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span>--template<span class="w"> </span>trend<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span>--compare<span class="w"> </span>prism-q3.json<span class="w"> </span>prism-q4.json<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">  </span>--format<span class="w"> </span>pptx<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">  </span>-o<span class="w"> </span>quarterly-review.pptx
-</code></pre></div>
-<h2 id="roadmap">Roadmap</h2>
-<ol>
-<li><strong>Phase 1</strong>: Basic Marp markdown generation</li>
-<li><strong>Phase 2</strong>: PDF/PPTX export</li>
-<li><strong>Phase 3</strong>: Chart embedding</li>
-<li><strong>Phase 4</strong>: Trend comparison slides</li>
-</ol>
 
 
 
