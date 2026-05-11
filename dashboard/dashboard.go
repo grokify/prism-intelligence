@@ -823,6 +823,7 @@ type MethodologyInfo struct {
 // GetMethodologyInfos returns metadata for all observability methodologies.
 func GetMethodologyInfos() []MethodologyInfo {
 	return []MethodologyInfo{
+		// Operations/SRE methodologies
 		{
 			ID:          "RED",
 			Title:       "RED Metrics",
@@ -843,6 +844,50 @@ func GetMethodologyInfos() []MethodologyInfo {
 			Subtitle:    "SRE Overview",
 			Description: "Google's four golden signals: Latency, Traffic, Errors, Saturation",
 			SLITypes:    []string{"latency", "throughput", "error_rate", "saturation"},
+		},
+		// Security methodologies (NIST CSF aligned)
+		{
+			ID:          "PREVENTION",
+			Title:       "Prevention",
+			Subtitle:    "Protect & Prevent",
+			Description: "Security controls that prevent threats: SAST, SCA, secrets scanning, container security",
+			SLITypes:    []string{"prevention"},
+		},
+		{
+			ID:          "DETECTION",
+			Title:       "Detection",
+			Subtitle:    "Detect & Monitor",
+			Description: "Security controls that detect threats: DAST, runtime detection, SIEM, threat intel",
+			SLITypes:    []string{"detection"},
+		},
+		{
+			ID:          "RESPONSE",
+			Title:       "Response",
+			Subtitle:    "Respond & Recover",
+			Description: "Security controls for incident response: MTTR, containment, remediation, recovery",
+			SLITypes:    []string{"response"},
+		},
+		// AI Security methodologies
+		{
+			ID:          "AI_PREVENTION",
+			Title:       "AI Prevention",
+			Subtitle:    "AI/ML Protection",
+			Description: "AI-specific prevention: ML pipeline integrity, model provenance, training data protection",
+			SLITypes:    []string{"ai_prevention"},
+		},
+		{
+			ID:          "AI_DETECTION",
+			Title:       "AI Detection",
+			Subtitle:    "AI/ML Monitoring",
+			Description: "AI-specific detection: adversarial input detection, model drift, anomaly detection",
+			SLITypes:    []string{"ai_detection"},
+		},
+		{
+			ID:          "AI_RESPONSE",
+			Title:       "AI Response",
+			Subtitle:    "AI/ML Recovery",
+			Description: "AI-specific response: model rollback, retraining triggers, incident escalation",
+			SLITypes:    []string{"ai_response"},
 		},
 	}
 }
