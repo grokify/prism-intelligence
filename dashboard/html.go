@@ -592,12 +592,14 @@ const htmlTemplate = `<!DOCTYPE html>
               .text(d => 'M' + d);
 
           // Threshold value below level label
+          // Show "-" for levels without thresholds (only if SLI has any thresholds)
+          const hasThresholds = thresholds.length > 0;
           tickG.append('text')
               .attr('text-anchor', 'middle')
               .attr('y', height + 28)
               .style('font-size', '10px')
               .style('fill', '#666')
-              .text(d => thresholdByLevel[d] || '');
+              .text(d => thresholdByLevel[d] || (hasThresholds ? '-' : ''));
         });
       }
 

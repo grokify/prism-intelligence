@@ -532,12 +532,14 @@
               .text(d => 'M' + d);
 
           
+          
+          const hasThresholds = thresholds.length > 0;
           tickG.append('text')
               .attr('text-anchor', 'middle')
               .attr('y', height + 28)
               .style('font-size', '10px')
               .style('fill', '#666')
-              .text(d => thresholdByLevel[d] || '');
+              .text(d => thresholdByLevel[d] || (hasThresholds ? '-' : ''));
         });
       }
 
