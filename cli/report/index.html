@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#prism-report" class="md-skip">
+        <a href="#prism-maturity-plan-report" class="md-skip">
           Skip to content
         </a>
       
@@ -3119,11 +3119,14 @@
   
 
 
-<h1 id="prism-report">prism report</h1>
-<p>Generate roadmap reports from a PRISM document.</p>
+<h1 id="prism-maturity-plan-report">prism maturity plan report</h1>
+<p>Generate roadmap reports from a PRISM plan document.</p>
 <h2 id="synopsis">Synopsis</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>prism<span class="w"> </span>report<span class="w"> </span>&lt;file&gt;<span class="w"> </span><span class="o">[</span>options<span class="o">]</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>prism<span class="w"> </span>maturity<span class="w"> </span>plan<span class="w"> </span>report<span class="w"> </span>&lt;plan-file&gt;<span class="w"> </span><span class="o">[</span>options<span class="o">]</span>
 </code></pre></div>
+<blockquote>
+<p><strong>Note:</strong> As of v0.6.0, <code>prism report</code> has been moved to <code>prism maturity plan report</code>.</p>
+</blockquote>
 <h2 id="description">Description</h2>
 <p>Generate a roadmap report in Markdown or JSON format. The report can be generated in different views:</p>
 <ul>
@@ -3172,22 +3175,22 @@
 </table>
 <h2 id="examples">Examples</h2>
 <p>Generate markdown report to stdout:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>prism<span class="w"> </span>report<span class="w"> </span>roadmap.json
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>prism<span class="w"> </span>maturity<span class="w"> </span>plan<span class="w"> </span>report<span class="w"> </span>plan.json
 </code></pre></div>
 <p>Generate markdown report to file:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>prism<span class="w"> </span>report<span class="w"> </span>roadmap.json<span class="w"> </span>-o<span class="w"> </span>report.md
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>prism<span class="w"> </span>maturity<span class="w"> </span>plan<span class="w"> </span>report<span class="w"> </span>plan.json<span class="w"> </span>-o<span class="w"> </span>report.md
 </code></pre></div>
 <p>Generate JSON report:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>prism<span class="w"> </span>report<span class="w"> </span>roadmap.json<span class="w"> </span>--format<span class="w"> </span>json
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>prism<span class="w"> </span>maturity<span class="w"> </span>plan<span class="w"> </span>report<span class="w"> </span>plan.json<span class="w"> </span>--format<span class="w"> </span>json
 </code></pre></div>
 <p>Generate phase-centric view only:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>prism<span class="w"> </span>report<span class="w"> </span>roadmap.json<span class="w"> </span>--view<span class="w"> </span>by-phase
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>prism<span class="w"> </span>maturity<span class="w"> </span>plan<span class="w"> </span>report<span class="w"> </span>plan.json<span class="w"> </span>--view<span class="w"> </span>by-phase
 </code></pre></div>
 <p>Generate goal-centric view only:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>prism<span class="w"> </span>report<span class="w"> </span>roadmap.json<span class="w"> </span>--view<span class="w"> </span>by-goal
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>prism<span class="w"> </span>maturity<span class="w"> </span>plan<span class="w"> </span>report<span class="w"> </span>plan.json<span class="w"> </span>--view<span class="w"> </span>by-goal
 </code></pre></div>
 <p>Generate report with custom title:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>prism<span class="w"> </span>report<span class="w"> </span>roadmap.json<span class="w"> </span>--title<span class="w"> </span><span class="s2">&quot;Q1 2026 Roadmap Report&quot;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>prism<span class="w"> </span>maturity<span class="w"> </span>plan<span class="w"> </span>report<span class="w"> </span>plan.json<span class="w"> </span>--title<span class="w"> </span><span class="s2">&quot;Q1 2026 Roadmap Report&quot;</span>
 </code></pre></div>
 <h2 id="output-format">Output Format</h2>
 <h3 id="markdown-output">Markdown Output</h3>
@@ -3215,7 +3218,7 @@
 <h2 id="see-also">See Also</h2>
 <ul>
 <li><a href="../slo-report/">prism slo-report</a> - SLO compliance reports</li>
-<li><a href="../dashboard/">prism dashboard</a> - Executive dashboards</li>
+<li><a href="../dashboard/">prism maturity plan dashboard</a> - Executive dashboards</li>
 <li><a href="../roadmap/">prism roadmap</a> - Roadmap overview commands</li>
 </ul>
 

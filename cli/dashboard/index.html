@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#prism-dashboard" class="md-skip">
+        <a href="#prism-maturity-plan-dashboard" class="md-skip">
           Skip to content
         </a>
       
@@ -1139,6 +1139,15 @@
   
     <nav class="md-nav" aria-label="Related Commands">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prism-maturity-model-dashboard" class="md-nav__link">
+    <span class="md-ellipsis">
+      prism maturity model dashboard
+    </span>
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#prism-dashforge" class="md-nav__link">
@@ -3078,6 +3087,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#prism-maturity-model-dashboard" class="md-nav__link">
+    <span class="md-ellipsis">
+      prism maturity model dashboard
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#prism-dashforge" class="md-nav__link">
     <span class="md-ellipsis">
       prism dashforge
@@ -3119,11 +3137,14 @@
   
 
 
-<h1 id="prism-dashboard">prism dashboard</h1>
-<p>Generate executive dashboards from a PRISM document.</p>
+<h1 id="prism-maturity-plan-dashboard">prism maturity plan dashboard</h1>
+<p>Generate executive dashboards from a PRISM plan document.</p>
 <h2 id="synopsis">Synopsis</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>prism<span class="w"> </span>dashboard<span class="w"> </span>&lt;file&gt;<span class="w"> </span><span class="o">[</span>options<span class="o">]</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>prism<span class="w"> </span>maturity<span class="w"> </span>plan<span class="w"> </span>dashboard<span class="w"> </span>&lt;plan-file&gt;<span class="w"> </span><span class="o">[</span>options<span class="o">]</span>
 </code></pre></div>
+<blockquote>
+<p><strong>Note:</strong> As of v0.6.0, <code>prism dashboard</code> has been moved to <code>prism maturity plan dashboard</code>.</p>
+</blockquote>
 <h2 id="description">Description</h2>
 <p>Generate an executive dashboard showing high-level status views including goal progress, phase metrics, and SLO compliance summaries.</p>
 <h2 id="options">Options</h2>
@@ -3151,48 +3172,58 @@
 </table>
 <h2 id="examples">Examples</h2>
 <p>Generate dashboard JSON:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>prism<span class="w"> </span>dashboard<span class="w"> </span>prism.json<span class="w"> </span>-o<span class="w"> </span>dashboard.json
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>prism<span class="w"> </span>maturity<span class="w"> </span>plan<span class="w"> </span>dashboard<span class="w"> </span>plan.json<span class="w"> </span>-o<span class="w"> </span>dashboard.json
 </code></pre></div>
 <p>Generate dashboard to stdout:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>prism<span class="w"> </span>dashboard<span class="w"> </span>prism.json
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>prism<span class="w"> </span>maturity<span class="w"> </span>plan<span class="w"> </span>dashboard<span class="w"> </span>plan.json
 </code></pre></div>
 <p>Generate markdown dashboard:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>prism<span class="w"> </span>dashboard<span class="w"> </span>prism.json<span class="w"> </span>--format<span class="w"> </span>markdown<span class="w"> </span>-o<span class="w"> </span>dashboard.md
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>prism<span class="w"> </span>maturity<span class="w"> </span>plan<span class="w"> </span>dashboard<span class="w"> </span>plan.json<span class="w"> </span>--format<span class="w"> </span>markdown<span class="w"> </span>-o<span class="w"> </span>dashboard.md
+</code></pre></div>
+<p>Generate HTML dashboard:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>prism<span class="w"> </span>maturity<span class="w"> </span>plan<span class="w"> </span>dashboard<span class="w"> </span>plan.json<span class="w"> </span>-f<span class="w"> </span>html<span class="w"> </span>-o<span class="w"> </span>dashboard.html
+</code></pre></div>
+<p>Generate Marp presentation slides:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>prism<span class="w"> </span>maturity<span class="w"> </span>plan<span class="w"> </span>dashboard<span class="w"> </span>plan.json<span class="w"> </span>-f<span class="w"> </span>marp<span class="w"> </span>-o<span class="w"> </span>slides.md
 </code></pre></div>
 <h2 id="output-format">Output Format</h2>
 <p>The dashboard JSON includes:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="p">{</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Executive Dashboard&quot;</span><span class="p">,</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span><span class="nt">&quot;generatedAt&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-04-18T10:00:00Z&quot;</span><span class="p">,</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">  </span><span class="nt">&quot;summary&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="nt">&quot;prismScore&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.78</span><span class="p">,</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">    </span><span class="nt">&quot;interpretation&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Strong&quot;</span><span class="p">,</span>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">    </span><span class="nt">&quot;goalsOnTrack&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
-<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">    </span><span class="nt">&quot;goalsTotal&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
-<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">    </span><span class="nt">&quot;currentPhase&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Q1 2026&quot;</span><span class="p">,</span>
-<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="w">    </span><span class="nt">&quot;phaseProgress&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.75</span>
-<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="w">  </span><span class="p">},</span>
-<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="w">  </span><span class="nt">&quot;goals&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="w">    </span><span class="p">{</span>
-<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="w">      </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;goal-reliability&quot;</span><span class="p">,</span>
-<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Achieve High Reliability&quot;</span><span class="p">,</span>
-<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="w">      </span><span class="nt">&quot;currentLevel&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
-<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a><span class="w">      </span><span class="nt">&quot;targetLevel&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
-<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="w">      </span><span class="nt">&quot;progress&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.75</span><span class="p">,</span>
-<a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a><span class="w">      </span><span class="nt">&quot;sloCompliance&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.67</span>
-<a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a><span class="w">  </span><span class="p">],</span>
-<a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a><span class="w">  </span><span class="nt">&quot;metrics&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a><span class="w">    </span><span class="nt">&quot;sloCompliance&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.75</span><span class="p">,</span>
-<a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a><span class="w">    </span><span class="nt">&quot;initiativeCompletion&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.50</span><span class="p">,</span>
-<a id="__codelineno-4-25" name="__codelineno-4-25" href="#__codelineno-4-25"></a><span class="w">    </span><span class="nt">&quot;deploymentProgress&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.80</span>
-<a id="__codelineno-4-26" name="__codelineno-4-26" href="#__codelineno-4-26"></a><span class="w">  </span><span class="p">}</span>
-<a id="__codelineno-4-27" name="__codelineno-4-27" href="#__codelineno-4-27"></a><span class="p">}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="p">{</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Executive Dashboard&quot;</span><span class="p">,</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">  </span><span class="nt">&quot;generatedAt&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-04-18T10:00:00Z&quot;</span><span class="p">,</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">  </span><span class="nt">&quot;summary&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">    </span><span class="nt">&quot;prismScore&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.78</span><span class="p">,</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">    </span><span class="nt">&quot;interpretation&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Strong&quot;</span><span class="p">,</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">    </span><span class="nt">&quot;goalsOnTrack&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">    </span><span class="nt">&quot;goalsTotal&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="w">    </span><span class="nt">&quot;currentPhase&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Q1 2026&quot;</span><span class="p">,</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="w">    </span><span class="nt">&quot;phaseProgress&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.75</span>
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="w">  </span><span class="p">},</span>
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="w">  </span><span class="nt">&quot;goals&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="w">      </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;goal-reliability&quot;</span><span class="p">,</span>
+<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Achieve High Reliability&quot;</span><span class="p">,</span>
+<a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a><span class="w">      </span><span class="nt">&quot;currentLevel&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a><span class="w">      </span><span class="nt">&quot;targetLevel&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
+<a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a><span class="w">      </span><span class="nt">&quot;progress&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.75</span><span class="p">,</span>
+<a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a><span class="w">      </span><span class="nt">&quot;sloCompliance&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.67</span>
+<a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-6-21" name="__codelineno-6-21" href="#__codelineno-6-21"></a><span class="w">  </span><span class="p">],</span>
+<a id="__codelineno-6-22" name="__codelineno-6-22" href="#__codelineno-6-22"></a><span class="w">  </span><span class="nt">&quot;metrics&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-23" name="__codelineno-6-23" href="#__codelineno-6-23"></a><span class="w">    </span><span class="nt">&quot;sloCompliance&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.75</span><span class="p">,</span>
+<a id="__codelineno-6-24" name="__codelineno-6-24" href="#__codelineno-6-24"></a><span class="w">    </span><span class="nt">&quot;initiativeCompletion&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.50</span><span class="p">,</span>
+<a id="__codelineno-6-25" name="__codelineno-6-25" href="#__codelineno-6-25"></a><span class="w">    </span><span class="nt">&quot;deploymentProgress&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.80</span>
+<a id="__codelineno-6-26" name="__codelineno-6-26" href="#__codelineno-6-26"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-6-27" name="__codelineno-6-27" href="#__codelineno-6-27"></a><span class="p">}</span>
 </code></pre></div>
 <h2 id="related-commands">Related Commands</h2>
+<h3 id="prism-maturity-model-dashboard">prism maturity model dashboard</h3>
+<p>Generate dashboards from a maturity model with optional state document:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>prism<span class="w"> </span>maturity<span class="w"> </span>model<span class="w"> </span>dashboard<span class="w"> </span>model.json<span class="w"> </span>--state<span class="w"> </span>state.json<span class="w"> </span>-f<span class="w"> </span>html<span class="w"> </span>-o<span class="w"> </span>dashboard.html
+</code></pre></div>
 <h3 id="prism-dashforge">prism dashforge</h3>
 <p>Convert a PRISM document to dashforge format for dashboard generation.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>prism<span class="w"> </span>dashforge<span class="w"> </span>&lt;file&gt;<span class="w"> </span><span class="o">[</span>options<span class="o">]</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>prism<span class="w"> </span>dashforge<span class="w"> </span>&lt;file&gt;<span class="w"> </span><span class="o">[</span>options<span class="o">]</span>
 </code></pre></div>
 <p><strong>Options:</strong></p>
 <table>
@@ -3214,15 +3245,15 @@
 </tbody>
 </table>
 <p><strong>Examples:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># Convert to dashforge format</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>prism<span class="w"> </span>dashforge<span class="w"> </span>prism.json<span class="w"> </span>-o<span class="w"> </span>dashforge.json
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="c1"># Generate metrics widgets only</span>
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>prism<span class="w"> </span>dashforge<span class="w"> </span>prism.json<span class="w"> </span>--widgets<span class="w"> </span>metrics
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># Convert to dashforge format</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>prism<span class="w"> </span>dashforge<span class="w"> </span>prism.json<span class="w"> </span>-o<span class="w"> </span>dashforge.json
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="c1"># Generate metrics widgets only</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>prism<span class="w"> </span>dashforge<span class="w"> </span>prism.json<span class="w"> </span>--widgets<span class="w"> </span>metrics
 </code></pre></div>
 <h2 id="see-also">See Also</h2>
 <ul>
-<li><a href="../report/">prism report</a> - Roadmap reports</li>
+<li><a href="../report/">prism maturity plan report</a> - Roadmap reports</li>
 <li><a href="../slo-report/">prism slo-report</a> - SLO compliance reports</li>
 <li><a href="../../integrations/dashforge/">Dashforge Integration</a> - Dashforge integration guide</li>
 </ul>

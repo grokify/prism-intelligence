@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#prism-maturity-report" class="md-skip">
+        <a href="#prism-maturity-model-report" class="md-skip">
           Skip to content
         </a>
       
@@ -3497,13 +3497,16 @@
   
 
 
-<h1 id="prism-maturity-report">prism maturity report</h1>
+<h1 id="prism-maturity-model-report">prism maturity model report</h1>
 <p>Generate markdown reports from a maturity model specification file.</p>
 <h2 id="synopsis">Synopsis</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>prism<span class="w"> </span>maturity<span class="w"> </span>report<span class="w"> </span>&lt;maturity-spec-file&gt;<span class="w"> </span><span class="o">[</span>flags<span class="o">]</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>prism<span class="w"> </span>maturity<span class="w"> </span>model<span class="w"> </span>report<span class="w"> </span>&lt;model-file&gt;<span class="w"> </span><span class="o">[</span>flags<span class="o">]</span>
 </code></pre></div>
+<blockquote>
+<p><strong>Note:</strong> As of v0.6.0, <code>prism maturity report</code> has been moved to <code>prism maturity model report</code>.</p>
+</blockquote>
 <h2 id="description">Description</h2>
-<p>The <code>prism maturity report</code> command generates comprehensive markdown documentation from a maturity model specification. Reports can be viewed from two perspectives:</p>
+<p>The <code>prism maturity model report</code> command generates comprehensive markdown documentation from a maturity model specification. Reports can be viewed from two perspectives:</p>
 <ul>
 <li><strong>Domain view</strong>: Maturity levels organized by domain (security, operations, quality)</li>
 <li><strong>Framework view</strong>: Criteria organized by compliance framework mappings</li>
@@ -3625,25 +3628,25 @@
 </code></pre></div>
 <h2 id="examples">Examples</h2>
 <h3 id="generate-to-stdout">Generate to stdout</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>prism<span class="w"> </span>maturity<span class="w"> </span>report<span class="w"> </span>maturity-spec.json
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>prism<span class="w"> </span>maturity<span class="w"> </span>model<span class="w"> </span>report<span class="w"> </span>model.json
 </code></pre></div>
 <h3 id="generate-to-file">Generate to file</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>prism<span class="w"> </span>maturity<span class="w"> </span>report<span class="w"> </span>maturity-spec.json<span class="w"> </span>-o<span class="w"> </span>maturity-report.md
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>prism<span class="w"> </span>maturity<span class="w"> </span>model<span class="w"> </span>report<span class="w"> </span>model.json<span class="w"> </span>-o<span class="w"> </span>maturity-report.md
 </code></pre></div>
 <h3 id="domain-view-only">Domain view only</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>prism<span class="w"> </span>maturity<span class="w"> </span>report<span class="w"> </span>maturity-spec.json<span class="w"> </span>--view<span class="w"> </span>domain<span class="w"> </span>-o<span class="w"> </span>domain-report.md
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>prism<span class="w"> </span>maturity<span class="w"> </span>model<span class="w"> </span>report<span class="w"> </span>model.json<span class="w"> </span>--view<span class="w"> </span>domain<span class="w"> </span>-o<span class="w"> </span>domain-report.md
 </code></pre></div>
 <h3 id="framework-view-only">Framework view only</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>prism<span class="w"> </span>maturity<span class="w"> </span>report<span class="w"> </span>maturity-spec.json<span class="w"> </span>--view<span class="w"> </span>framework<span class="w"> </span>-o<span class="w"> </span>compliance-report.md
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>prism<span class="w"> </span>maturity<span class="w"> </span>model<span class="w"> </span>report<span class="w"> </span>model.json<span class="w"> </span>--view<span class="w"> </span>framework<span class="w"> </span>-o<span class="w"> </span>compliance-report.md
 </code></pre></div>
 <h3 id="filter-to-specific-frameworks">Filter to specific frameworks</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>prism<span class="w"> </span>maturity<span class="w"> </span>report<span class="w"> </span>maturity-spec.json<span class="w"> </span>--frameworks<span class="w"> </span>NIST_CSF_2,NIST_800_53
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>prism<span class="w"> </span>maturity<span class="w"> </span>model<span class="w"> </span>report<span class="w"> </span>model.json<span class="w"> </span>--frameworks<span class="w"> </span>NIST_CSF_2,NIST_800_53
 </code></pre></div>
 <h3 id="without-yaml-front-matter">Without YAML front matter</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>prism<span class="w"> </span>maturity<span class="w"> </span>report<span class="w"> </span>maturity-spec.json<span class="w"> </span>--no-meta
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>prism<span class="w"> </span>maturity<span class="w"> </span>model<span class="w"> </span>report<span class="w"> </span>model.json<span class="w"> </span>--no-meta
 </code></pre></div>
 <h3 id="json-output">JSON output</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>prism<span class="w"> </span>maturity<span class="w"> </span>report<span class="w"> </span>maturity-spec.json<span class="w"> </span>-f<span class="w"> </span>json<span class="w"> </span>-o<span class="w"> </span>maturity-spec.json
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>prism<span class="w"> </span>maturity<span class="w"> </span>model<span class="w"> </span>report<span class="w"> </span>model.json<span class="w"> </span>-f<span class="w"> </span>json<span class="w"> </span>-o<span class="w"> </span>model.json
 </code></pre></div>
 <h2 id="output-format">Output Format</h2>
 <h3 id="yaml-front-matter">YAML Front Matter</h3>
@@ -3755,15 +3758,15 @@
 <h2 id="use-cases">Use Cases</h2>
 <h3 id="compliance-reporting">Compliance Reporting</h3>
 <p>Generate framework-specific compliance reports:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>prism<span class="w"> </span>maturity<span class="w"> </span>report<span class="w"> </span>spec.json<span class="w"> </span>--view<span class="w"> </span>framework<span class="w"> </span>--frameworks<span class="w"> </span>FEDRAMP_MOD<span class="w"> </span>-o<span class="w"> </span>fedramp-moderate.md
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>prism<span class="w"> </span>maturity<span class="w"> </span>model<span class="w"> </span>report<span class="w"> </span>model.json<span class="w"> </span>--view<span class="w"> </span>framework<span class="w"> </span>--frameworks<span class="w"> </span>FEDRAMP_MOD<span class="w"> </span>-o<span class="w"> </span>fedramp-moderate.md
 </code></pre></div>
 <h3 id="executive-summaries">Executive Summaries</h3>
 <p>Generate domain-focused summaries without implementation details:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>prism<span class="w"> </span>maturity<span class="w"> </span>report<span class="w"> </span>spec.json<span class="w"> </span>--view<span class="w"> </span>domain<span class="w"> </span>--no-detail<span class="w"> </span>-o<span class="w"> </span>executive-summary.md
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>prism<span class="w"> </span>maturity<span class="w"> </span>model<span class="w"> </span>report<span class="w"> </span>model.json<span class="w"> </span>--view<span class="w"> </span>domain<span class="w"> </span>--no-detail<span class="w"> </span>-o<span class="w"> </span>executive-summary.md
 </code></pre></div>
 <h3 id="documentation-site">Documentation Site</h3>
 <p>Generate MkDocs-compatible documentation:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>prism<span class="w"> </span>maturity<span class="w"> </span>report<span class="w"> </span>spec.json<span class="w"> </span>-o<span class="w"> </span>docs/maturity/index.md
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>prism<span class="w"> </span>maturity<span class="w"> </span>model<span class="w"> </span>report<span class="w"> </span>model.json<span class="w"> </span>-o<span class="w"> </span>docs/maturity/index.md
 </code></pre></div>
 <h2 id="see-also">See Also</h2>
 <ul>

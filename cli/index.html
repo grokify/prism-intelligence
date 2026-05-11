@@ -778,20 +778,53 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#reporting-commands-v020" class="md-nav__link">
+  <a href="#slo-reporting-v020" class="md-nav__link">
     <span class="md-ellipsis">
-      Reporting Commands (v0.2.0)
+      SLO Reporting (v0.2.0)
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#maturity-model-commands-v030" class="md-nav__link">
+  <a href="#maturity-commands-v060" class="md-nav__link">
     <span class="md-ellipsis">
-      Maturity Model Commands (v0.3.0)
+      Maturity Commands (v0.6.0)
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Maturity Commands (v0.6.0)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#model-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      Model Commands
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#state-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      State Commands
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#plan-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      Plan Commands
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -3087,20 +3120,53 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#reporting-commands-v020" class="md-nav__link">
+  <a href="#slo-reporting-v020" class="md-nav__link">
     <span class="md-ellipsis">
-      Reporting Commands (v0.2.0)
+      SLO Reporting (v0.2.0)
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#maturity-model-commands-v030" class="md-nav__link">
+  <a href="#maturity-commands-v060" class="md-nav__link">
     <span class="md-ellipsis">
-      Maturity Model Commands (v0.3.0)
+      Maturity Commands (v0.6.0)
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Maturity Commands (v0.6.0)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#model-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      Model Commands
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#state-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      State Commands
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#plan-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      Plan Commands
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -3233,7 +3299,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="reporting-commands-v020">Reporting Commands (v0.2.0)</h3>
+<h3 id="slo-reporting-v020">SLO Reporting (v0.2.0)</h3>
 <table>
 <thead>
 <tr>
@@ -3243,16 +3309,8 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="report/"><code>prism report</code></a></td>
-<td>Generate roadmap reports (Markdown/JSON)</td>
-</tr>
-<tr>
 <td><a href="slo-report/"><code>prism slo-report</code></a></td>
 <td>Generate SLO compliance reports</td>
-</tr>
-<tr>
-<td><a href="dashboard/"><code>prism dashboard</code></a></td>
-<td>Generate executive dashboards</td>
 </tr>
 <tr>
 <td><code>prism dashforge</code></td>
@@ -3260,7 +3318,8 @@
 </tr>
 </tbody>
 </table>
-<h3 id="maturity-model-commands-v030">Maturity Model Commands (v0.3.0)</h3>
+<h3 id="maturity-commands-v060">Maturity Commands (v0.6.0)</h3>
+<h4 id="model-commands">Model Commands</h4>
 <table>
 <thead>
 <tr>
@@ -3270,12 +3329,58 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="maturity-report/"><code>prism maturity report</code></a></td>
+<td><a href="maturity-report/"><code>prism maturity model report</code></a></td>
 <td>Generate maturity model reports (Markdown)</td>
 </tr>
 <tr>
-<td><a href="maturity-xlsx/"><code>prism maturity xlsx</code></a></td>
+<td><a href="maturity-xlsx/"><code>prism maturity model xlsx</code></a></td>
 <td>Generate maturity model reports (Excel)</td>
+</tr>
+<tr>
+<td><code>prism maturity model dashboard</code></td>
+<td>Generate model dashboards with state integration</td>
+</tr>
+<tr>
+<td><code>prism maturity model validate</code></td>
+<td>Validate model documents</td>
+</tr>
+</tbody>
+</table>
+<h4 id="state-commands">State Commands</h4>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>prism maturity state validate</code></td>
+<td>Validate state documents (with optional model cross-validation)</td>
+</tr>
+<tr>
+<td><code>prism maturity state show</code></td>
+<td>Display state summary (text/json)</td>
+</tr>
+</tbody>
+</table>
+<h4 id="plan-commands">Plan Commands</h4>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="dashboard/"><code>prism maturity plan dashboard</code></a></td>
+<td>Generate executive dashboards</td>
+</tr>
+<tr>
+<td><a href="report/"><code>prism maturity plan report</code></a></td>
+<td>Generate roadmap reports (Markdown/JSON)</td>
 </tr>
 </tbody>
 </table>
