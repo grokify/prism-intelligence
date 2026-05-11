@@ -77,6 +77,33 @@ Examples:
 	RunE: runMaturityModelValidate,
 }
 
+var maturityModelLintCmd = &cobra.Command{
+	Use:   "lint <model-file>",
+	Short: "Check maturity model for common issues",
+	Long: `Lint a maturity model for issues that affect dashboard display and completeness.
+
+Unlike 'validate' which checks structural correctness, 'lint' checks for:
+  - Criteria without sliId (orphan criteria won't show in dashboard)
+  - Criteria missing operator or target (threshold won't display)
+  - SLIs without any criteria (unused SLIs)
+  - SLIs missing unit (affects threshold formatting)
+  - SLIs missing sliType (affects methodology grouping)
+  - Incomplete threshold coverage across maturity levels
+
+Exit codes:
+  0 - No issues found
+  1 - Warnings found (non-blocking)
+  2 - Errors found (blocking issues)
+
+Examples:
+  prism maturity model lint model.json
+  prism maturity model lint model.json --strict`,
+	Args: cobra.ExactArgs(1),
+	RunE: runMaturityModelLint,
+}
+
+var lintStrict bool // --strict flag
+
 func init() {
 	// Add model subcommand to maturity
 	maturityCmd.AddCommand(maturityModelCmd)
@@ -84,11 +111,15 @@ func init() {
 	// Add subcommands to model
 	maturityModelCmd.AddCommand(maturityModelDashboardCmd)
 	maturityModelCmd.AddCommand(maturityModelValidateCmd)
+	maturityModelCmd.AddCommand(maturityModelLintCmd)
 
 	// Dashboard flags
 	maturityModelDashboardCmd.Flags().StringVar(&modelStateFile, "state", "", "State document to read current values from")
 	maturityModelDashboardCmd.Flags().StringVarP(&modelOutputFile, "output", "o", "", "Output file (default: stdout)")
 	maturityModelDashboardCmd.Flags().StringVarP(&modelFormat, "format", "f", "html", "Output format: html, json")
+
+	// Lint flags
+	maturityModelLintCmd.Flags().BoolVar(&lintStrict, "strict", false, "Treat warnings as errors")
 }
 
 func runMaturityModelDashboard(cmd *cobra.Command, args []string) error {
@@ -247,6 +278,205 @@ func runMaturityModelValidate(cmd *cobra.Command, args []string) error {
 			totalEnablers += len(level.Enablers)
 		}
 		fmt.Printf("  %s: %d levels, %d criteria, %d enablers\n", domainKey, len(domain.Levels), totalCriteria, totalEnablers)
+	}
+
+	return nil
+}
+
+// LintIssue represents a linting issue found in the model.
+type LintIssue struct {
+	Severity string // "error", "warning", "info"
+	Location string // e.g., "domain.level.criterion"
+	Message  string
+	Hint     string // Suggested fix
+}
+
+func runMaturityModelLint(cmd *cobra.Command, args []string) error {
+	filename := args[0]
+
+	// Read and parse maturity spec
+	spec, err := maturity.ReadSpecFile(filename)
+	if err != nil {
+		return fmt.Errorf("failed to read model: %w", err)
+	}
+
+	var issues []LintIssue
+
+	// Track which SLIs are referenced by criteria
+	referencedSLIs := make(map[string]bool)
+
+	// Check each domain
+	for domainKey, domain := range spec.Domains {
+		if domain == nil {
+			continue
+		}
+
+		// Track criteria per SLI per level for threshold coverage analysis
+		sliLevelCoverage := make(map[string]map[int]bool) // sliId -> level -> hasThreshold
+
+		for _, level := range domain.Levels {
+			for _, criterion := range level.Criteria {
+				loc := fmt.Sprintf("%s.M%d.%s", domainKey, level.Level, criterion.ID)
+
+				// Check for missing sliId
+				if criterion.SLIID == "" {
+					issues = append(issues, LintIssue{
+						Severity: "warning",
+						Location: loc,
+						Message:  "Criterion has no sliId - won't appear in dashboard bullet charts",
+						Hint:     "Add sliId to link this criterion to an SLI definition",
+					})
+					continue
+				}
+
+				referencedSLIs[criterion.SLIID] = true
+
+				// Initialize level coverage map for this SLI
+				if sliLevelCoverage[criterion.SLIID] == nil {
+					sliLevelCoverage[criterion.SLIID] = make(map[int]bool)
+				}
+				sliLevelCoverage[criterion.SLIID][level.Level] = true
+
+				// Check for missing operator
+				if criterion.Operator == "" {
+					issues = append(issues, LintIssue{
+						Severity: "error",
+						Location: loc,
+						Message:  "Criterion missing operator - threshold cannot be displayed",
+						Hint:     "Add operator (gte, lte, eq, exists) to define the threshold type",
+					})
+				}
+
+				// Check for missing target on non-qualitative criteria
+				if criterion.Operator != "exists" && criterion.Target == 0 {
+					// Get SLI to check if it's qualitative
+					isQualitative := false
+					if sli, ok := spec.SLIs[criterion.SLIID]; ok && sli != nil {
+						isQualitative = sli.IsQualitativeOnly()
+					}
+					if !isQualitative {
+						issues = append(issues, LintIssue{
+							Severity: "warning",
+							Location: loc,
+							Message:  "Criterion has target=0 which may be unintentional for quantitative metrics",
+							Hint:     "Set target to the threshold value, or use operator='exists' for qualitative criteria",
+						})
+					}
+				}
+
+				// Check for qualitative criteria not using 'exists' operator
+				if criterion.Type == "qualitative" && criterion.Operator != "exists" {
+					issues = append(issues, LintIssue{
+						Severity: "warning",
+						Location: loc,
+						Message:  "Qualitative criterion should use operator='exists'",
+						Hint:     "Change operator to 'exists' for qualitative criteria",
+					})
+				}
+			}
+		}
+
+		// Check for incomplete threshold coverage (SLIs that skip levels)
+		for sliID, levels := range sliLevelCoverage {
+			// Find min and max levels with criteria
+			minLevel, maxLevel := 6, 0
+			for lvl := range levels {
+				if lvl < minLevel {
+					minLevel = lvl
+				}
+				if lvl > maxLevel {
+					maxLevel = lvl
+				}
+			}
+
+			// Check for gaps
+			for lvl := minLevel; lvl <= maxLevel; lvl++ {
+				if !levels[lvl] {
+					issues = append(issues, LintIssue{
+						Severity: "info",
+						Location: fmt.Sprintf("%s.%s", domainKey, sliID),
+						Message:  fmt.Sprintf("SLI has no criterion at M%d (gap between M%d and M%d)", lvl, minLevel, maxLevel),
+						Hint:     fmt.Sprintf("Add a criterion for M%d or this level will show '-' in dashboard", lvl),
+					})
+				}
+			}
+		}
+	}
+
+	// Check SLIs
+	for sliID, sli := range spec.SLIs {
+		if sli == nil {
+			continue
+		}
+
+		// Check for unreferenced SLIs
+		if !referencedSLIs[sliID] {
+			issues = append(issues, LintIssue{
+				Severity: "warning",
+				Location: fmt.Sprintf("slis.%s", sliID),
+				Message:  "SLI is defined but not referenced by any criteria",
+				Hint:     "Add criteria that reference this SLI, or remove the unused SLI definition",
+			})
+		}
+
+		// Check for missing unit
+		if sli.Unit == "" && !sli.IsQualitativeOnly() {
+			issues = append(issues, LintIssue{
+				Severity: "warning",
+				Location: fmt.Sprintf("slis.%s", sliID),
+				Message:  "SLI missing unit - thresholds will display without units (e.g., '50' instead of '50%')",
+				Hint:     "Add unit field (e.g., '%', 'ms', 'hours', 'count')",
+			})
+		}
+
+		// Check for missing sliType (info level - not required but helpful)
+		if sli.SLIType == "" {
+			issues = append(issues, LintIssue{
+				Severity: "info",
+				Location: fmt.Sprintf("slis.%s", sliID),
+				Message:  "SLI missing sliType - cannot be grouped by methodology (RED/USE/Golden Signals)",
+				Hint:     "Add sliType (availability, latency, error_rate, throughput, saturation, utilization, quality)",
+			})
+		}
+	}
+
+	// Output results
+	errorCount := 0
+	warningCount := 0
+	infoCount := 0
+
+	for _, issue := range issues {
+		switch issue.Severity {
+		case "error":
+			errorCount++
+			fmt.Printf("ERROR   %s\n", issue.Location)
+		case "warning":
+			warningCount++
+			fmt.Printf("WARNING %s\n", issue.Location)
+		case "info":
+			infoCount++
+			fmt.Printf("INFO    %s\n", issue.Location)
+		}
+		fmt.Printf("        %s\n", issue.Message)
+		fmt.Printf("        → %s\n\n", issue.Hint)
+	}
+
+	// Summary
+	fmt.Printf("─────────────────────────────────────────\n")
+	fmt.Printf("Lint summary for %s:\n", filename)
+	fmt.Printf("  Errors:   %d\n", errorCount)
+	fmt.Printf("  Warnings: %d\n", warningCount)
+	fmt.Printf("  Info:     %d\n", infoCount)
+
+	// Exit code based on findings
+	if errorCount > 0 {
+		return fmt.Errorf("found %d errors", errorCount)
+	}
+	if lintStrict && warningCount > 0 {
+		return fmt.Errorf("found %d warnings (strict mode)", warningCount)
+	}
+	if len(issues) == 0 {
+		fmt.Println("\n✓ No issues found")
 	}
 
 	return nil
