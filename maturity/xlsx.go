@@ -34,6 +34,10 @@ func (g *XLSXGenerator) Generate() error {
 		return fmt.Errorf("failed to create SLOs sheet: %w", err)
 	}
 
+	if err := g.createThresholdMatrixSheet(); err != nil {
+		return fmt.Errorf("failed to create threshold matrix sheet: %w", err)
+	}
+
 	if err := g.createFrameworkMappingsSheet(); err != nil {
 		return fmt.Errorf("failed to create framework mappings sheet: %w", err)
 	}
@@ -246,6 +250,206 @@ func (g *XLSXGenerator) createSLOsSheet() error {
 	g.setAutoFilter(sheetName, "A1:"+endFilterCell)
 
 	return nil
+}
+
+// createThresholdMatrixSheet creates a pivot-style sheet showing SLIs with thresholds for each maturity level.
+// This provides a human-readable view of how thresholds progress across M1-M5.
+func (g *XLSXGenerator) createThresholdMatrixSheet() error {
+	sheetName := "Threshold Matrix"
+	_, err := g.file.NewSheet(sheetName)
+	if err != nil {
+		return err
+	}
+
+	// Headers
+	headers := []string{"Category", "Tags", "Frameworks", "SLI Name", "Unit", "M1", "M2", "M3", "M4", "M5"}
+
+	for i, h := range headers {
+		cell, _ := excelize.CoordinatesToCellName(i+1, 1)
+		g.setCellValue(sheetName, cell, h)
+	}
+
+	// Style header row
+	headerStyle, _ := g.file.NewStyle(&excelize.Style{
+		Font:      &excelize.Font{Bold: true, Color: "FFFFFF"},
+		Fill:      excelize.Fill{Type: "pattern", Color: []string{"2E75B6"}, Pattern: 1},
+		Alignment: &excelize.Alignment{Horizontal: "center"},
+	})
+	g.setCellStyle(sheetName, "A1", "J1", headerStyle)
+
+	// Build a map of SLI ID -> level -> threshold string
+	// Structure: sliID -> { level: ">=99.9%", ... }
+	type sliInfo struct {
+		id         string
+		name       string
+		category   string
+		unit       string
+		tags       []string       // sorted, deduplicated tags
+		frameworks []string       // sorted list of framework names
+		thresholds map[int]string // level -> formatted threshold
+	}
+
+	sliMap := make(map[string]*sliInfo)
+	var sliOrder []string // preserve order of first appearance
+
+	domainNames := g.sortedDomainNames()
+	for _, domainName := range domainNames {
+		domain := g.spec.Domains[domainName]
+		for _, level := range domain.Levels {
+			for _, c := range level.Criteria {
+				if c.SLIID == "" {
+					continue
+				}
+
+				// Get or create SLI info
+				info, exists := sliMap[c.SLIID]
+				if !exists {
+					sli := c.GetSLI(g.spec)
+					name := c.SLIID
+					category := ""
+					unit := ""
+					var tags []string
+					var frameworks []string
+					if sli != nil {
+						name = sli.Name
+						category = sli.Category
+						unit = sli.Unit
+						// Get normalized (sorted, deduplicated) tags
+						tags = sli.GetNormalizedTags()
+						// Collect framework names from SLI mappings
+						fwSet := make(map[string]bool)
+						for _, fm := range sli.FrameworkMappings {
+							fwSet[fm.Framework] = true
+						}
+						for fw := range fwSet {
+							frameworks = append(frameworks, fw)
+						}
+						sort.Strings(frameworks)
+					}
+					info = &sliInfo{
+						id:         c.SLIID,
+						name:       name,
+						category:   category,
+						unit:       unit,
+						tags:       tags,
+						frameworks: frameworks,
+						thresholds: make(map[int]string),
+					}
+					sliMap[c.SLIID] = info
+					sliOrder = append(sliOrder, c.SLIID)
+				}
+
+				// Format threshold
+				threshold := g.formatThreshold(c, info.unit)
+				info.thresholds[level.Level] = threshold
+			}
+		}
+	}
+
+	// Sort by category (NIST CSF order), then by SLI order within category
+	catWeights := CategorySortWeight()
+
+	// Build SLI order map from spec categories
+	sliOrderMap := make(map[string]int) // sliID -> order within category
+	for _, cat := range g.spec.Categories {
+		for idx, sliID := range cat.SLIOrder {
+			sliOrderMap[sliID] = idx
+		}
+	}
+
+	sort.Slice(sliOrder, func(i, j int) bool {
+		a, b := sliMap[sliOrder[i]], sliMap[sliOrder[j]]
+
+		// First sort by category weight (NIST CSF order)
+		weightA := catWeights[a.category]
+		weightB := catWeights[b.category]
+		if weightA == 0 {
+			weightA = 100 // Unknown categories sort last
+		}
+		if weightB == 0 {
+			weightB = 100
+		}
+		if weightA != weightB {
+			return weightA < weightB
+		}
+
+		// Within same category, sort by SLI order if defined
+		orderA, hasOrderA := sliOrderMap[a.id]
+		orderB, hasOrderB := sliOrderMap[b.id]
+		if hasOrderA && hasOrderB {
+			return orderA < orderB
+		}
+		if hasOrderA {
+			return true // SLIs with order come first
+		}
+		if hasOrderB {
+			return false
+		}
+
+		// Fall back to alphabetical by name
+		return a.name < b.name
+	})
+
+	// Data rows
+	row := 2
+	for _, sliID := range sliOrder {
+		info := sliMap[sliID]
+
+		g.setCellValue(sheetName, fmt.Sprintf("A%d", row), info.category)
+		g.setCellValue(sheetName, fmt.Sprintf("B%d", row), strings.Join(info.tags, ", "))
+		g.setCellValue(sheetName, fmt.Sprintf("C%d", row), strings.Join(info.frameworks, ", "))
+		g.setCellValue(sheetName, fmt.Sprintf("D%d", row), info.name)
+		g.setCellValue(sheetName, fmt.Sprintf("E%d", row), info.unit)
+
+		// M1-M5 thresholds (columns F-J)
+		for level := 1; level <= 5; level++ {
+			col, _ := excelize.CoordinatesToCellName(5+level, row)
+			if threshold, ok := info.thresholds[level]; ok {
+				g.setCellValue(sheetName, col, threshold)
+			} else {
+				g.setCellValue(sheetName, col, "-")
+			}
+		}
+
+		row++
+	}
+
+	// Set column widths
+	colWidths := map[string]float64{
+		"A": 15, "B": 25, "C": 25, "D": 35, "E": 10, "F": 15, "G": 15, "H": 15, "I": 15, "J": 15,
+	}
+	for col, width := range colWidths {
+		g.setColWidth(sheetName, col, col, width)
+	}
+
+	// Style threshold columns with center alignment
+	if row > 2 {
+		centerStyle, _ := g.file.NewStyle(&excelize.Style{
+			Alignment: &excelize.Alignment{Horizontal: "center"},
+		})
+		endCell := fmt.Sprintf("J%d", row-1)
+		g.setCellStyle(sheetName, "F2", endCell, centerStyle)
+	}
+
+	// Auto filter
+	g.setAutoFilter(sheetName, "A1:J1")
+
+	return nil
+}
+
+// formatThreshold formats a criterion's threshold for display.
+func (g *XLSXGenerator) formatThreshold(c Criterion, unit string) string {
+	// Qualitative criteria
+	if c.Operator == "exists" {
+		return "Tracked"
+	}
+
+	// Format numeric threshold with operator and unit
+	symbol := OperatorSymbol(c.Operator)
+	if unit != "" {
+		return fmt.Sprintf("%s%v%s", symbol, c.Target, unit)
+	}
+	return fmt.Sprintf("%s%v", symbol, c.Target)
 }
 
 // collectAllFrameworks returns all unique frameworks across all criteria, sorted alphabetically.

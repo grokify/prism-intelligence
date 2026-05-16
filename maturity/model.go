@@ -5,6 +5,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
+	"regexp"
+	"sort"
 	"strings"
 )
 
@@ -15,10 +17,11 @@ import (
 // State tracking (current values, history, targets) should use PRISM Maturity State documents instead.
 // See docs/design/REFACTOR_MATURITY_STATE.md for migration guidance.
 type Spec struct {
-	Schema   string                  `json:"$schema,omitempty"`
-	Metadata *SpecMetadata           `json:"metadata,omitempty"`
-	SLIs     map[string]*SLI         `json:"slis,omitempty"` // Service Level Indicators with framework mappings
-	Domains  map[string]*DomainModel `json:"domains"`
+	Schema     string                  `json:"$schema,omitempty"`
+	Metadata   *SpecMetadata           `json:"metadata,omitempty"`
+	Categories []Category              `json:"categories,omitempty"` // Ordered list of categories with SLI ordering
+	SLIs       map[string]*SLI         `json:"slis,omitempty"`       // Service Level Indicators with framework mappings
+	Domains    map[string]*DomainModel `json:"domains"`
 }
 
 // SLI defines a Service Level Indicator (the metric being measured).
@@ -48,6 +51,10 @@ type SLI struct {
 	Layer    string `json:"layer,omitempty"`    // requirements, code, infra, runtime, adoption, support
 	Category string `json:"category,omitempty"` // prevention, detection, response
 	SLIType  string `json:"sliType,omitempty"`  // Observability type: availability, latency, error_rate, throughput, saturation, utilization, quality, freshness
+
+	// Tags enable multi-dimensional classification orthogonal to category.
+	// Tags should be lowercase kebab-case (e.g., "ai", "supply-chain", "shift-left").
+	Tags []string `json:"tags,omitempty"`
 
 	// Framework mappings - defined once on the SLI, inherited by all SLOs
 	FrameworkMappings []FrameworkMapping `json:"frameworkMappings,omitempty"`
@@ -647,4 +654,175 @@ func (d *DomainModel) EnablersForLevel(level int) []Enabler {
 		}
 	}
 	return nil
+}
+
+// Category defines a category for organizing SLIs with custom ordering.
+// When categories are defined, they control the display order in XLSX and dashboards.
+// When absent, NIST CSF 2.0 canonical order is used as the default.
+type Category struct {
+	ID          string   `json:"id"`                    // Category identifier (e.g., "govern", "protect", "detect")
+	Name        string   `json:"name,omitempty"`        // Human-readable name
+	Description string   `json:"description,omitempty"` // Category description
+	SLIOrder    []string `json:"sliOrder,omitempty"`    // Ordered list of SLI IDs within this category
+}
+
+// NIST CSF 2.0 canonical category order.
+const (
+	CategoryGovern   = "govern"
+	CategoryIdentify = "identify"
+	CategoryProtect  = "protect"
+	CategoryDetect   = "detect"
+	CategoryRespond  = "respond"
+	CategoryRecover  = "recover"
+)
+
+// DefaultCategoryOrder returns the NIST CSF 2.0 canonical category order.
+func DefaultCategoryOrder() []string {
+	return []string{
+		CategoryGovern,
+		CategoryIdentify,
+		CategoryProtect,
+		CategoryDetect,
+		CategoryRespond,
+		CategoryRecover,
+	}
+}
+
+// CategorySortWeight returns a map of category ID to sort weight.
+// Lower weight = higher priority. Unknown categories get weight 100.
+// Includes common variations (e.g., "detect" and "detection").
+func CategorySortWeight() map[string]int {
+	return map[string]int{
+		// NIST CSF 2.0 canonical
+		CategoryGovern:   1, // govern
+		CategoryIdentify: 2, // identify
+		CategoryProtect:  3, // protect
+		CategoryDetect:   4, // detect
+		CategoryRespond:  5, // respond
+		CategoryRecover:  6, // recover
+		// Common variations
+		"governance": 1,
+		"prevention": 3, // Maps to Protect
+		"detection":  4, // Maps to Detect
+		"response":   5, // Maps to Respond
+		"recovery":   6, // Maps to Recover
+		// Operations-focused categories (sort after NIST CSF)
+		"reliability":  10,
+		"efficiency":   11,
+		"quality":      12,
+		"availability": 13,
+	}
+}
+
+// GetCategoryOrder returns the ordered list of categories from the spec.
+// If categories are defined, returns them in order.
+// Otherwise, returns NIST CSF default order.
+func (s *Spec) GetCategoryOrder() []string {
+	if len(s.Categories) > 0 {
+		order := make([]string, len(s.Categories))
+		for i, cat := range s.Categories {
+			order[i] = cat.ID
+		}
+		return order
+	}
+	return DefaultCategoryOrder()
+}
+
+// GetCategoryByID returns a category by its ID, or nil if not found.
+func (s *Spec) GetCategoryByID(id string) *Category {
+	for i := range s.Categories {
+		if s.Categories[i].ID == id {
+			return &s.Categories[i]
+		}
+	}
+	return nil
+}
+
+// GetSLIOrderForCategory returns the SLI order for a category.
+// Returns nil if the category is not found or has no SLI order defined.
+func (s *Spec) GetSLIOrderForCategory(categoryID string) []string {
+	cat := s.GetCategoryByID(categoryID)
+	if cat != nil {
+		return cat.SLIOrder
+	}
+	return nil
+}
+
+// Recommended SLI tags for consistent classification across maturity models.
+const (
+	TagAI                      = "ai"                       // AI/ML-specific security
+	TagShiftLeft               = "shift-left"               // Design/build-time controls
+	TagSupplyChain             = "supply-chain"             // Software supply chain security
+	TagRuntimeDefense          = "runtime-defense"          // Production-time protection
+	TagVulnerabilityManagement = "vulnerability-management" // Vulnerability handling
+	TagIncidentResponse        = "incident-response"        // Incident handling
+	TagApplication             = "application"              // Application-layer security
+	TagInfrastructure          = "infrastructure"           // Infrastructure security
+	TagCompliance              = "compliance"               // Audit and compliance metrics
+	TagDetection               = "detection"                // Monitoring and alerting
+	TagAutomation              = "automation"               // Automated security controls
+)
+
+// RecommendedTags returns the list of recommended SLI tags.
+func RecommendedTags() []string {
+	return []string{
+		TagAI,
+		TagShiftLeft,
+		TagSupplyChain,
+		TagRuntimeDefense,
+		TagVulnerabilityManagement,
+		TagIncidentResponse,
+	}
+}
+
+// tagRegex validates kebab-case tags: lowercase letters, numbers, hyphens.
+// Must start with a letter, no consecutive hyphens, 1-32 characters.
+var tagRegex = regexp.MustCompile(`^[a-z][a-z0-9]*(-[a-z0-9]+)*$`)
+
+// ValidateTag checks if a tag follows the kebab-case convention.
+func ValidateTag(tag string) error {
+	if len(tag) == 0 {
+		return fmt.Errorf("tag cannot be empty")
+	}
+	if len(tag) > 32 {
+		return fmt.Errorf("tag %q exceeds maximum length of 32 characters", tag)
+	}
+	if !tagRegex.MatchString(tag) {
+		return fmt.Errorf("tag %q must be lowercase kebab-case (letters, numbers, hyphens)", tag)
+	}
+	return nil
+}
+
+// NormalizeTags returns a sorted, deduplicated slice of tags.
+// Invalid tags are excluded with a warning (logged if logger provided).
+func NormalizeTags(tags []string) []string {
+	if len(tags) == 0 {
+		return nil
+	}
+
+	seen := make(map[string]bool)
+	var result []string
+
+	for _, tag := range tags {
+		tag = strings.ToLower(strings.TrimSpace(tag))
+		if tag == "" {
+			continue
+		}
+		if seen[tag] {
+			continue
+		}
+		if ValidateTag(tag) != nil {
+			continue // skip invalid tags
+		}
+		seen[tag] = true
+		result = append(result, tag)
+	}
+
+	sort.Strings(result)
+	return result
+}
+
+// GetNormalizedTags returns the SLI's tags sorted and deduplicated.
+func (s *SLI) GetNormalizedTags() []string {
+	return NormalizeTags(s.Tags)
 }
