@@ -20,6 +20,7 @@ The `prism maturity model xlsx` command generates a comprehensive Excel workbook
 |-------|-------------|
 | **Requirements** | Enablers with domain, level, type, team, effort, and status |
 | **SLOs** | Criteria (SLOs) with framework columns showing control references |
+| **Threshold Matrix** | Pivot view of SLIs with M1-M5 thresholds, tags, and frameworks (v0.6.0+) |
 | **Framework Mappings** | Detailed per-mapping rows with framework, reference, control name, baseline |
 | **Progress** | Assessment status by domain with level progress percentages |
 | **Level Definitions** | M1-M5 level descriptions for each domain |
@@ -34,6 +35,23 @@ The SLOs sheet dynamically adds columns for each compliance framework found in t
 | SEC-002 | Security | M2 | Vuln Scanning | ... | ID.RA-1 | - |
 
 The `-` indicates the criterion has no mapping to that framework.
+
+## Threshold Matrix Sheet (v0.6.0+)
+
+The Threshold Matrix provides a pivot-style view where each SLI is a row with M1-M5 thresholds as columns. This makes it easy to see how thresholds progress across maturity levels.
+
+| Category | Tags | Frameworks | SLI Name | Unit | M1 | M2 | M3 | M4 | M5 |
+|----------|------|------------|----------|------|----|----|----|----|------|
+| detection | | SRE | Monitoring Coverage | % | - | >=50% | >=80% | >=95% | =100% |
+| efficiency | shift-left | DORA | Deployment Frequency | deploys/day | - | - | - | >=1 | >=10 |
+| reliability | operational, runtime | DORA, SRE | Service Availability | % | - | >=95% | >=99% | >=99.9% | >=99.99% |
+
+- **Category**: SLI category (prevention, detection, response, reliability, etc.)
+- **Tags**: Comma-separated, alphabetically-sorted tags (e.g., `ai, supply-chain`)
+- **Frameworks**: Comma-separated framework names from SLI mappings
+- **SLI Name**: Human-readable SLI name
+- **Unit**: Measurement unit
+- **M1-M5**: Threshold at each maturity level (`-` if not defined, `Tracked` for qualitative)
 
 ### SLI Resolution
 

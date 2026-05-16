@@ -31,6 +31,8 @@ An SLI defines what is being measured, including any compliance framework mappin
 | `qualitativeStates` | array | No | Qualitative state progression (v0.5.0+) |
 | `layer` | string | No | Value stream layer (code, infra, runtime, etc.) |
 | `category` | string | No | Metric category (reliability, efficiency, security) |
+| `sliType` | string | No | Observability type (availability, latency, error_rate, etc.) |
+| `tags` | array | No | Multi-dimensional classification tags (v0.6.0+) |
 | `frameworkMappings` | array | No | Compliance framework references |
 
 ### SLI Example (Maturity Model)
@@ -47,6 +49,7 @@ An SLI defines what is being measured, including any compliance framework mappin
       "type": "quantitative",
       "layer": "runtime",
       "category": "response",
+      "tags": ["operational", "runtime"],
       "frameworkMappings": [
         {"framework": "NIST_800_53", "reference": "IR-6", "name": "Incident Reporting"},
         {"framework": "SOC_2", "reference": "CC7.4", "name": "Security Incident Response"}
@@ -387,6 +390,78 @@ sli.GetMeasurementType() // "hybrid"
 // Get qualitative states
 states := sli.GetQualitativeStates()
 ```
+
+## SLI Tags (v0.6.0+)
+
+Tags enable multi-dimensional classification of SLIs orthogonal to category. While `category` (prevention, detection, response) is used for scoring, tags allow flexible filtering and grouping.
+
+### Tag Format
+
+Tags must be lowercase kebab-case:
+
+- Letters, numbers, and hyphens only
+- Must start with a letter
+- No consecutive hyphens
+- 1-32 characters
+
+**Valid:** `ai`, `supply-chain`, `shift-left`, `runtime`
+**Invalid:** `AI`, `supply_chain`, `ShiftLeft`, `-invalid`
+
+### Recommended Tags
+
+| Tag | Description | Example SLIs |
+|-----|-------------|--------------|
+| `ai` | AI/ML-specific security | Model security, pipeline integrity, ML monitoring |
+| `shift-left` | Design/build-time controls | Threat modeling, SAST, security gates |
+| `supply-chain` | Software supply chain | SCA, SBOM, container scanning, dependency management |
+| `runtime-defense` | Production-time protection | WAF/RASP, runtime detection, containment |
+| `vulnerability-management` | Vulnerability handling | SAST, DAST, SCA, vuln MTTR, remediation |
+| `incident-response` | Incident handling | MTTD, containment, recovery, postmortems |
+
+Additional tags you may use:
+
+| Tag | Description |
+|-----|-------------|
+| `application` | Application-layer security (SAST, DAST, secrets) |
+| `infrastructure` | Infrastructure security (IaC, K8s policy, network) |
+| `compliance` | Audit and compliance metrics |
+| `detection` | Monitoring and alerting capabilities |
+| `automation` | Automated security controls |
+
+### Tag Example
+
+```json
+{
+  "slis": {
+    "ps-ai-pipeline-integrity": {
+      "id": "ps-ai-pipeline-integrity",
+      "name": "AI Pipeline Integrity",
+      "category": "prevention",
+      "tags": ["ai", "supply-chain"],
+      "frameworkMappings": [
+        {"framework": "MITRE_ATLAS", "reference": "AML.T0020"}
+      ]
+    }
+  }
+}
+```
+
+### XLSX Export
+
+Tags appear in the Threshold Matrix sheet as a comma-separated, alphabetically-sorted list:
+
+| Category | Tags | Frameworks | SLI Name | M1 | M2 | M3 | M4 | M5 |
+|----------|------|------------|----------|----|----|----|----|------|
+| prevention | ai, supply-chain | MITRE_ATLAS | AI Pipeline Integrity | - | - | Tracked | - | - |
+
+### Tag Normalization
+
+Tags are automatically:
+
+- Converted to lowercase
+- Trimmed of whitespace
+- Deduplicated
+- Sorted alphabetically
 
 ## Best Practices
 
