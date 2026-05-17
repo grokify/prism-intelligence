@@ -51,6 +51,7 @@ nav:
   - Getting Started:
       - Installation: getting-started/installation.md
       - Quick Start: getting-started/quickstart.md
+      - Maturity Workflow: getting-started/maturity-workflow.md
       - Your First Document: getting-started/first-document.md
   - CLI Reference:
       - Overview: cli/index.md
