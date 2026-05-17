@@ -153,6 +153,16 @@
     "sli-error-budget-policy": {
       "sliId": "sli-error-budget-policy",
       "qualitativeState": "tracked"
+    },
+    "sli-throughput": {
+      "sliId": "sli-throughput",
+      "qualitativeState": "measured",
+      "windows": {
+        "30d": { "value": 850, "timestamp": "2026-05-09T00:00:00Z" }
+      },
+      "targets": {
+        "Q4_2026": { "value": 1000, "maturityLevel": 4 }
+      }
     }
   },
 
