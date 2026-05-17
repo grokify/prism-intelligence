@@ -1211,7 +1211,16 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Framework Columns">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#threshold-matrix-sheet-v060" class="md-nav__link">
+    <span class="md-ellipsis">
+      Threshold Matrix Sheet (v0.6.0+)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Threshold Matrix Sheet (v0.6.0+)">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -2876,6 +2885,29 @@
   
   
     <li class="md-nav__item">
+      <a href="../../releases/v0.7.0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    v0.7.0
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../releases/v0.6.0/" class="md-nav__link">
         
   
@@ -3074,7 +3106,16 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Framework Columns">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#threshold-matrix-sheet-v060" class="md-nav__link">
+    <span class="md-ellipsis">
+      Threshold Matrix Sheet (v0.6.0+)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Threshold Matrix Sheet (v0.6.0+)">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -3183,6 +3224,10 @@
 <td>Criteria (SLOs) with framework columns showing control references</td>
 </tr>
 <tr>
+<td><strong>Threshold Matrix</strong></td>
+<td>Pivot view of SLIs with M1-M5 thresholds, tags, and frameworks (v0.6.0+)</td>
+</tr>
+<tr>
 <td><strong>Framework Mappings</strong></td>
 <td>Detailed per-mapping rows with framework, reference, control name, baseline</td>
 </tr>
@@ -3232,6 +3277,70 @@
 </tbody>
 </table>
 <p>The <code>-</code> indicates the criterion has no mapping to that framework.</p>
+<h2 id="threshold-matrix-sheet-v060">Threshold Matrix Sheet (v0.6.0+)</h2>
+<p>The Threshold Matrix provides a pivot-style view where each SLI is a row with M1-M5 thresholds as columns. This makes it easy to see how thresholds progress across maturity levels.</p>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Tags</th>
+<th>Frameworks</th>
+<th>SLI Name</th>
+<th>Unit</th>
+<th>M1</th>
+<th>M2</th>
+<th>M3</th>
+<th>M4</th>
+<th>M5</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>detection</td>
+<td></td>
+<td>SRE</td>
+<td>Monitoring Coverage</td>
+<td>%</td>
+<td>-</td>
+<td>&gt;=50%</td>
+<td>&gt;=80%</td>
+<td>&gt;=95%</td>
+<td>=100%</td>
+</tr>
+<tr>
+<td>efficiency</td>
+<td>shift-left</td>
+<td>DORA</td>
+<td>Deployment Frequency</td>
+<td>deploys/day</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>&gt;=1</td>
+<td>&gt;=10</td>
+</tr>
+<tr>
+<td>reliability</td>
+<td>operational, runtime</td>
+<td>DORA, SRE</td>
+<td>Service Availability</td>
+<td>%</td>
+<td>-</td>
+<td>&gt;=95%</td>
+<td>&gt;=99%</td>
+<td>&gt;=99.9%</td>
+<td>&gt;=99.99%</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Category</strong>: SLI category (prevention, detection, response, reliability, etc.)</li>
+<li><strong>Tags</strong>: Comma-separated, alphabetically-sorted tags (e.g., <code>ai, supply-chain</code>)</li>
+<li><strong>Frameworks</strong>: Comma-separated framework names from SLI mappings</li>
+<li><strong>SLI Name</strong>: Human-readable SLI name</li>
+<li><strong>Unit</strong>: Measurement unit</li>
+<li><strong>M1-M5</strong>: Threshold at each maturity level (<code>-</code> if not defined, <code>Tracked</code> for qualitative)</li>
+</ul>
 <h3 id="sli-resolution">SLI Resolution</h3>
 <p>Framework mappings can be defined in two places:</p>
 <ol>
