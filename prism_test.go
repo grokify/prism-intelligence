@@ -505,8 +505,8 @@ func TestMaturityLevelName(t *testing.T) {
 		{3, "Defined"},
 		{4, "Managed"},
 		{5, "Optimizing"},
-		{0, ""},
-		{6, ""},
+		{0, "Unknown"},
+		{6, "Unknown"},
 	}
 
 	for _, tt := range tests {
