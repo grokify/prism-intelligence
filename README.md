@@ -587,15 +587,37 @@ Initiatives link to goals and phases with deployment tracking:
 }
 ```
 
-## Integration with Structured-Plan
+## PRISM Ecosystem
 
-PRISM integrates with [prism-execution](https://github.com/grokify/prism-execution) to provide a complete operational planning workflow. PRISM serves as the source of truth for requirements (maturity models, SLOs), while prism-execution handles execution tracking (OKRs, roadmaps).
+PRISM Intelligence is part of the [PRISM ecosystem](https://github.com/grokify/prism), a unified framework for capability-driven organizational intelligence.
+
+```
+┌───────────────────┐    ┌───────────────────┐    ┌───────────────────┐
+│ PRISM Capability  │    │ PRISM Intelligence│    │ PRISM Execution   │
+│                   │    │                   │    │                   │
+│  "What we need"   │───▶│ "How we measure"  │───▶│  "How we act"     │
+│                   │    │                   │    │                   │
+│ Capability stacks │    │ SLIs, SLOs        │    │ OKRs, V2MOM       │
+│ Layers, domains   │    │ Maturity models   │    │ Roadmaps          │
+│ Dependencies      │    │ Maturity state    │    │ Initiatives       │
+└───────────────────┘    └───────────────────┘    └───────────────────┘
+```
+
+| Module | Purpose | Key Artifacts |
+|--------|---------|---------------|
+| [prism-capability](https://github.com/grokify/prism-capability) | What capabilities exist | Capability stacks, layers, dependencies |
+| [prism-intelligence](https://github.com/grokify/prism-intelligence) | How we measure maturity | SLI/SLO definitions, maturity state |
+| [prism-execution](https://github.com/grokify/prism-execution) | How we improve | OKRs, V2MOM, roadmaps, initiatives |
+
+## Integration with PRISM Execution
+
+PRISM Intelligence integrates with [prism-execution](https://github.com/grokify/prism-execution) to provide a complete operational planning workflow. PRISM Intelligence serves as the source of truth for requirements (maturity models, SLOs), while PRISM Execution handles execution tracking (OKRs, roadmaps).
 
 ### Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                         PRISM (Source of Truth)                 │
+│               PRISM Intelligence (Source of Truth)              │
 │  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐           │
 │  │    Goals     │  │   Maturity   │  │     SLOs     │           │
 │  │              │  │    Models    │  │              │           │
@@ -618,7 +640,7 @@ PRISM integrates with [prism-execution](https://github.com/grokify/prism-executi
                             │
                             ▼
 ┌─────────────────────────────────────────────────────────────────┐
-│                 Structured-Plan (Execution)                     │
+│                   PRISM Execution (Execution)                   │
 │  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐           │
 │  │     OKR      │  │   V2MOM      │  │   Roadmap    │           │
 │  │              │  │              │  │              │           │
@@ -630,8 +652,8 @@ PRISM integrates with [prism-execution](https://github.com/grokify/prism-executi
 
 ### Data Flow
 
-| PRISM Concept | Structured-Plan Concept |
-|---------------|-------------------------|
+| PRISM Intelligence | PRISM Execution |
+|--------------------|-----------------|
 | Goal | OKR Objective |
 | Goal.TargetLevel | Objective Target |
 | SLO (per maturity level) | Key Result |
@@ -640,9 +662,9 @@ PRISM integrates with [prism-execution](https://github.com/grokify/prism-executi
 
 ### Workflow
 
-1. **Define requirements in PRISM** - Goals, maturity models, SLOs
+1. **Define requirements in PRISM Intelligence** - Goals, maturity models, SLOs
 2. **Analyze with LLM** - Generate initiative recommendations to achieve targets
-3. **Export to prism-execution** - OKR/V2MOM/Roadmap format
+3. **Export to PRISM Execution** - OKR/V2MOM/Roadmap format
 4. **Track execution** - Monitor progress against phase targets
 
 ```bash
