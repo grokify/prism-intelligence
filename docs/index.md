@@ -1,8 +1,8 @@
-# PRISM
+# PRISM Intelligence
 
 **Platform for Reliability, Improvement, and Strategic Maturity**
 
-PRISM is an Operational Product Management platform for COO-level organizational health monitoring. It provides a unified framework for B2B SaaS health metrics that combines SLOs, maturity modeling, and OKRs into a single coherent system. PRISM enables organizations to understand current health and drive improvement projects across operations, security, quality, product, and AI domains.
+PRISM Intelligence is an Operational Product Management platform for COO-level organizational health monitoring. It provides a unified framework for B2B SaaS health metrics that combines SLOs, maturity modeling, and OKRs into a single coherent system. PRISM enables organizations to understand current health and drive improvement projects across operations, security, quality, product, and AI domains.
 
 ## Key Features
 
@@ -52,7 +52,7 @@ PRISM is an Operational Product Management platform for COO-level organizational
 
 ```json
 {
-  "$schema": "https://github.com/grokify/prism/schema/prism.schema.json",
+  "$schema": "https://github.com/grokify/prism-intelligence/schema/prism-maturity-plan.schema.json",
   "metadata": {
     "name": "Acme Corp PRISM",
     "version": "1.0.0"
@@ -110,15 +110,15 @@ The PRISM score provides a single composite metric (0.0-1.0) representing organi
 | ≥0.25 | Weak | Significant gaps |
 | <0.25 | Critical | Immediate attention required |
 
-## Integration with Structured-Plan
+## Integration with PRISM Execution
 
-PRISM integrates with [structured-plan](https://github.com/grokify/structured-plan) to provide a complete operational planning workflow. PRISM serves as the source of truth for requirements (maturity models, SLOs), while structured-plan handles execution tracking (OKRs, roadmaps).
+PRISM Intelligence integrates with [prism-execution](https://github.com/grokify/prism-execution) to provide a complete operational planning workflow. PRISM Intelligence serves as the source of truth for requirements (maturity models, SLOs), while prism-execution handles execution tracking (OKRs, roadmaps).
 
 ### Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                         PRISM (Source of Truth)                 │
+│                  PRISM Intelligence (Source of Truth)           │
 │  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐          │
 │  │    Goals     │  │   Maturity   │  │     SLOs     │          │
 │  │              │  │    Models    │  │              │          │
@@ -141,7 +141,7 @@ PRISM integrates with [structured-plan](https://github.com/grokify/structured-pl
                             │
                             ▼
 ┌─────────────────────────────────────────────────────────────────┐
-│                 Structured-Plan (Execution)                     │
+│                   PRISM Execution (Execution)                   │
 │  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐          │
 │  │     OKR      │  │   V2MOM      │  │   Roadmap    │          │
 │  │              │  │              │  │              │          │
@@ -170,9 +170,9 @@ PRISM integrates with [structured-plan](https://github.com/grokify/structured-pl
 
 ### Workflow
 
-1. **Define requirements in PRISM** - Goals, maturity models, SLOs
+1. **Define requirements in PRISM Intelligence** - Goals, maturity models, SLOs
 2. **Analyze with LLM** - Generate initiative recommendations to achieve targets
-3. **Export to structured-plan** - Roadmap/OKR/V2MOM format
+3. **Export to prism-execution** - Roadmap/OKR/V2MOM format
 4. **Track execution** - Monitor progress against phase targets
 
 ```bash
@@ -190,7 +190,7 @@ prism export okr prism.json -o roadmap.okr.json
 
 ```bash
 # Install the CLI
-go install github.com/grokify/prism/cmd/prism@latest
+go install github.com/grokify/prism-intelligence/cmd/prism@latest
 
 # Initialize a new document
 prism init -o prism.json
