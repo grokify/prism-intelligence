@@ -1,12 +1,12 @@
 # Integrations Overview
 
-PRISM integrates with various tools and platforms for reporting, visualization, and export.
+PRISM Intelligence integrates with various tools and platforms for reporting, visualization, and export.
 
 ## Available Integrations
 
 | Integration | Status | Description |
 |-------------|--------|-------------|
-| [Structured-Plan](structured-plan.md) | Available | Roadmap, OKR, and V2MOM export |
+| [PRISM Execution](prism-execution.md) | Available | Roadmap, OKR, and V2MOM export |
 | [Dashforge](dashforge.md) | Planned | Dashboard generation and embedding |
 | [Marp](marp.md) | Planned | Presentation generation |
 | [Excel](excel.md) | Planned | XLSX export for stakeholders |
@@ -15,21 +15,21 @@ PRISM integrates with various tools and platforms for reporting, visualization, 
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                      PRISM Document                          │
-│                     (prism.json)                            │
+│                 PRISM Intelligence Document                  │
+│                       (prism.json)                          │
 └─────────────────────────────────────────────────────────────┘
                               │
                               ▼
 ┌─────────────────────────────────────────────────────────────┐
-│                     PRISM Library                           │
-│               (github.com/grokify/prism)                    │
+│                 PRISM Intelligence Library                   │
+│          (github.com/grokify/prism-intelligence)            │
 └─────────────────────────────────────────────────────────────┘
                               │
      ┌────────────┬───────────┼───────────┬────────────┐
      ▼            ▼           ▼           ▼            ▼
 ┌──────────┐┌──────────┐┌──────────┐┌──────────┐┌──────────┐
-│Structured││ Dashforge││   Marp   ││   Excel  ││   CLI    │
-│   Plan   ││Dashboard ││  Slides  ││   XLSX   ││ Reports  │
+│  PRISM   ││ Dashforge││   Marp   ││   Excel  ││   CLI    │
+│Execution ││Dashboard ││  Slides  ││   XLSX   ││ Reports  │
 └──────────┘└──────────┘└──────────┘└──────────┘└──────────┘
      │            │           │           │            │
      ▼            ▼           ▼           ▼            ▼
@@ -119,4 +119,4 @@ Future integrations will be configured in the PRISM document:
 
 ## Coming Soon
 
-These integrations are in development. Check the [GitHub repository](https://github.com/grokify/prism) for updates.
+These integrations are in development. Check the [GitHub repository](https://github.com/grokify/prism-intelligence) for updates.

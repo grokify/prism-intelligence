@@ -20,7 +20,7 @@ PRISM is written in Go and follows standard Go project conventions. The codebase
 ### Clone and Build
 
 ```bash
-git clone https://github.com/grokify/prism.git
+git clone https://github.com/grokify/prism-intelligence.git
 cd prism
 go build ./cmd/prism
 ```
@@ -114,5 +114,5 @@ Export converters live in `export/`. To add a new format:
 
 ## Getting Help
 
-- [GitHub Issues](https://github.com/grokify/prism/issues) - Bug reports and feature requests
-- [GitHub Discussions](https://github.com/grokify/prism/discussions) - Questions and discussions
+- [GitHub Issues](https://github.com/grokify/prism-intelligence/issues) - Bug reports and feature requests
+- [GitHub Discussions](https://github.com/grokify/prism-intelligence/discussions) - Questions and discussions

@@ -152,10 +152,10 @@ PRISM uses a three-part document model:
 
 | Project | Repository | Purpose |
 |---------|------------|---------|
-| **PRISM** | `github.com/grokify/prism` | Health model, maturity, SLOs |
+| **PRISM** | `github.com/grokify/prism-intelligence` | Health model, maturity, SLOs |
 | **Structured Plan** | `github.com/grokify/structured-plan` | OKRs, V2MOM, roadmap |
 | **Structured Changelog** | `github.com/grokify/structured-changelog` | Release management |
 
 ## Contributing
 
-See [GitHub Issues](https://github.com/grokify/prism/issues) for detailed task tracking and discussion.
+See [GitHub Issues](https://github.com/grokify/prism-intelligence/issues) for detailed task tracking and discussion.

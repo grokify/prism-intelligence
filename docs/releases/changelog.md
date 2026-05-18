@@ -1,6 +1,6 @@
 # Changelog
 
-For the complete changelog, see [CHANGELOG.md](https://github.com/grokify/prism/blob/main/CHANGELOG.md) in the repository root.
+For the complete changelog, see [CHANGELOG.md](https://github.com/grokify/prism-intelligence/blob/main/CHANGELOG.md) in the repository root.
 
 ## Recent Releases
 
@@ -32,4 +32,4 @@ Commits follow [Conventional Commits](https://www.conventionalcommits.org/en/v1.
 
 ## Changelog Format
 
-The changelog follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) format and is generated from [CHANGELOG.json](https://github.com/grokify/prism/blob/main/CHANGELOG.json) using [Structured Changelog](https://github.com/grokify/structured-changelog).
+The changelog follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) format and is generated from [CHANGELOG.json](https://github.com/grokify/prism-intelligence/blob/main/CHANGELOG.json) using [Structured Changelog](https://github.com/grokify/structured-changelog).

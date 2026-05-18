@@ -10,7 +10,7 @@ Thank you for your interest in contributing to PRISM. This guide covers the cont
 # Fork the repository on GitHub, then:
 git clone https://github.com/YOUR_USERNAME/prism.git
 cd prism
-git remote add upstream https://github.com/grokify/prism.git
+git remote add upstream https://github.com/grokify/prism-intelligence.git
 ```
 
 ### Install Dependencies
@@ -212,7 +212,7 @@ func runMyCommand(cmd *cobra.Command, args []string) error {
 ```go
 package export
 
-import "github.com/grokify/prism"
+import "github.com/grokify/prism-intelligence"
 
 type MyFormatDocument struct {
     // Define output structure
@@ -286,8 +286,8 @@ Include:
 
 ## Questions?
 
-- Open a [GitHub Discussion](https://github.com/grokify/prism/discussions) for questions
-- Open an [Issue](https://github.com/grokify/prism/issues) for bugs or feature requests
+- Open a [GitHub Discussion](https://github.com/grokify/prism-intelligence/discussions) for questions
+- Open an [Issue](https://github.com/grokify/prism-intelligence/issues) for bugs or feature requests
 
 ## License
 

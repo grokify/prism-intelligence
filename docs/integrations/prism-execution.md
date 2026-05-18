@@ -1,13 +1,13 @@
-# Structured-Plan Integration
+# PRISM Execution Integration
 
-PRISM integrates with [structured-plan](https://github.com/grokify/structured-plan) to export roadmaps, OKRs, and V2MOMs for execution tracking.
+PRISM Intelligence integrates with [PRISM Execution](https://github.com/grokify/prism-execution) to export roadmaps, OKRs, and V2MOMs for execution tracking.
 
 ## Overview
 
-PRISM serves as the source of truth for requirements (maturity models, SLOs), while structured-plan handles execution tracking:
+PRISM Intelligence serves as the source of truth for requirements (maturity models, SLOs), while PRISM Execution handles execution tracking:
 
-| PRISM (Source of Truth) | Structured-Plan (Execution) |
-|-------------------------|----------------------------|
+| PRISM Intelligence (Source of Truth) | PRISM Execution (Execution) |
+|--------------------------------------|----------------------------|
 | Goals with maturity models | Objectives |
 | SLOs and MetricCriteria | Key Results |
 | Phases with GoalTargets | Roadmap Phases |
@@ -150,7 +150,7 @@ Adoption Rate = adoptedCustomers / deployedCustomers × 100
 
 ## Workflow
 
-### 1. Define Requirements in PRISM
+### 1. Define Requirements in PRISM Intelligence
 
 ```json
 {
@@ -191,7 +191,7 @@ Adoption Rate = adoptedCustomers / deployedCustomers × 100
 prism export roadmap prism.json --with-okrs -o roadmap.json
 ```
 
-### 3. Use with Structured-Plan
+### 3. Use with PRISM Execution
 
 ```bash
 # Validate exported document
@@ -207,8 +207,8 @@ For programmatic access, use the export package:
 
 ```go
 import (
-    "github.com/grokify/prism"
-    "github.com/grokify/prism/export"
+    "github.com/grokify/prism-intelligence"
+    "github.com/grokify/prism-intelligence/export"
 )
 
 // Load PRISM document

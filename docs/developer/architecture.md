@@ -4,7 +4,7 @@ This document describes the internal architecture and package structure of PRISM
 
 ## Package Overview
 
-### Core Package (`github.com/grokify/prism`)
+### Core Package (`github.com/grokify/prism-intelligence`)
 
 The root package contains all core types and primary document operations:
 
