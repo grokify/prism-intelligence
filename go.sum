@@ -9,8 +9,8 @@ github.com/grokify/echartify v0.2.1 h1:A4iGGFS4L5d4m8MKCsSwXwjxMu+MMOjEUyWHUUC2c
 github.com/grokify/echartify v0.2.1/go.mod h1:Tm3e64bYQa1GHqjyNt4ndql0klWG8f6U3FlyX97yOtM=
 github.com/grokify/oscompat v0.3.0 h1:OsZNfRRLkfShSBu8jOLwtVQLj9/gOw3UjVe//XeV5uU=
 github.com/grokify/oscompat v0.3.0/go.mod h1:Ekex/WzHaA39LNt5xbeQRASo74NEXAIqBlqdvNF2oUM=
-github.com/grokify/structured-plan v0.10.1 h1:CINy/e3VLADqc1UO9IYhbMN0qjJ3vqMw2LL9/8u/BZc=
-github.com/grokify/structured-plan v0.10.1/go.mod h1:/Qw41j24eE1vKB4SCgCT/u0NwUhN2xuoPFFuFHHUE2A=
+github.com/grokify/prism-execution v0.11.0 h1:S0EBMfVuVoaVb4TTmwvofaf2qgwM4RraGUn8ls3MDXY=
+github.com/grokify/prism-execution v0.11.0/go.mod h1:kOBENZA5rbdFD76SOZ9PJVKpZ6PAnuwYO4qZrvorwzI=
 github.com/inconshreveable/mousetrap v1.1.0 h1:wN+x4NVGpMsO7ErUn/mUI3vEoE6Jt13X2s0bqwp9tc8=
 github.com/inconshreveable/mousetrap v1.1.0/go.mod h1:vpF70FUmC8bwa3OWnCshd2FqLfsEA9PFc4w1p2J65bw=
 github.com/invopop/jsonschema v0.14.0 h1:MHQqLhvpNUZfw+hM3AZDYK7jxO8FZoQeQM77g8iyZjg=
