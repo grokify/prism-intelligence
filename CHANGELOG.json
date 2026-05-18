@@ -1,11 +1,31 @@
 {
   "irVersion": "1.0",
-  "project": "prism",
-  "repository": "https://github.com/grokify/prism",
+  "project": "prism-intelligence",
+  "repository": "https://github.com/grokify/prism-intelligence",
   "versioning": "semver",
   "commitConvention": "conventional",
   "maintainers": ["grokify"],
   "releases": [
+    {
+      "version": "v0.8.0",
+      "date": "2026-05-17",
+      "highlights": [
+        { "description": "Repository renamed from grokify/prism to grokify/prism-intelligence" },
+        { "description": "Part of PRISM ecosystem consolidation with prism-capability and prism-execution" }
+      ],
+      "breaking": [
+        { "description": "Go module path changed from github.com/grokify/prism to github.com/grokify/prism-intelligence", "commit": "1f520bd" },
+        { "description": "Dependency renamed from structured-plan to prism-execution (temporary replace directive)", "commit": "1f520bd" }
+      ],
+      "changed": [
+        { "description": "All import paths updated to github.com/grokify/prism-intelligence", "commit": "1f520bd" },
+        { "description": "JSON Schema $id URLs updated to prism-intelligence", "commit": "e2fb90b" },
+        { "description": "README badges and installation instructions updated", "commit": "3cd2863" }
+      ],
+      "documentation": [
+        { "description": "Updated README with new repository URLs and installation commands", "commit": "3cd2863" }
+      ]
+    },
     {
       "version": "v0.7.0",
       "date": "2026-05-17",
