@@ -2,6 +2,7 @@ package prism
 
 // LayerDef defines an ownership layer in the stack (code, infra, runtime).
 // Layers represent where metrics are measured and who is accountable.
+// Note: Extends prism-core's LayerDef with GoldenSignal support.
 type LayerDef struct {
 	ID          string       `json:"id"`
 	Name        string       `json:"name"`

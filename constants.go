@@ -1,40 +1,48 @@
 package prism
 
+import core "github.com/grokify/prism-core"
+
 // Domain constants represent the three primary domains in PRISM.
+// Note: prism-core has 10 domains; prism-intelligence uses these 3 primary ones.
 const (
-	DomainSecurity   = "security"
-	DomainOperations = "operations"
-	DomainQuality    = "quality"
+	DomainSecurity   = core.DomainSecurity
+	DomainOperations = core.DomainOperations
+	DomainQuality    = core.DomainQuality
 )
 
-// AllDomains returns all valid domain values.
+// AllDomains returns all valid domain values for prism-intelligence.
+// Returns the 3 primary domains used in this module.
 func AllDomains() []string {
 	return []string{DomainSecurity, DomainOperations, DomainQuality}
 }
 
-// Layer constants represent value stream phases from ideation to support.
+// ValidDomain checks if a domain value is valid.
+func ValidDomain(domain string) bool {
+	return core.ValidDomain(domain)
+}
+
+// Layer constants imported from prism-core.
 const (
-	LayerRequirements = "requirements"
-	LayerCode         = "code"
-	LayerInfra        = "infra"
-	LayerRuntime      = "runtime"
-	LayerAdoption     = "adoption"
-	LayerSupport      = "support"
+	LayerRequirements = core.LayerRequirements
+	LayerCode         = core.LayerCode
+	LayerInfra        = core.LayerInfra
+	LayerRuntime      = core.LayerRuntime
+	LayerAdoption     = core.LayerAdoption
+	LayerSupport      = core.LayerSupport
 )
 
 // AllLayers returns all valid layer values in value stream order.
 func AllLayers() []string {
-	return []string{
-		LayerRequirements,
-		LayerCode,
-		LayerInfra,
-		LayerRuntime,
-		LayerAdoption,
-		LayerSupport,
-	}
+	return core.AllLayers()
+}
+
+// ValidLayer checks if a layer value is valid.
+func ValidLayer(layer string) bool {
+	return core.ValidLayer(layer)
 }
 
 // QualityVertical constants based on ISO 25010 quality characteristics.
+// These are prism-intelligence-specific.
 const (
 	QualityVerticalFunctional      = "functional"
 	QualityVerticalReliability     = "reliability"
@@ -56,21 +64,27 @@ func AllQualityVerticals() []string {
 	}
 }
 
-// Lifecycle stage constants represent stages in the software delivery lifecycle.
+// Lifecycle stage constants imported from prism-core.
 const (
-	StageDesign   = "design"
-	StageBuild    = "build"
-	StageTest     = "test"
-	StageRuntime  = "runtime"
-	StageResponse = "response"
+	StageDesign   = core.StageDesign
+	StageBuild    = core.StageBuild
+	StageTest     = core.StageTest
+	StageRuntime  = core.StageRuntime
+	StageResponse = core.StageResponse
 )
 
 // AllStages returns all valid stage values.
 func AllStages() []string {
-	return []string{StageDesign, StageBuild, StageTest, StageRuntime, StageResponse}
+	return core.AllStages()
+}
+
+// ValidStage checks if a stage value is valid.
+func ValidStage(stage string) bool {
+	return core.ValidStage(stage)
 }
 
 // Category constants represent metric categories.
+// These are prism-intelligence-specific.
 const (
 	CategoryPrevention  = "prevention"
 	CategoryDetection   = "detection"
@@ -92,34 +106,32 @@ func AllCategories() []string {
 	}
 }
 
-// Maturity level constants represent the 5-level maturity model.
+// Maturity level constants imported from prism-core.
 const (
-	MaturityLevel1 = 1 // Reactive
-	MaturityLevel2 = 2 // Basic
-	MaturityLevel3 = 3 // Defined
-	MaturityLevel4 = 4 // Managed
-	MaturityLevel5 = 5 // Optimizing
+	MaturityLevel1 = core.MaturityLevel1 // Reactive
+	MaturityLevel2 = core.MaturityLevel2 // Basic
+	MaturityLevel3 = core.MaturityLevel3 // Defined
+	MaturityLevel4 = core.MaturityLevel4 // Managed
+	MaturityLevel5 = core.MaturityLevel5 // Optimizing
 )
 
 // MaturityLevelName returns the name for a maturity level.
 func MaturityLevelName(level int) string {
-	switch level {
-	case MaturityLevel1:
-		return "Reactive"
-	case MaturityLevel2:
-		return "Basic"
-	case MaturityLevel3:
-		return "Defined"
-	case MaturityLevel4:
-		return "Managed"
-	case MaturityLevel5:
-		return "Optimizing"
-	default:
-		return ""
-	}
+	return core.MaturityLevelName(level)
+}
+
+// MaturityLevelDescription returns a description for a maturity level.
+func MaturityLevelDescription(level int) string {
+	return core.MaturityLevelDescription(level)
+}
+
+// ValidMaturityLevel checks if a maturity level is valid (1-5).
+func ValidMaturityLevel(level int) bool {
+	return core.ValidMaturityLevel(level)
 }
 
 // Customer awareness state constants.
+// These are prism-intelligence-specific.
 const (
 	AwarenessUnaware          = "unaware"
 	AwarenessAwareNotActing   = "aware_not_remediating"
@@ -137,31 +149,31 @@ func AllAwarenessStates() []string {
 	}
 }
 
-// Framework constants for external framework mappings.
+// Framework constants imported from prism-core.
 const (
 	// NIST Frameworks
-	FrameworkNISTCSF    = "NIST_CSF"     // NIST Cybersecurity Framework (1.1)
-	FrameworkNISTCSF2   = "NIST_CSF_2"   // NIST Cybersecurity Framework 2.0
-	FrameworkNIST80053  = "NIST_800_53"  // NIST SP 800-53 (Security and Privacy Controls)
-	FrameworkNISTRMF    = "NIST_RMF"     // NIST Risk Management Framework
-	FrameworkNISTAIRMF  = "NIST_AI_RMF"  // NIST AI Risk Management Framework
-	FrameworkNIST800171 = "NIST_800_171" // NIST SP 800-171 (CUI Protection)
+	FrameworkNISTCSF    = core.FrameworkNISTCSF
+	FrameworkNISTCSF2   = core.FrameworkNISTCSF2
+	FrameworkNIST80053  = core.FrameworkNIST80053
+	FrameworkNISTRMF    = core.FrameworkNISTRMF
+	FrameworkNISTAIRMF  = core.FrameworkNISTAIRMF
+	FrameworkNIST800171 = core.FrameworkNIST800171
 
 	// FedRAMP (uses NIST 800-53 controls)
-	FrameworkFEDRAMP     = "FEDRAMP"      // FedRAMP (general)
-	FrameworkFEDRAMPHigh = "FEDRAMP_HIGH" // FedRAMP High baseline
-	FrameworkFEDRAMPMod  = "FEDRAMP_MOD"  // FedRAMP Moderate baseline
-	FrameworkFEDRAMPLow  = "FEDRAMP_LOW"  // FedRAMP Low baseline
+	FrameworkFEDRAMP     = "FEDRAMP" // FedRAMP (general) - prism-intelligence-specific
+	FrameworkFEDRAMPHigh = core.FrameworkFedRAMPHigh
+	FrameworkFEDRAMPMod  = core.FrameworkFedRAMPMod
+	FrameworkFEDRAMPLow  = core.FrameworkFedRAMPLow
 
 	// Other Security Frameworks
-	FrameworkMITREATTACK = "MITRE_ATTACK" // MITRE ATT&CK
-	FrameworkCISControls = "CIS_CONTROLS" // CIS Critical Security Controls
-	FrameworkSOC2        = "SOC_2"        // SOC 2 Trust Services Criteria
-	FrameworkISO27001    = "ISO_27001"    // ISO/IEC 27001
+	FrameworkMITREATTACK = core.FrameworkMITREATTACK
+	FrameworkCISControls = core.FrameworkCISControls
+	FrameworkSOC2        = core.FrameworkSOC2
+	FrameworkISO27001    = core.FrameworkISO27001
 
 	// Engineering Frameworks
-	FrameworkDORA = "DORA" // DORA DevOps Metrics
-	FrameworkSRE  = "SRE"  // Google SRE Practices
+	FrameworkDORA = core.FrameworkDORA
+	FrameworkSRE  = core.FrameworkSRE
 )
 
 // Framework baseline/impact levels for NIST 800-53 and FedRAMP.
@@ -195,14 +207,7 @@ func AllFrameworks() []string {
 
 // NISTFrameworks returns NIST-specific frameworks.
 func NISTFrameworks() []string {
-	return []string{
-		FrameworkNISTCSF,
-		FrameworkNISTCSF2,
-		FrameworkNIST80053,
-		FrameworkNISTRMF,
-		FrameworkNISTAIRMF,
-		FrameworkNIST800171,
-	}
+	return core.NISTFrameworks()
 }
 
 // ComplianceFrameworks returns compliance-focused frameworks.
@@ -221,7 +226,23 @@ func ComplianceFrameworks() []string {
 	}
 }
 
+// ValidFramework checks if a framework value is valid.
+func ValidFramework(framework string) bool {
+	for _, f := range AllFrameworks() {
+		if f == framework {
+			return true
+		}
+	}
+	return false
+}
+
+// FrameworkDisplayName returns a human-readable name for a framework.
+func FrameworkDisplayName(framework string) string {
+	return core.FrameworkDisplayName(framework)
+}
+
 // Metric type constants.
+// These are prism-intelligence-specific.
 const (
 	MetricTypeCoverage     = "coverage"
 	MetricTypeRate         = "rate"
@@ -245,7 +266,8 @@ func AllMetricTypes() []string {
 	}
 }
 
-// Trend direction constants.
+// Trend direction constants for threshold interpretation.
+// Note: These are comparison semantics, distinct from prism-core's trend direction types.
 const (
 	TrendHigherBetter = "higher_better"
 	TrendLowerBetter  = "lower_better"
@@ -282,15 +304,16 @@ func AllWindows() []string {
 }
 
 // SLI type constants classify SLIs by observability type.
+// Note: prism-core has a similar set; these are prism-intelligence's SLI types.
 const (
-	SLITypeAvailability = "availability" // System/service availability
-	SLITypeLatency      = "latency"      // Response time, duration
-	SLITypeErrorRate    = "error_rate"   // Error percentage, failure rate
-	SLITypeThroughput   = "throughput"   // Request rate, traffic volume
-	SLITypeSaturation   = "saturation"   // Resource utilization/exhaustion
-	SLITypeUtilization  = "utilization"  // Resource usage level
-	SLITypeQuality      = "quality"      // Data quality, correctness
-	SLITypeFreshness    = "freshness"    // Data age, staleness
+	SLITypeAvailability = core.SLITypeAvailability
+	SLITypeLatency      = core.SLITypeLatency
+	SLITypeErrorRate    = core.SLITypeErrorRate
+	SLITypeThroughput   = core.SLITypeThroughput
+	SLITypeSaturation   = "saturation"  // prism-intelligence-specific
+	SLITypeUtilization  = "utilization" // prism-intelligence-specific
+	SLITypeQuality      = "quality"     // prism-intelligence-specific
+	SLITypeFreshness    = core.SLITypeFreshness
 )
 
 // AllSLITypes returns all valid SLI type values.
@@ -305,6 +328,11 @@ func AllSLITypes() []string {
 		SLITypeQuality,
 		SLITypeFreshness,
 	}
+}
+
+// SLITypeDirection returns the default comparison direction for an SLI type.
+func SLITypeDirection(sliType string) string {
+	return core.SLITypeDirection(sliType)
 }
 
 // Methodology constants for standard observability methodologies.

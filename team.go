@@ -1,13 +1,17 @@
 package prism
 
-import "fmt"
+import (
+	"fmt"
 
-// TeamType constants based on Team Topologies.
+	core "github.com/grokify/prism-core"
+)
+
+// TeamType constants imported from prism-core (Team Topologies).
 const (
-	TeamTypeStreamAligned = "stream_aligned"
-	TeamTypePlatform      = "platform"
-	TeamTypeEnabling      = "enabling"
-	TeamTypeOverlay       = "overlay"
+	TeamTypeStreamAligned = core.TeamTypeStreamAligned
+	TeamTypePlatform      = core.TeamTypePlatform
+	TeamTypeEnabling      = core.TeamTypeEnabling
+	TeamTypeOverlay       = core.TeamTypeOverlay
 )
 
 // AllTeamTypes returns all valid team type values.
@@ -18,6 +22,11 @@ func AllTeamTypes() []string {
 		TeamTypeEnabling,
 		TeamTypeOverlay,
 	}
+}
+
+// ValidTeamType checks if a team type is valid.
+func ValidTeamType(teamType string) bool {
+	return core.ValidTeamType(teamType)
 }
 
 // Team represents a team in the organization following Team Topologies patterns.
@@ -54,24 +63,24 @@ func (t *Team) Validate(doc *PRISMDocument) ValidationErrors {
 		errs = append(errs, ValidationError{Field: "name", Message: "is required"})
 	}
 
-	if err := ValidateTeamType(t.Type); err != nil {
-		errs = append(errs, ValidationError{Field: "type", Value: t.Type, Message: err.Error()})
+	if !ValidTeamType(t.Type) {
+		errs = append(errs, ValidationError{Field: "type", Value: t.Type, Message: "invalid team type"})
 	}
 
 	// Validate domain if specified
 	if t.Domain != "" {
-		if err := ValidateDomain(t.Domain); err != nil {
-			errs = append(errs, ValidationError{Field: "domain", Value: t.Domain, Message: err.Error()})
+		if !ValidDomain(t.Domain) {
+			errs = append(errs, ValidationError{Field: "domain", Value: t.Domain, Message: "invalid domain"})
 		}
 	}
 
 	// Validate layer accountability
 	for i, layer := range t.LayerAccountability {
-		if err := ValidateLayer(layer); err != nil {
+		if !ValidLayer(layer) {
 			errs = append(errs, ValidationError{
 				Field:   fmt.Sprintf("layerAccountability[%d]", i),
 				Value:   layer,
-				Message: err.Error(),
+				Message: "invalid layer",
 			})
 		}
 	}
