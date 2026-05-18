@@ -19,7 +19,7 @@
  [docs-godoc-svg]: https://pkg.go.dev/badge/github.com/grokify/prism-intelligence
  [docs-godoc-url]: https://pkg.go.dev/github.com/grokify/prism-intelligence
  [docs-mkdoc-svg]: https://img.shields.io/badge/docs-guide-blue.svg
- [docs-mkdoc-url]: https://grokify.dev/prism
+ [docs-mkdoc-url]: https://grokify.dev/prism-intelligence
  [license-svg]: https://img.shields.io/badge/license-MIT-blue.svg
  [license-url]: https://github.com/grokify/prism-intelligence/blob/main/LICENSE
 
