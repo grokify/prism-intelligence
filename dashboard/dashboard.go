@@ -6,8 +6,9 @@ import (
 	"fmt"
 	"sort"
 
-	"github.com/grokify/prism-intelligence"
-	"github.com/grokify/prism-intelligence/maturity"
+	capstack "github.com/grokify/prism-capability"
+	"github.com/grokify/prism-maturity"
+	"github.com/grokify/prism-maturity/maturity"
 )
 
 // Dashboard represents a Dashforge-compatible dashboard.
@@ -178,11 +179,13 @@ type TextConfig struct {
 
 // Generator creates dashboards from maturity specs.
 type Generator struct {
-	spec     *maturity.Spec
-	stateDoc *prism.PRISMDocument // Optional: PRISM Maturity State document
-	widgets  []Widget
-	data     []DataSource
-	row      int
+	spec      *maturity.Spec
+	stateDoc  *prism.PRISMDocument      // Optional: PRISM Maturity State document
+	capStack  *capstack.CapabilityStack // Optional: Capability stack for layer-based views
+	aggMethod AggregationMethod         // Aggregation method for capability/layer maturity
+	widgets   []Widget
+	data      []DataSource
+	row       int
 }
 
 // NewGenerator creates a dashboard generator for a maturity spec.
@@ -199,6 +202,20 @@ func NewGenerator(spec *maturity.Spec) *Generator {
 // When set, state is read from this document instead of the legacy assessments.
 func (g *Generator) WithStateDocument(doc *prism.PRISMDocument) *Generator {
 	g.stateDoc = doc
+	return g
+}
+
+// WithCapabilityStack adds a capability stack for layer-based views.
+// When set, the dashboard will include layer-grouped maturity visualizations.
+func (g *Generator) WithCapabilityStack(cs *capstack.CapabilityStack) *Generator {
+	g.capStack = cs
+	return g
+}
+
+// WithAggregationMethod sets the aggregation method for capability/layer maturity.
+// Defaults to AggregationMin if not set.
+func (g *Generator) WithAggregationMethod(method AggregationMethod) *Generator {
+	g.aggMethod = method
 	return g
 }
 
@@ -319,7 +336,14 @@ func (g *Generator) Generate() (*Dashboard, error) {
 	// Add domain summary cards
 	g.addDomainSummaryRow()
 
-	// Add maturity bullet charts for each domain
+	// Layer-based views (only if capStack provided)
+	if g.capStack != nil {
+		g.addLayerMaturityOverview()
+		g.addLayerSummaryCards()
+		g.addCapabilityBulletsByLayer()
+	}
+
+	// Add maturity bullet charts for each domain (category-based)
 	g.addBulletWidgets()
 
 	// Add level progress charts for each domain
@@ -1236,6 +1260,218 @@ func (g *Generator) addFlatBulletList(domainKey string, domain *maturity.DomainM
 			ID:           fmt.Sprintf("bullet-%s-%s", domainKey, category),
 			Type:         "bullet",
 			Title:        fmt.Sprintf("%s - %s", domain.Name, formatCategory(category)),
+			Position:     Position{X: 0, Y: g.row, W: 12, H: height},
+			DataSourceID: dataID,
+			Config:       config,
+		})
+		g.row += height
+	}
+}
+
+// addLayerMaturityOverview adds a horizontal bar chart showing maturity for all layers.
+func (g *Generator) addLayerMaturityOverview() {
+	if g.capStack == nil {
+		return
+	}
+
+	agg := NewMaturityAggregator(g.spec, g.capStack, g.stateDoc, g.aggMethod)
+	layerMaturities := agg.GetLayerMaturities()
+
+	if len(layerMaturities) == 0 {
+		return
+	}
+
+	// Build chart data in reverse order (for horizontal bar chart, data is rendered bottom-to-top)
+	var chartData []map[string]any
+	for i := len(layerMaturities) - 1; i >= 0; i-- {
+		lm := layerMaturities[i]
+		chartData = append(chartData, map[string]any{
+			"layer": lm.LayerName,
+			"level": lm.AggregateLevel,
+		})
+	}
+
+	dataID := "layer-maturity-overview"
+	dataBytes, _ := json.Marshal(chartData)
+
+	g.data = append(g.data, DataSource{
+		ID:   dataID,
+		Type: "inline",
+		Data: dataBytes,
+	})
+
+	// Create horizontal bar chart
+	config, _ := json.Marshal(ChartConfig{
+		Marks: []Mark{
+			{
+				ID:       "maturity",
+				Geometry: "bar",
+				Encode:   Encode{X: "level", Y: "layer"},
+				Style: &Style{
+					Color:        "#3b82f6",
+					BorderRadius: []int{0, 4, 4, 0},
+				},
+			},
+		},
+		Axes: []Axis{
+			{ID: "x", Type: "value", Position: "bottom", Name: "Maturity Level", Min: float64Ptr(0), Max: float64Ptr(5)},
+			{ID: "y", Type: "category", Position: "left"},
+		},
+		Grid: &Grid{
+			Left:         "20%",
+			Right:        "5%",
+			Top:          "10%",
+			Bottom:       "15%",
+			ContainLabel: true,
+		},
+		Tooltip: &Tooltip{Show: true, Trigger: "axis"},
+	})
+
+	height := len(layerMaturities) + 2
+	if height < 4 {
+		height = 4
+	}
+	if height > 8 {
+		height = 8
+	}
+
+	g.widgets = append(g.widgets, Widget{
+		ID:           "layer-maturity-overview",
+		Type:         "chart",
+		Title:        "Capability Layer Maturity Overview",
+		Position:     Position{X: 0, Y: g.row, W: 12, H: height},
+		DataSourceID: dataID,
+		Config:       config,
+	})
+	g.row += height
+}
+
+// addLayerSummaryCards adds metric cards for each capability layer.
+func (g *Generator) addLayerSummaryCards() {
+	if g.capStack == nil {
+		return
+	}
+
+	agg := NewMaturityAggregator(g.spec, g.capStack, g.stateDoc, g.aggMethod)
+	layerMaturities := agg.GetLayerMaturities()
+
+	if len(layerMaturities) == 0 {
+		return
+	}
+
+	// Calculate card width (max 4 per row)
+	width := 12 / len(layerMaturities)
+	if width < 3 {
+		width = 3
+	}
+
+	for i, lm := range layerMaturities {
+		dataID := fmt.Sprintf("layer-%s-data", lm.LayerID)
+		dataRow := map[string]any{
+			"layer":        lm.LayerName,
+			"level":        lm.AggregateLevel,
+			"capabilities": len(lm.Capabilities),
+		}
+		dataBytes, _ := json.Marshal([]any{dataRow})
+
+		g.data = append(g.data, DataSource{
+			ID:   dataID,
+			Type: "inline",
+			Data: dataBytes,
+		})
+
+		config, _ := json.Marshal(MetricConfig{
+			ValueField: "level",
+			Format:     "number",
+			FormatOptions: &FormatOptions{
+				Prefix:   "M",
+				Decimals: 1,
+			},
+			Subtitle: fmt.Sprintf("%d capabilities", len(lm.Capabilities)),
+			Thresholds: []ThresholdValue{
+				{Value: 0, Color: "#ef4444"}, // Red
+				{Value: 2, Color: "#f59e0b"}, // Yellow
+				{Value: 3, Color: "#22c55e"}, // Green
+				{Value: 4, Color: "#3b82f6"}, // Blue
+			},
+		})
+
+		col := (i % 4) * width
+		row := g.row + (i/4)*2
+
+		g.widgets = append(g.widgets, Widget{
+			ID:           fmt.Sprintf("layer-%s-metric", lm.LayerID),
+			Type:         "metric",
+			Title:        lm.LayerName,
+			Position:     Position{X: col, Y: row, W: width, H: 2},
+			DataSourceID: dataID,
+			Config:       config,
+		})
+	}
+
+	// Advance row counter
+	rows := (len(layerMaturities) + 3) / 4 // ceiling division
+	g.row += rows * 2
+}
+
+// addCapabilityBulletsByLayer adds bullet charts for capabilities grouped by layer.
+func (g *Generator) addCapabilityBulletsByLayer() {
+	if g.capStack == nil {
+		return
+	}
+
+	agg := NewMaturityAggregator(g.spec, g.capStack, g.stateDoc, g.aggMethod)
+	layerMaturities := agg.GetLayerMaturities()
+
+	if len(layerMaturities) == 0 {
+		return
+	}
+
+	for _, lm := range layerMaturities {
+		if len(lm.Capabilities) == 0 {
+			continue
+		}
+
+		// Build bullets for this layer
+		var bullets []MaturityBullet
+		for _, capMat := range lm.Capabilities {
+			subtitle := fmt.Sprintf("M%.1f (%d SLIs)", capMat.AggregateLevel, len(capMat.SLIIDs))
+			bullet := NewMaturityBullet(
+				capMat.CapabilityName,
+				subtitle,
+				capMat.AggregateLevel,
+				5.0, // Target is always M5
+			)
+			bullets = append(bullets, bullet)
+		}
+
+		dataID := fmt.Sprintf("bullet-layer-%s", lm.LayerID)
+		dataBytes, _ := json.Marshal(bullets)
+
+		g.data = append(g.data, DataSource{
+			ID:   dataID,
+			Type: "inline",
+			Data: dataBytes,
+		})
+
+		config, _ := json.Marshal(map[string]any{
+			"bulletType": "capability",
+			"layerId":    lm.LayerID,
+		})
+
+		// Calculate height based on number of capabilities
+		height := len(lm.Capabilities) + 1
+		if height < 2 {
+			height = 2
+		}
+		if height > 8 {
+			height = 8
+		}
+
+		g.widgets = append(g.widgets, Widget{
+			ID:           fmt.Sprintf("bullet-layer-%s", lm.LayerID),
+			Type:         "bullet",
+			Title:        fmt.Sprintf("Capabilities - %s", lm.LayerName),
 			Position:     Position{X: 0, Y: g.row, W: 12, H: height},
 			DataSourceID: dataID,
 			Config:       config,

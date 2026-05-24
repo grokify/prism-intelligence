@@ -6,7 +6,9 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/grokify/prism-intelligence/maturity"
+	capstack "github.com/grokify/prism-capability"
+	"github.com/grokify/prism-maturity"
+	"github.com/grokify/prism-maturity/maturity"
 )
 
 func TestGenerateDashboard(t *testing.T) {
@@ -359,4 +361,261 @@ func findSubstring(s, substr string) bool {
 		}
 	}
 	return false
+}
+
+func TestGenerateWithCapabilityStack(t *testing.T) {
+	spec := &maturity.Spec{
+		Metadata: &maturity.SpecMetadata{
+			Name:        "Security Model",
+			Description: "Test model with capability stack",
+		},
+		SLIs: map[string]*maturity.SLI{
+			"sli-sast": {ID: "sli-sast", Name: "SAST Coverage", Category: "protect"},
+			"sli-dast": {ID: "sli-dast", Name: "DAST Coverage", Category: "detect"},
+		},
+		Domains: map[string]*maturity.DomainModel{
+			"security": {
+				Name: "Security",
+				Levels: []maturity.Level{
+					{
+						Level: 1,
+						Name:  "Reactive",
+						Criteria: []maturity.Criterion{
+							{SLIID: "sli-sast", Operator: "gte", Target: 0},
+						},
+					},
+					{
+						Level: 2,
+						Name:  "Basic",
+						Criteria: []maturity.Criterion{
+							{SLIID: "sli-sast", Operator: "gte", Target: 50},
+						},
+					},
+				},
+			},
+		},
+	}
+
+	cs := &capstack.CapabilityStack{
+		Metadata: capstack.Metadata{Name: "Security Stack"},
+		Layers: []capstack.Layer{
+			{ID: "code", Name: "Code", Order: 1},
+			{ID: "runtime", Name: "Runtime", Order: 2},
+		},
+		Capabilities: []capstack.Capability{
+			{
+				ID:       "cap-sast",
+				Name:     "SAST",
+				LayerID:  "code",
+				PRISMRef: &capstack.PRISMRef{SLIIDs: []string{"sli-sast"}},
+			},
+			{
+				ID:       "cap-dast",
+				Name:     "DAST",
+				LayerID:  "runtime",
+				PRISMRef: &capstack.PRISMRef{SLIIDs: []string{"sli-dast"}},
+			},
+		},
+	}
+
+	gen := NewGenerator(spec).WithCapabilityStack(cs)
+	dashboard, err := gen.Generate()
+	if err != nil {
+		t.Fatalf("Failed to generate dashboard: %v", err)
+	}
+
+	// Check for layer-specific widgets
+	hasLayerOverview := false
+	hasLayerMetric := false
+	hasLayerBullet := false
+
+	for _, w := range dashboard.Widgets {
+		if w.ID == "layer-maturity-overview" {
+			hasLayerOverview = true
+		}
+		if contains(w.ID, "layer-") && w.Type == "metric" {
+			hasLayerMetric = true
+		}
+		if contains(w.ID, "bullet-layer-") {
+			hasLayerBullet = true
+		}
+	}
+
+	if !hasLayerOverview {
+		t.Error("Dashboard with capStack should have layer maturity overview")
+	}
+	if !hasLayerMetric {
+		t.Error("Dashboard with capStack should have layer metric cards")
+	}
+	if !hasLayerBullet {
+		t.Error("Dashboard with capStack should have layer bullet charts")
+	}
+}
+
+func TestGenerateWithoutCapabilityStack(t *testing.T) {
+	spec := &maturity.Spec{
+		Metadata: &maturity.SpecMetadata{
+			Name:        "Basic Model",
+			Description: "Test model without capability stack",
+		},
+		Domains: map[string]*maturity.DomainModel{
+			"ops": {
+				Name: "Operations",
+				Levels: []maturity.Level{
+					{Level: 1, Name: "Reactive"},
+				},
+			},
+		},
+	}
+
+	// No capability stack
+	gen := NewGenerator(spec)
+	dashboard, err := gen.Generate()
+	if err != nil {
+		t.Fatalf("Failed to generate dashboard: %v", err)
+	}
+
+	// Should NOT have layer-specific widgets
+	for _, w := range dashboard.Widgets {
+		if w.ID == "layer-maturity-overview" {
+			t.Error("Dashboard without capStack should not have layer maturity overview")
+		}
+		if contains(w.ID, "bullet-layer-") {
+			t.Error("Dashboard without capStack should not have layer bullet charts")
+		}
+	}
+
+	// Should still have domain widgets
+	hasDomainMetric := false
+	for _, w := range dashboard.Widgets {
+		if contains(w.ID, "domain-") && w.Type == "metric" {
+			hasDomainMetric = true
+			break
+		}
+	}
+	if !hasDomainMetric {
+		t.Error("Dashboard should have domain metric cards")
+	}
+}
+
+func TestAggregationMethods(t *testing.T) {
+	spec := &maturity.Spec{
+		Domains: map[string]*maturity.DomainModel{
+			"security": {
+				Name: "Security",
+				Levels: []maturity.Level{
+					{Level: 1, Criteria: []maturity.Criterion{{SLIID: "sli-a", Operator: "gte", Target: 0}}},
+					{Level: 2, Criteria: []maturity.Criterion{{SLIID: "sli-a", Operator: "gte", Target: 50}}},
+					{Level: 3, Criteria: []maturity.Criterion{{SLIID: "sli-b", Operator: "gte", Target: 80}}},
+				},
+			},
+		},
+	}
+
+	cs := &capstack.CapabilityStack{
+		Layers: []capstack.Layer{
+			{ID: "code", Name: "Code", Order: 1},
+		},
+		Capabilities: []capstack.Capability{
+			{ID: "cap-a", Name: "Cap A", LayerID: "code", PRISMRef: &capstack.PRISMRef{SLIIDs: []string{"sli-a"}}},
+			{ID: "cap-b", Name: "Cap B", LayerID: "code", PRISMRef: &capstack.PRISMRef{SLIIDs: []string{"sli-b"}}},
+		},
+	}
+
+	stateDoc := &prism.PRISMDocument{
+		SLIState: prism.SLIStateMap{
+			"sli-a": &prism.SLIState{Windows: map[string]*prism.WindowState{"30d": {Value: 75}}},  // M2
+			"sli-b": &prism.SLIState{Windows: map[string]*prism.WindowState{"30d": {Value: 100}}}, // M3
+		},
+	}
+
+	// Test MIN aggregation
+	genMin := NewGenerator(spec).
+		WithCapabilityStack(cs).
+		WithStateDocument(stateDoc).
+		WithAggregationMethod(AggregationMin)
+
+	dashboardMin, err := genMin.Generate()
+	if err != nil {
+		t.Fatalf("Failed to generate dashboard with MIN: %v", err)
+	}
+	if dashboardMin == nil {
+		t.Fatal("Dashboard is nil")
+	}
+
+	// Test AVG aggregation
+	genAvg := NewGenerator(spec).
+		WithCapabilityStack(cs).
+		WithStateDocument(stateDoc).
+		WithAggregationMethod(AggregationAvg)
+
+	dashboardAvg, err := genAvg.Generate()
+	if err != nil {
+		t.Fatalf("Failed to generate dashboard with AVG: %v", err)
+	}
+	if dashboardAvg == nil {
+		t.Fatal("Dashboard is nil")
+	}
+
+	// Both should have layer widgets
+	hasLayerWidgetMin := false
+	hasLayerWidgetAvg := false
+
+	for _, w := range dashboardMin.Widgets {
+		if w.ID == "layer-maturity-overview" {
+			hasLayerWidgetMin = true
+			break
+		}
+	}
+	for _, w := range dashboardAvg.Widgets {
+		if w.ID == "layer-maturity-overview" {
+			hasLayerWidgetAvg = true
+			break
+		}
+	}
+
+	if !hasLayerWidgetMin {
+		t.Error("MIN aggregation dashboard missing layer overview")
+	}
+	if !hasLayerWidgetAvg {
+		t.Error("AVG aggregation dashboard missing layer overview")
+	}
+}
+
+func TestGenerateHTMLWithCapabilityStack(t *testing.T) {
+	spec := &maturity.Spec{
+		Metadata: &maturity.SpecMetadata{Name: "Test Model"},
+		Domains: map[string]*maturity.DomainModel{
+			"ops": {Name: "Operations", Levels: []maturity.Level{{Level: 1}}},
+		},
+	}
+
+	cs := &capstack.CapabilityStack{
+		Layers:       []capstack.Layer{{ID: "code", Name: "Code", Order: 1}},
+		Capabilities: []capstack.Capability{{ID: "cap-a", Name: "Cap A", LayerID: "code"}},
+	}
+
+	gen := NewGenerator(spec).WithCapabilityStack(cs)
+	dashboard, err := gen.Generate()
+	if err != nil {
+		t.Fatalf("Failed to generate dashboard: %v", err)
+	}
+
+	html, err := dashboard.ToHTML(DefaultHTMLOptions())
+	if err != nil {
+		t.Fatalf("Failed to generate HTML: %v", err)
+	}
+
+	// Check for layer-related content
+	if !contains(html, "layer-maturity-overview") {
+		t.Error("HTML should contain layer-maturity-overview")
+	}
+
+	// Save for inspection
+	tmpFile := filepath.Join(os.TempDir(), "prism-dashboard-capstack.html")
+	if err := os.WriteFile(tmpFile, []byte(html), 0600); err != nil { //nolint:gosec
+		t.Logf("Could not write temp file: %v", err)
+	} else {
+		t.Logf("Generated HTML with capstack: %s (%d bytes)", tmpFile, len(html))
+	}
 }

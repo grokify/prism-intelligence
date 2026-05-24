@@ -269,6 +269,42 @@ const htmlTemplate = `<!DOCTYPE html>
       height: 12px;
       border-radius: 2px;
     }
+
+    /* Layer grouping styles */
+    .layer-header {
+      background: linear-gradient(135deg, var(--blue) 0%, transparent 100%);
+      padding: 8px 16px;
+      border-radius: 8px 8px 0 0;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+    .layer-header.code { background: linear-gradient(135deg, #3b82f6 0%, transparent 100%); }
+    .layer-header.infra { background: linear-gradient(135deg, #8b5cf6 0%, transparent 100%); }
+    .layer-header.runtime { background: linear-gradient(135deg, #22c55e 0%, transparent 100%); }
+    .layer-header.requirements { background: linear-gradient(135deg, #f59e0b 0%, transparent 100%); }
+    .layer-header.adoption { background: linear-gradient(135deg, #06b6d4 0%, transparent 100%); }
+    .layer-header.support { background: linear-gradient(135deg, #ec4899 0%, transparent 100%); }
+
+    .aggregation-badge {
+      font-size: 10px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: var(--bg-primary);
+      color: var(--text-secondary);
+      margin-left: 8px;
+    }
+
+    .capability-group {
+      margin-bottom: 16px;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .capability-group .bullet-container {
+      padding: 12px 16px;
+    }
   </style>
 </head>
 <body>
