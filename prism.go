@@ -705,6 +705,13 @@ type SLIState struct {
 	Windows          map[string]*WindowState `json:"windows,omitempty"`          // State by window (7d, 30d, 90d, quarterly, annual)
 	History          []HistoricalValue       `json:"history,omitempty"`          // Historical values over time
 	Targets          map[string]*TargetValue `json:"targets,omitempty"`          // Future targets by period (e.g., "Q2_2026")
+
+	// Priority is the calculated improvement priority (P0, P1, P2, P3).
+	// Derived from importance weight and maturity gap.
+	Priority string `json:"priority,omitempty"`
+
+	// PriorityRationale explains why this priority was assigned.
+	PriorityRationale string `json:"priorityRationale,omitempty"`
 }
 
 // WindowState represents the current value for a specific SLO window.
